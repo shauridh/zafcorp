@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kasir SABANA — struktur navigasi v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{ --acc:#dc2626; --ink:#191d23; --bg:#eef0f3; --card:#fff; --line:#e6e9ee; --mut:#79828d;
+         --mut2:#a6adb7; --ink-soft:#414a55; --soft:#f4f5f7; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;padding:24px 18px 60px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:20px}
+  .lead{color:#b7aea5;font-size:13.5px;max-width:860px;margin:9px 0 16px;line-height:1.6}
+  .state{margin-top:22px}
+  .st-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7aea5}
+  .st-name{font-size:16px;font-weight:800;margin:4px 0 2px}
+  .st-sub{font-size:12.5px;color:#b7aea5;line-height:1.5;max-width:820px}
+  .frame{margin:14px auto 0;background:#0c0b0a;border-radius:20px;padding:9px;
+    box-shadow:0 26px 60px -20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06)}
+  .app{width:100%;background:var(--bg);border-radius:14px;overflow:hidden;color:var(--ink);
+    font-size:13px;min-height:430px;display:flex;flex-direction:column}
+
+  /* topbar */
+  .top{display:flex;align-items:center;gap:10px;background:var(--card);border-bottom:1px solid var(--line);
+    padding:9px 14px}
+  .burger{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+    color:var(--ink-soft);display:grid;place-items:center;flex:none}
+  .mark{width:34px;height:34px;border-radius:10px;background:var(--acc);color:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:17px;flex:none;margin-left:4px}
+  .brand{font-weight:800;font-size:15px}
+  .brand small{display:block;font-size:10px;color:var(--mut);font-weight:600;margin-top:1px}
+  .sp{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);
+    border-radius:10px;padding:7px 11px;font-size:11.5px;font-weight:700;color:var(--ink-soft)}
+  .pill .amt{color:var(--acc);font-variant-numeric:tabular-nums}
+  .live{width:8px;height:8px;border-radius:50%;background:#16a34a}
+
+  .body{display:flex;flex:1;min-height:0}
+  /* sidebar */
+  .sb{background:var(--card);border-right:1px solid var(--line);flex:none;transition:width .18s ease}
+  .sb.open{width:236px}
+  .sb.rail{width:64px}
+  .grp{font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2);
+    padding:16px 18px 5px}
+  .rail .grp{padding:14px 0 4px;text-align:center;font-size:0}
+  .rail .grp::after{content:"·";font-size:14px}
+  .item{display:flex;align-items:center;gap:11px;padding:9px 14px;margin:2px 8px;border-radius:10px;
+    color:var(--ink-soft);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+  .item svg{flex:none}
+  .item:hover{background:var(--soft);color:var(--ink)}
+  .item.on{background:var(--acc);color:#fff}
+  .rail .item{justify-content:center;padding:9px 0;margin:2px 6px}
+  .rail .item .lbl{display:none}
+
+  /* content */
+  .main{flex:1;min-width:0;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+  .crumbs{font-size:11.5px;color:var(--mut);font-weight:600}
+  .crumbs b{color:var(--ink)}
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .hero h3{font-size:15px;font-weight:800;margin-bottom:2px}
+  .hero p{font-size:12px;color:var(--mut);max-width:600px;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1}
+  .ph{background:var(--card);border:1px dashed #cfd4dc;border-radius:14px;color:var(--mut2);
+    display:grid;place-items:center;font-size:12px;font-weight:700;min-height:180px}
+
+  /* kasir content for state C */
+  .kmenu{flex:1.6;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+  .ksearch{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 11px;
+    color:var(--mut2);font-size:12px;margin-bottom:10px}
+  .kchips{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
+  .kchip{border:1px solid var(--line);border-radius:9px;padding:6px 11px;font-size:11.5px;font-weight:700;color:var(--ink-soft)}
+  .kchip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .ktile{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:9px;display:flex;
+    flex-direction:column;gap:2px}
+  .ktile .n1{font-weight:700;font-size:12px}
+  .ktile .p1{font-weight:800;font-size:12px;font-variant-numeric:tabular-nums;margin-top:auto;padding-top:4px}
+  .ktile .s1{font-size:9.5px;color:var(--mut)}
+  .ktile.off{opacity:.5}
+  .kside{width:290px;flex:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;
+    display:flex;flex-direction:column}
+  .ktot{display:flex;justify-content:space-between;font-weight:800;font-size:15px;margin:8px 0;
+    font-variant-numeric:tabular-nums}
+  .kbtn{background:var(--acc);color:#fff;border-radius:11px;padding:12px;text-align:center;font-weight:800;
+    font-size:14px;margin-top:auto}
+
+  /* popup overlay */
+  .ovl{position:absolute;inset:0;background:rgba(13,12,12,.55);display:grid;place-items:center;
+    z-index:5;backdrop-filter:blur(1.5px)}
+  .dlg{width:360px;background:#fff;border-radius:18px;padding:20px;box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+  .dlg .ic{width:44px;height:44px;border-radius:13px;background:#fdecec;color:var(--acc);display:grid;
+    place-items:center;margin-bottom:12px}
+  .dlg h4{font-size:15.5px;font-weight:800}
+  .dlg p{font-size:12.5px;color:var(--mut);line-height:1.55;margin:6px 0 14px}
+  .dlg .fld{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+  .dlg .fld label{font-size:11px;font-weight:700;color:var(--ink-soft)}
+  .dlg .fld .box{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:11px;padding:9px 12px}
+  .dlg .fld .box input{border:0;outline:0;font-size:16px;font-weight:800;width:100%;font-family:inherit;
+    font-variant-numeric:tabular-nums}
+  .dlg .fld .box .cur{color:var(--mut2);font-weight:800;font-size:13px;margin-right:6px}
+  .dlg .btn{width:100%;background:var(--acc);color:#fff;border-radius:11px;padding:12px;text-align:center;
+    font-weight:800;font-size:13.5px}
+  .dlg .btn.sec{margin-top:8px;background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+  .dlg .link{margin-top:12px;text-align:center;font-size:11.5px;color:var(--mut);font-weight:600}
+  .dlg .link b{color:var(--acc)}
+
+  .foot{margin-top:20px;font-size:12px;color:#9d948a;line-height:1.65;max-width:900px}
+  .foot b{color:#d9d0c6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kasir SABANA — struktur navigasi v4</h1>
+  <p class="lead">Tiga kondisi yang dibahas. Struktur menu baru (Kas Tunai keluar dari daftar, tiga halaman
+  digabung jadi Dashboard) + sidebar kiri yang bisa dicolaps ke rail ikon + pop-up buka kas saat kasir
+  memilih Tunai padahal laci tutup. Ini mockup navigasi — isi Dashboard &amp; layar lain dibahas
+  bertahap berikutnya.</p>
+
+  <!-- A: desktop expanded -->
+  <div class="state">
+    <div class="st-tag">Kondisi A · Desktop — sidebar terbuka</div>
+    <div class="st-name">Menu kiri terstruktur; hamburger paling kiri</div>
+    <div class="st-sub">Harian: Dashboard (gabungan Beranda·Penjualan·Laporan), Kasir. Operasi: Beli,
+    Produksi, Deep Fryer, List Belanja. Master: Bahan, Produk, Riwayat, Pengeluaran, Pengaturan.</div>
+    <div class="frame"><div class="app" style="min-height:400px">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill"><span class="live"></span>Kas <span class="amt">Rp 361.000</span></span>
+        <span class="pill">12:04</span>
+      </div>
+      <div class="body">
+        <div class="sb open">
+          <div class="grp">Harian</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span class="lbl">Dashboard</span></div>
+          <div class="item on"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg><span class="lbl">Kasir</span></div>
+          <div class="grp">Operasi</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg><span class="lbl">Beli Bahan</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/><path d="M9 3v18M15 3v18M6 9h3M6 15h3M15 9h3M15 15h3"/></svg><span class="lbl">Produksi</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg><span class="lbl">Deep Fryer</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg><span class="lbl">List Belanja</span></div>
+          <div class="grp">Master &amp; sistem</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg><span class="lbl">Bahan &amp; Stok</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span class="lbl">Produk &amp; Menu</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span class="lbl">Pengeluaran</span></div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg><span class="lbl">Pengaturan</span></div>
+        </div>
+        <div class="main">
+          <div class="crumbs">Harian / <b>Dashboard</b></div>
+          <div class="hero"><h3>Dashboard</h3><p>Gabungan Beranda + Penjualan + Laporan — grafik omzet, metode
+          &amp; platform, produk terlaris, kas &amp; peringatan, aksi cepat. (Isi: mockup berikutnya)</p></div>
+          <div class="grid2"><div class="ph">Grafik omzet harian</div><div class="ph">Produk terlaris · donat metode</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- B: collapsed rail -->
+  <div class="state">
+    <div class="st-tag">Kondisi B · Desktop — dicolaps</div>
+    <div class="st-name">Sidebar menyempit jadi rail ikon (tidak hilang)</div>
+    <div class="st-sub">Klik hamburger → label disembunyikan, ikon tetap tampil; hover/ketuk menunjukkan
+    nama. Area konten melebar penuh. Kasir tetap satu ketukan.</div>
+    <div class="frame"><div class="app" style="min-height:360px">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill"><span class="live"></span>Kas <span class="amt">Rp 361.000</span></span>
+      </div>
+      <div class="body">
+        <div class="sb rail">
+          <div class="grp"></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></div>
+          <div class="item on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg></div>
+          <div class="grp"></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/><path d="M9 3v18M15 3v18M6 9h3M6 15h3M15 9h3M15 15h3"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg></div>
+          <div class="grp"></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+          <div class="item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg></div>
+        </div>
+        <div class="main">
+          <div class="crumbs">Harian / <b>Kasir</b></div>
+          <div class="grid2" style="grid-template-columns:1fr"><div class="ph" style="min-height:250px">Area konten melebar penuh — rail ikon tetap di kiri</div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- C: kasir popup -->
+  <div class="state">
+    <div class="st-tag">Kondisi C · Pop-up buka kas di Kasir</div>
+    <div class="st-name">"Kas Tunai" tak lagi di menu — muncul saat dibutuhkan</div>
+    <div class="st-sub">Kasir memilih metode Tunai padahal laci belum dibuka → pop-up langsung di layar Kasir:
+    isi uang awal (default float Rp 350.000) → Buka &amp; lanjut; atau batal ke QRIS/Transfer; atau ke halaman
+    kelola lengkap bila ingin tambah/keluar/tutup nanti.</div>
+    <div class="frame"><div class="app" style="min-height:430px;position:relative">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill" style="opacity:.6">Kas — tutup</span>
+        <span class="pill">12:04</span>
+      </div>
+      <div class="body">
+        <div class="sb rail">
+          <div class="item on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg></div>
+        </div>
+        <div class="main" style="position:relative">
+          <div class="kmenu" style="flex:1">
+            <div class="ksearch">Cari menu…</div>
+            <div class="kchips"><span class="kchip on">Semua</span><span class="kchip">Ayam</span><span class="kchip">Nasi</span><span class="kchip">Cemilan</span></div>
+            <div class="kgrid">
+              <div class="ktile"><div class="n1">Ayam Dada</div><div class="p1">Rp 11.000</div><div class="s1">Stok 12</div></div>
+              <div class="ktile"><div class="n1">Ayam Sayap</div><div class="p1">Rp 8.000</div><div class="s1">Stok 4</div></div>
+              <div class="ktile"><div class="n1">Paha Atas</div><div class="p1">Rp 11.000</div><div class="s1">Stok 6</div></div>
+              <div class="ktile off"><div class="n1">Nasi Uduk</div><div class="p1">Rp 6.000</div><div class="s1">Habis</div></div>
+              <div class="ktile"><div class="n1">Paha Bawah</div><div class="p1">Rp 10.000</div><div class="s1">Stok 6</div></div>
+              <div class="ktile"><div class="n1">Kentang</div><div class="p1">Rp 12.000</div><div class="s1">Stok 8</div></div>
+            </div>
+          </div>
+          <div class="kside">
+            <div style="font-size:12px;font-weight:700">Pesanan · 1 item</div>
+            <div style="display:flex;justify-content:space-between;gap:8px;margin-top:8px">
+              <div style="flex:1"><div style="font-weight:700;font-size:12.5px">Ayam Dada</div><div style="font-size:10.5px;color:var(--mut)">Rp 11.000 × 1</div></div>
+              <div style="font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums">Rp 11.000</div>
+            </div>
+            <div class="ktot"><span>Total</span><span>Rp 11.000</span></div>
+            <div style="display:flex;gap:5px;margin-bottom:8px">
+              <span style="flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 0;font-size:10.5px;font-weight:700">Tunai</span>
+              <span style="flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 0;font-size:10.5px;font-weight:700;color:var(--mut)">QRIS</span>
+              <span style="flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:7px 0;font-size:10.5px;font-weight:700;color:var(--mut)">Transfer</span>
+            </div>
+            <div class="kbtn">Bayar — Rp 11.000</div>
+          </div>
+
+          <div class="ovl">
+            <div class="dlg">
+              <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+              <h4>Kas tunai belum dibuka</h4>
+              <p>Untuk menerima pembayaran <b>Tunai</b>, laci perlu dibuka dulu. Isi uang awal lalu lanjutkan —
+              float <b>Rp 350.000</b> otomatis tersisa saat tutup kas.</p>
+              <div class="fld">
+                <label for="f">Uang awal di laci (Rp)</label>
+                <div class="box"><span class="cur">Rp</span><input id="f" value="350.000" disabled=""/></div>
+              </div>
+              <div class="btn">Buka Kas &amp; lanjut tunai</div>
+              <div class="btn sec">Gunakan QRIS / Transfer saja</div>
+              <div class="link">Perlu isi/tarik/ambil dari laci? <b>Kelola Kas Tunai →</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <p class="foot"><b>Asumsi yang saya gunakan</b> (bisa diubah): halaman kelola kasir tetap ada &amp; bisa
+  dibuka lewat pop-up di Kasir atau kartu status di Dashboard — hanya tidak lagi tampil di daftar menu.
+  Pengaturan &amp; layar master lain tidak berubah. Setelah Anda setujui struktur ini, langkah berikutnya:
+  mockup Dashboard (grafik), lalu implementasi bertahap per halaman.</p>
+</div>
+</body>
+</html>

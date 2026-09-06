@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ayam SABANA — Order Antar Sendiri · mockup halaman pelanggan (web)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{ --acc:#dc2626; --acc2:#c01f1f; --ink:#191d23; --ink-soft:#414a55; --bg:#eef0f3; --card:#fff;
+         --line:#e6e9ee; --line-strong:#d3d8e0; --mut:#79828d; --mut2:#a6adb7; --soft:#f4f5f7;
+         --ok:#177245; --warn:#b45309; --danger:#b3261e;
+         --brand-soft:#fdecec; --ok-soft:#e8f5ee; --warn-soft:#fff8f1; --danger-soft:#fdecec; --map:#dfe7ea; }
+  html[data-theme='gelap']{ --acc:#e03535; --acc2:#ef4b4b; --ink:#eceef2; --ink-soft:#c3cad4; --bg:#16181d;
+         --card:#20242b; --line:#2c313a; --line-strong:#3b424d; --mut:#9aa4b1; --mut2:#6f7885; --soft:#1c1f25;
+         --ok:#4ade80; --warn:#fbbf24; --danger:#f87171;
+         --brand-soft:#3a1d1d; --ok-soft:#12291d; --warn-soft:#2a2113; --danger-soft:#3a1d1d; --map:#1a2226; }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;padding:24px 18px 60px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-size:20px}
+  .lead{color:#b7aea5;font-size:13.5px;max-width:920px;margin:9px 0 4px;line-height:1.6}
+  .hint{color:#8f847a;font-size:12px;margin:2px 0 6px;line-height:1.6}
+  .hint b{color:#cfc6bc}
+  .theme{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:#171412;color:#ece5dd;
+    border:1px solid #3d352e;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  html[data-theme='gelap'] .theme .sun{display:none}
+  html:not([data-theme='gelap']) .theme .moon{display:none}
+
+  .phones{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;align-items:flex-start}
+  .state{flex:1;min-width:300px}
+  .st-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7aea5}
+  .st-name{font-size:15px;font-weight:800;margin:4px 0 2px}
+  .st-sub{font-size:12.5px;color:#b7aea5;line-height:1.55;max-width:560px}
+  .frame{margin:12px auto 0;background:#0c0b0a;border-radius:22px;padding:9px;
+    box-shadow:0 26px 60px -20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);max-width:392px}
+  .app{width:100%;background:var(--bg);border-radius:15px;overflow:hidden;color:var(--ink);
+    font-size:13px;font-family:'Inter',system-ui,sans-serif;transition:background .2s,color .2s;min-height:640px;
+    display:flex;flex-direction:column;position:relative}
+  .app.m{max-width:374px;margin:0 auto}
+
+  /* ===== phone chrome ===== */
+  .statusbar{display:flex;align-items:center;gap:8px;background:var(--card);border-bottom:1px solid var(--line);
+    padding:10px 12px}
+  .back{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    display:grid;place-items:center;flex:none;font-size:15px;cursor:pointer}
+  .back:disabled{opacity:.35;cursor:default}
+  .shop{flex:1;min-width:0}
+  .shop .nm{font-weight:800;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .shop .sub{font-size:10.5px;color:var(--mut);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sync{display:inline-flex;align-items:center;gap:5px;font-size:9.5px;font-weight:800;color:var(--ok);
+    background:var(--ok-soft);padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .sync .dot{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 1.6s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+
+  /* ===== steps ===== */
+  .steps{display:flex;gap:4px;background:var(--card);border-bottom:1px solid var(--line);padding:9px 12px}
+  .step{flex:1;text-align:center;font-size:9.5px;font-weight:800;color:var(--mut2);letter-spacing:.02em;position:relative;padding-top:18px}
+  .step::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;
+    background:var(--soft);border:1.5px solid var(--line-strong);font-weight:800;font-size:11px;color:var(--mut);
+    display:grid;place-items:center}
+  .step:nth-child(1)::before{content:'1'}.step:nth-child(2)::before{content:'2'}.step:nth-child(3)::before{content:'3'}
+  .step.on{color:var(--acc)}
+  .step.on::before{background:var(--acc);border-color:var(--acc);color:#fff}
+  .step.done{color:var(--ok)}
+  .step.done::before{background:var(--ok);border-color:var(--ok);color:#fff;content:'✓'}
+
+  .body{flex:1;overflow-y:auto;min-height:0}
+  .scr{display:none;padding:12px}
+  .scr.active{display:block}
+
+  /* ===== katalog ===== */
+  .menuhead{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .menuhead h2{font-size:16px;font-weight:800;flex:1}
+  .chips{display:flex;gap:5px;overflow-x:auto;padding-bottom:8px;margin-bottom:4px}
+  .chip{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:6px 12px;font-size:11.5px;
+    font-weight:700;color:var(--ink-soft);cursor:pointer;transition:.15s;font-family:inherit;white-space:nowrap}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .row{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
+  .thumb{width:52px;height:52px;border-radius:10px;background:var(--brand-soft);flex:none;display:grid;place-items:center;
+    font-size:22px}
+  .r-mid{flex:1;min-width:0}
+  .r-nm{font-weight:800;font-size:12.5px;line-height:1.25}
+  .r-ct{font-size:10px;color:var(--mut);font-weight:600;margin-top:1px}
+  .r-pc{font-weight:800;font-size:13.5px;margin-top:3px;font-variant-numeric:tabular-nums}
+  .badge{font-size:8.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;
+    display:inline-block;margin-top:4px}
+  .badge.habis{background:var(--danger-soft);color:var(--danger)}
+  .badge.low{background:var(--warn-soft);color:var(--warn)}
+  .badge.sync2{background:var(--ok-soft);color:var(--ok)}
+  .qty{display:flex;align-items:center;gap:8px;align-self:center}
+  .qty button{width:28px;height:28px;border-radius:9px;border:1px solid var(--line-strong);background:var(--card);
+    color:var(--ink);font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;line-height:1}
+  .qty button.minus:disabled{opacity:.35;cursor:default}
+  .qty .v{min-width:18px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+  .row.habis .qty,.row.habis .r-pc{opacity:.5}
+  .row.habis .qty button{opacity:.5;pointer-events:none}
+
+  /* ===== keranjang ===== */
+  .sec{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:4px 0 8px}
+  .sumrow{display:flex;justify-content:space-between;padding:7px 2px;font-size:13px}
+  .sumrow .l{color:var(--ink-soft);font-weight:600}
+  .sumrow .v{font-weight:700;font-variant-numeric:tabular-nums}
+  .sumrow.total{border-top:1px dashed var(--line-strong);margin-top:4px;padding-top:10px;font-size:14.5px}
+  .sumrow.total .v{color:var(--acc);font-weight:800}
+  .note{font-size:10.5px;color:var(--mut);line-height:1.5;background:var(--soft);border:1px solid var(--line);
+    border-radius:10px;padding:8px 10px;margin-top:8px}
+  .note b{color:var(--ink-soft)}
+
+  /* ===== alamat & ongkir ===== */
+  .field{margin-bottom:9px}
+  .field label{font-size:11px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:4px}
+  .field input{width:100%;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink);
+    border-radius:10px;padding:9px 11px;font-family:inherit;font-size:13px;outline:0}
+  .field input:focus{border-color:var(--acc)}
+  .map{border-radius:12px;overflow:hidden;border:1px solid var(--line);position:relative;height:190px;
+    background:var(--map);margin-bottom:8px;touch-action:none;user-select:none}
+  .map .street{position:absolute;background:rgba(128,128,128,.16)}
+  .map .block{position:absolute;background:rgba(255,255,255,.14);border-radius:4px}
+  html[data-theme='gelap'] .map .block{background:rgba(255,255,255,.05)}
+  .marker{position:absolute;width:30px;height:30px;transform:translate(-50%,-100%);cursor:grab;z-index:3}
+  .marker svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+  .marker.resto{cursor:default;z-index:2}
+  .map-label{position:absolute;font-size:9px;font-weight:700;background:var(--card);border:1px solid var(--line);
+    padding:2px 7px;border-radius:999px;color:var(--ink-soft);white-space:nowrap}
+  .fee{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .fee .l{font-size:10.5px;color:var(--mut);font-weight:700;margin-bottom:3px}
+  .fee .big{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+  .fee .rinci{font-size:10.5px;color:var(--mut);margin-top:2px}
+  .fee.err .big{color:var(--danger);font-size:14px}
+  .fee.err{background:var(--danger-soft);border-color:var(--danger)}
+  .link{color:var(--acc);font-weight:700;font-size:11.5px;cursor:pointer;text-decoration:underline}
+  .link:disabled{opacity:.4;cursor:default;text-decoration:none}
+
+  /* ===== bayar ===== */
+  .payopt{border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;display:flex;gap:10px;align-items:center;
+    cursor:pointer;margin-bottom:8px;background:var(--card);transition:.15s}
+  .payopt .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:17px;flex:none}
+  .payopt.q .ico{background:var(--brand-soft)}
+  .payopt.c .ico{background:var(--ok-soft)}
+  .payopt .pm{font-weight:800;font-size:12.5px}
+  .payopt .ps{font-size:10.5px;color:var(--mut);margin-top:1px;line-height:1.4}
+  .payopt .rad{margin-left:auto;width:18px;height:18px;border-radius:50%;border:2px solid var(--line-strong);flex:none}
+  .payopt.on{border-color:var(--acc)}
+  .payopt.on .rad{border-color:var(--acc);background:radial-gradient(circle,var(--acc) 0 5px,transparent 6px)}
+  .qrisbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;margin:8px 0}
+  .qrisbox .qimg{width:150px;height:150px;margin:4px auto;background:#fff;border-radius:10px;padding:7px}
+  .qrisbox .amt{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+  .qrisbox .meta{font-size:10.5px;color:var(--mut);margin-top:3px}
+  .upload{border:1.5px dashed var(--line-strong);border-radius:12px;padding:14px;text-align:center;cursor:pointer;
+    background:var(--soft);transition:.15s}
+  .upload:hover{border-color:var(--acc)}
+  .upload .uico{font-size:22px}
+  .upload .ut{font-size:12px;font-weight:700;margin-top:3px}
+  .upload .us{font-size:10px;color:var(--mut);margin-top:2px}
+  .upload.done{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+  .upload.done .us{color:var(--ok);font-weight:700}
+  .req{font-size:10.5px;color:var(--warn);font-weight:700;margin-top:6px}
+
+  /* ===== tombol bawah ===== */
+  .bar{background:var(--card);border-top:1px solid var(--line);padding:10px 12px;display:flex;gap:10px;align-items:center}
+  .bar .tot{flex:1}
+  .bar .tot .t1{font-size:10px;color:var(--mut);font-weight:700}
+  .bar .tot .t2{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+  .bar .tot .t2 small{font-size:11px;color:var(--mut);font-weight:700}
+  .cta{background:var(--acc);color:#fff;border:0;border-radius:11px;padding:12px 18px;font-weight:800;font-size:13px;
+    font-family:inherit;cursor:pointer;transition:.15s;white-space:nowrap}
+  .cta:hover{background:var(--acc2)}
+  .cta:disabled{background:var(--mut2);cursor:default}
+  .cta.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line-strong)}
+  .cta.ghost:hover{border-color:var(--acc);color:var(--acc);background:var(--card)}
+
+  /* ===== status pesanan ===== */
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px}
+  .pill.wait{background:var(--warn-soft);color:var(--warn)}
+  .pill.lunas{background:var(--ok-soft);color:var(--ok)}
+  .pill.cod{background:#e7f3fe;color:#1d4ed8}
+  .orderinfo{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:10px}
+  .orderinfo .no{font-weight:800;font-size:13px}
+  .orderinfo .det{font-size:10.5px;color:var(--mut);margin-top:2px;line-height:1.5}
+  .tl{position:relative;padding-left:24px}
+  .tl::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line-strong)}
+  .tl-item{position:relative;padding:0 0 16px}
+  .tl-item::before{content:'';position:absolute;left:-21px;top:3px;width:12px;height:12px;border-radius:50%;
+    background:var(--card);border:2px solid var(--line-strong)}
+  .tl-item.done::before{background:var(--ok);border-color:var(--ok)}
+  .tl-item.now::before{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 4px var(--brand-soft)}
+  .tl-item .tt{font-weight:800;font-size:12px}
+  .tl-item .ts{font-size:10.5px;color:var(--mut);margin-top:1px}
+  .tl-item.done .tt{color:var(--ok)}
+  .tl-item.now .tt{color:var(--acc)}
+  .demo{margin-top:10px;display:flex;gap:7px;flex-wrap:wrap}
+  .demo button{font-size:10.5px;font-weight:700;border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);
+    border-radius:9px;padding:6px 10px;cursor:pointer;font-family:inherit}
+  .demo button:hover{border-color:var(--acc);color:var(--acc)}
+
+  /* ===== CSAT ===== */
+  .csat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
+  .csat .h{font-weight:800;font-size:12.5px;margin-bottom:2px}
+  .csat .s{font-size:10.5px;color:var(--mut);margin-bottom:8px}
+  .stars{display:flex;gap:7px;justify-content:center;font-size:26px;cursor:pointer;user-select:none}
+  .stars span{filter:grayscale(1);opacity:.35;transition:.15s}
+  .stars span.on{filter:none;opacity:1}
+  .csat textarea{width:100%;border:1.5px solid var(--line-strong);border-radius:10px;padding:8px 10px;font-family:inherit;
+    font-size:12px;color:var(--ink);background:var(--card);outline:0;margin-top:8px;resize:none;height:52px}
+  .csat textarea:focus{border-color:var(--acc)}
+  .thanks{text-align:center;padding:16px 6px;background:var(--ok-soft);border-radius:12px;margin-top:10px}
+  .thanks .big{font-size:30px}
+  .thanks .tt{font-weight:800;font-size:13px;color:var(--ok);margin-top:4px}
+  .thanks .ts{font-size:10.5px;color:var(--mut);margin-top:2px}
+
+  /* ===== panel kasir (pratinjau) ===== */
+  .kscard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px;margin-bottom:9px}
+  .kscard .khead{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .kscard .kno{font-weight:800;font-size:12.5px;flex:1}
+  .kscard .kbody{font-size:11px;color:var(--ink-soft);line-height:1.55}
+  .kscard .kbody b{color:var(--ink)}
+  .kscard .kimg{width:44px;height:44px;border-radius:8px;border:1px solid var(--line);margin:6px 0;object-fit:cover;
+    background:var(--soft);display:grid;place-items:center;font-size:18px}
+  .kact{display:flex;gap:7px;margin-top:8px}
+  .kact button{flex:1;border-radius:9px;padding:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;border:0}
+  .kact .ok{background:var(--ok);color:#fff}
+  .kact .no{background:var(--card);color:var(--danger);border:1.5px solid var(--danger)}
+  .kact .ok:disabled,.kact .no:disabled{opacity:.4;cursor:default}
+  .ksok{font-size:10.5px;font-weight:800;color:var(--ok);background:var(--ok-soft);border-radius:9px;padding:7px;
+    text-align:center;margin-top:7px}
+  .nbanner{position:absolute;top:8px;left:8px;right:8px;z-index:9;background:var(--acc);color:#fff;border-radius:11px;
+    padding:10px 12px;font-size:12px;font-weight:800;display:flex;gap:8px;align-items:center;
+    box-shadow:0 10px 24px rgba(0,0,0,.35);animation:nbIn .3s}
+  .nbanner.hide{opacity:0;transition:.3s}
+  @keyframes nbIn{from{transform:translateY(-14px);opacity:0}}
+  .demo .sound{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(80px);background:#191d23;color:#fff;
+    font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:11px;box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:.25s;opacity:0;z-index:99;max-width:88vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Ayam SABANA — Order Antar Sendiri · halaman pelanggan (mockup web, mobile-first)</h1>
+  <p class="lead">Katalog tersinkron dengan kasir → keranjang → pilih titik di peta (ongkir per km dari titik resto) →
+  bayar QRIS nominal terkunci <b>+ unggah bukti yang dikonfirmasi kasir</b>, atau COD → pantau status → CSAT.</p>
+  <p class="hint">Fitur demo: tambah item di katalog, lanjut ke alamat & geser pin di peta (lihat ongkir berubah), pilih
+  QRIS → unggah bukti → lihat <b>sisi kasir</b> di panel kanan (verifikasi bukti = callback manual), lalu simulasi
+  perjalanan status sampai CSAT. <b>Habis</b> = produk nonaktif/"sementara habis" di kasir ikut hilang dari katalog.</p>
+  <button class="theme" onclick="tema()"><span class="sun">☀️</span><span class="moon">🌙</span> Tema</button>
+
+  <div class="phones">
+    <!-- ====================== PHONE PELANGGAN ====================== -->
+    <div class="state">
+      <div class="st-tag">Sisi pelanggan</div>
+      <div class="st-name">Halaman order (link/QR toko)</div>
+      <div class="st-sub">Mobile-first, tanpa aplikasi — buka dari QR di struk/meja/kemasan atau link yang dikirim kasir.</div>
+      <div class="frame"><div class="app m" id="app">
+
+        <div class="statusbar">
+          <button class="back" id="backBtn" onclick="goBack()" disabled>←</button>
+          <div class="shop">
+            <div class="nm">Ayam SABANA 🍗</div>
+            <div class="sub">Antar sendiri · Jl. Sudirman 12</div>
+          </div>
+          <span class="sync"><span class="dot"></span>menu sync kasir</span>
+        </div>
+
+        <div class="steps" id="steps">
+          <div class="step on" data-s="1">Menu</div>
+          <div class="step" data-s="2">Alamat &amp; ongkir</div>
+          <div class="step" data-s="3">Bayar</div>
+        </div>
+
+        <div class="body">
+          <!-- MENU -->
+          <div class="scr active" id="scr-menu">
+            <div class="chips" id="chips"></div>
+            <div id="menuList"></div>
+          </div>
+
+          <!-- KERANJANG -->
+          <div class="scr" id="scr-cart">
+            <div class="sec">Keranjang</div>
+            <div id="cartList"></div>
+            <div class="note">Ongkos kirim dihitung di langkah berikutnya — <b>biaya dasar + tarif per km</b> dari titik resto,
+              dengan jarak maksimal 7 km.</div>
+          </div>
+
+          <!-- ALAMAT -->
+          <div class="scr" id="scr-alamat">
+            <div class="field"><label>Nama penerima</label><input id="inNama" placeholder="mis. Bu Sari" value="Bu Sari"/></div>
+            <div class="field"><label>No. HP / WhatsApp</label><input id="inHp" placeholder="08xx-xxxx-xxxx" value="0812-3456-7890"/></div>
+            <div class="field"><label>Alamat &amp; titik pengantaran</label></div>
+            <div class="map" id="map">
+              <div class="block" style="left:14%;top:16%;width:26%;height:24%"></div>
+              <div class="block" style="left:54%;top:12%;width:30%;height:20%"></div>
+              <div class="block" style="left:12%;top:56%;width:32%;height:22%"></div>
+              <div class="block" style="left:56%;top:50%;width:26%;height:26%"></div>
+              <div class="street" style="left:0;right:0;top:44%;height:4px"></div>
+              <div class="street" style="left:0;right:0;top:72%;height:4px"></div>
+              <div class="street" style="top:0;bottom:0;left:48%;width:4px"></div>
+              <div class="street" style="top:0;bottom:0;left:30%;width:2px;opacity:.5"></div>
+              <span class="map-label" id="lblResto" style="left:52%;top:38%">📍 Resto</span>
+              <div class="marker resto" id="mResto" style="left:48%;top:42%">
+                <svg width="30" height="34" viewBox="0 0 24 28"><path fill="#dc2626" d="M12 0C5.4 0 0 5.4 0 12c0 9 12 16 12 16s12-7 12-16C24 5.4 18.6 0 12 0z"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg>
+              </div>
+              <div class="marker" id="mPin" style="left:62%;top:30%">
+                <svg width="28" height="32" viewBox="0 0 24 28"><path fill="#1d4ed8" d="M12 0C5.4 0 0 5.4 0 12c0 9 12 16 12 16s12-7 12-16C24 5.4 18.6 0 12 0z"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg>
+              </div>
+            </div>
+            <div class="fee" id="feeBox">
+              <div class="l" id="feeLbl">Menghitung jarak…</div>
+              <div class="big" id="feeVal">—</div>
+              <div class="rinci" id="feeRinci"></div>
+            </div>
+            <button class="link" id="areaLink" onclick="pilihArea()">atau pilih dari daftar area &gt;</button>
+          </div>
+
+          <!-- BAYAR -->
+          <div class="scr" id="scr-bayar">
+            <div class="sec">Ringkasan</div>
+            <div id="sumRingkas"></div>
+            <div class="sec" style="margin-top:10px">Metode pembayaran</div>
+            <div class="payopt q on" onclick="pilihPay('q')">
+              <div class="ico">📱</div>
+              <div><div class="pm">QRIS — bayar dulu</div>
+                <div class="ps">Scan QR nominal terkunci, lalu <b>unggah bukti</b> yang diverifikasi kasir.</div></div>
+              <div class="rad"></div>
+            </div>
+            <div class="payopt c" onclick="pilihPay('c')">
+              <div class="ico">💵</div>
+              <div><div class="pm">COD — bayar di tempat</div>
+                <div class="ps">Tunai saat kurir tiba. Tanpa bukti transfer.</div></div>
+              <div class="rad"></div>
+            </div>
+            <div id="qrisArea"></div>
+          </div>
+
+          <!-- STATUS -->
+          <div class="scr" id="scr-status">
+            <div class="orderinfo">
+              <div class="no">Pesanan #101 · Ayam SABANA</div>
+              <div class="det" id="statusDet"></div>
+              <div style="margin-top:6px"><span class="pill" id="statusPill"></span></div>
+            </div>
+            <div class="sec">Status pengiriman</div>
+            <div class="tl" id="timeline"></div>
+            <div class="demo">
+              <button onclick="demoMajukan('dibuat')">▶ Buat</button>
+              <button onclick="demoMajukan('siap')">▶ Siap</button>
+              <button onclick="demoMajukan('diantar')">▶ Antarkan</button>
+              <button onclick="demoMajukan('selesai')">▶ Selesai</button>
+            </div>
+            <div id="csatArea"></div>
+          </div>
+        </div>
+
+        <div class="bar">
+          <div class="tot"><div class="t1" id="barT1">Total sementara</div><div class="t2" id="barT2">Rp 0</div></div>
+          <button class="cta" id="ctaBtn" onclick="cta()">Pilih menu</button>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- ====================== PHONE KASIR (PRATINJAU) ====================== -->
+    <div class="state">
+      <div class="st-tag">Sisi kasir (pratinjau alur verifikasi)</div>
+      <div class="st-name">Papan Pesanan Antar — bukti bayar</div>
+      <div class="st-sub">Callback <b>manual</b>: bukti yang diunggah pelanggan masuk ke papan; kasir mencocokkan notifikasi
+      uang masuk di HP toko lalu menekan <b>Terima → Lunas</b>. Tanpa ini, pesanan QRIS tidak lanjut ke dapur.</div>
+      <div class="frame"><div class="app m">
+        <div class="statusbar">
+          <button class="back" style="visibility:hidden">←</button>
+          <div class="shop"><div class="nm">Papan Pesanan Antar</div><div class="sub">Kasir · shift #1</div></div>
+          <span class="pill wait" id="ksCount">1 menunggu verifikasi</span>
+        </div>
+        <div class="body" style="padding:12px" id="ksBody">
+          <div class="kscard" id="ksCard">
+            <div class="khead">
+              <span class="kno">#101 · QRIS</span>
+              <span class="pill wait" id="ksPill">menunggu verifikasi</span>
+            </div>
+            <div class="kbody" id="ksDet">Menghitung…</div>
+            <div class="kimg" id="ksImg">🧾</div>
+            <div class="kbody" id="ksImgTxt">Bukti transfer pelanggan — cocokkan nominal &amp; waktu di aplikasi bank toko.</div>
+            <div class="kact">
+              <button class="ok" onclick="ksVerifikasi()">✓ Terima — Lunas</button>
+              <button class="no" onclick="ksTolak()">✗ Tolak</button>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="st-sub" style="margin-top:10px">COD tidak perlu verifikasi ini — pembayaran dicatat saat kurir kembali
+      ("COD dibayar") dan masuk laci shift.</div>
+      <div class="demo" style="margin-top:8px">
+        <button class="sound" onclick="simPesananMasuk()">🔔 Simulasi: pesanan masuk + suara</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= data (demo — katalog "sync kasir") ================= */
+const MENU = [
+  { id:1, nama:'Ayam Dada Goreng',  kat:'Ayam',  harga:11000, stok:'ok',    emoji:'🍗' },
+  { id:2, nama:'Sayap Goreng (2)',  kat:'Ayam',  harga:9000,  stok:'ok',    emoji:'🍗' },
+  { id:3, nama:'Paha Bawah Goreng', kat:'Ayam',  harga:9500,  stok:'low',   emoji:'🍗' },
+  { id:4, nama:'Paket Nasi + Ayam', kat:'Paket', harga:15000, stok:'ok',    emoji:'🍱' },
+  { id:5, nama:'Paket Nasi + 2 Ayam',kat:'Paket',harga:21000, stok:'ok',    emoji:'🍱' },
+  { id:6, nama:'Kentang Goreng',    kat:'Lain',  harga:8000,  stok:'ok',    emoji:'🍟' },
+  { id:7, nama:'Es Teh Manis',      kat:'Minum', harga:5000,  stok:'ok',    emoji:'🧋' },
+  { id:8, nama:'Sambal Extra (3)',  kat:'Lain',  harga:3000,  stok:'ok',    emoji:'🌶️' },
+  { id:9, nama:'Es Jeruk',          kat:'Minum', harga:6000,  stok:'habis', emoji:'🍊' },
+];
+const cart = {};           // id -> qty
+const TARIF = { biayaDasar:5000, perKm:2000, jarakMax:7 };   // dari Pengaturan kasir
+const RESTO = { x:0.48, y:0.42 };                            // titik resto di peta (0..1)
+const AREA = [ {nama:'Jl. Melati (1,2 km)', dx:-0.20, dy:-0.02}, {nama:'Gg. Kenanga (2,4 km)', dx:0.16, dy:0.08},
+               {nama:'Perumnas Griya (4,1 km)', dx:-0.10, dy:0.32}, {nama:'Komp. Anggrek (5,8 km)', dx:0.30, dy:-0.26},
+               {nama:'Jl. Raya Utara (6,9 km)', dx:0.02, dy:-0.36} ];
+const SCALE = 0.031;       // ~1 km ≈ 32 px (peta 374px ≈ 12 km)
+
+/* ================= state ================= */
+let step = 1;              // 1 menu, 2 alamat, 3 bayar; cart = 1.5
+let pay = 'q';
+let jarak = 0, ongkir = 0, diLuar = false;
+let pin = { x:0.62, y:0.30 };
+let bukti = null;          // nama file bukti
+let statusIdx = 1;         // 0 diterima,1 dibuat,2 siap,3 diantar,4 selesai
+let verifKasir = false;
+let csat = 0;
+
+const totalItem = () => Object.entries(cart).reduce((s,[id,q]) => s + MENU.find(m=>m.id==id).harga*q, 0);
+const totalSemua = () => totalItem() + (step>=2 && !diLuar ? ongkir : 0);
+const fmt = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
+const rupiah = n => Math.round(n/100)*100;
+
+/* ================= katalog ================= */
+function renderChips(){
+  const kats = ['Semua', ...new Set(MENU.map(m=>m.kat))];
+  document.getElementById('chips').innerHTML = kats.map((k,i)=>
+    `<button class="chip${i===0?' on':''}" onclick="setKat(this,'${k}')">${k}</button>`).join('');
+}
+function setKat(el,k){
+  document.querySelectorAll('#chips .chip').forEach(c=>c.classList.remove('on')); el.classList.add('on');
+  renderMenu(k);
+}
+function badge(m){
+  if (m.stok==='habis') return '<span class="badge habis">Sementara habis</span>';
+  if (m.stok==='low')   return '<span class="badge low">Stok menipis</span>';
+  return '<span class="badge sync2">Tersedia</span>';
+}
+function renderMenu(kat='Semua'){
+  const list = MENU.filter(m => m.kat===kat || kat==='Semua');
+  document.getElementById('menuList').innerHTML = list.map(m=>{
+    const q = cart[m.id]||0, off = m.stok==='habis';
+    return `<div class="row${off?' habis':''}">
+      <div class="thumb">${m.emoji}</div>
+      <div class="r-mid">
+        <div class="r-nm">${m.nama}</div>
+        <div class="r-ct">${m.kat} · harga offline sama dgn kasir</div>
+        <div class="r-pc">${fmt(m.harga)}</div>
+        ${badge(m)}
+      </div>
+      <div class="qty">
+        <button class="minus" ${q===0?'disabled':''} onclick="ubah(${m.id},-1)">−</button>
+        <span class="v">${q}</span>
+        <button class="plus" onclick="ubah(${m.id},1)">+</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function ubah(id,d){
+  if (MENU.find(m=>m.id==id).stok==='habis') return;
+  const q = (cart[id]||0)+d;
+  if (q<=0) delete cart[id]; else cart[id]=q;
+  renderMenu(document.querySelector('#chips .chip.on')?.textContent||'Semua');
+  updateBar();
+  if (Object.keys(cart).length===0) { step=1; showScr(1); }
+}
+
+/* ================= bar & navigasi ================= */
+function updateBar(){
+  const n = Object.keys(cart).length;
+  document.getElementById('barT2').innerHTML = fmt(totalSemua());
+  const b = document.getElementById('ctaBtn');
+  if (step===1){ b.textContent = n? 'Lihat keranjang →' : 'Pilih menu'; b.disabled = !n;
+    document.getElementById('barT1').textContent = n? `${n} item · total sementara` : 'Total sementara'; }
+  else if (step===2){ b.textContent = diLuar? 'Di luar jangkauan' : 'Lanjut ke bayar →'; b.disabled = diLuar;
+    document.getElementById('barT1').textContent = 'Subtotal + ongkir'; }
+  else if (step===3){ b.textContent = pay==='q'? 'Saya sudah bayar — unggah bukti' : 'Pesan — bayar di tempat';
+    b.disabled = pay==='q' && !bukti; }
+  else { document.getElementById('barT2').innerHTML = fmt(totalSemua()); }
+}
+function setStep(n){
+  step=n;
+  document.querySelectorAll('#steps .step').forEach((s,i)=>{
+    s.className = 'step' + (i+1===n?' on': i+1<n?' done':'');
+  });
+  const back = document.getElementById('backBtn');
+  back.disabled = n===1;
+  updateBar();
+}
+function showScr(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('active'));
+  document.getElementById('scr-'+id).classList.add('active');
+}
+function goBack(){
+  if (step===3) setStep(2), showScr('alamat');
+  else if (step===2) setStep(1), showScr('menu');
+}
+function cta(){
+  if (step===1){ if (!Object.keys(cart).length) return; renderCart(); setStep(2); showScr('cart'); }
+  else if (step===2){ setStep(3); renderBayar(); showScr('bayar'); }
+  else if (step===3){ kirimPesanan(); }
+}
+
+/* ================= keranjang ================= */
+function renderCart(){
+  document.getElementById('cartList').innerHTML = Object.entries(cart).map(([id,q])=>{
+    const m = MENU.find(x=>x.id==id);
+    return `<div class="row">
+      <div class="thumb">${m.emoji}</div>
+      <div class="r-mid"><div class="r-nm">${m.nama}</div>
+        <div class="r-pc">${fmt(m.harga)} × ${q} = ${fmt(m.harga*q)}</div></div>
+      <div class="qty">
+        <button class="minus" onclick="ubah(${m.id},-1)">−</button>
+        <span class="v">${q}</span>
+        <button class="plus" onclick="ubah(${m.id},1)">+</button>
+      </div>
+    </div>`;
+  }).join('') + `<div class="sumrow"><span class="l">Subtotal menu</span><span class="v">${fmt(totalItem())}</span></div>`;
+}
+
+/* ================= peta & ongkir ================= */
+function hitung(){
+  const dx=(pin.x-RESTO.x), dy=(pin.y-RESTO.y);
+  const km = Math.sqrt(dx*dx+dy*dy)/SCALE;
+  jarak = Math.round(km*10)/10;
+  diLuar = jarak > TARIF.jarakMax;
+  ongkir = diLuar? 0 : rupiah(TARIF.biayaDasar + TARIF.perKm*jarak);
+  const f = document.getElementById('feeBox');
+  document.getElementById('feeLbl').textContent = diLuar? 'Di luar jangkauan pengantaran' : 'Ongkos kirim (dari titik resto)';
+  document.getElementById('feeVal').textContent = diLuar? 'Maksimal '+TARIF.jarakMax+' km' : fmt(ongkir);
+  document.getElementById('feeRinci').textContent = diLuar? 'Geser pin ke dalam radius, atau hubungi toko.'
+    : `${jarak.toLocaleString('id-ID')} km · biaya dasar ${fmt(TARIF.biayaDasar)} + ${fmt(TARIF.perKm)}/km`;
+  f.classList.toggle('err', diLuar);
+  updateBar();
+}
+function pilihArea(){
+  const opt = AREA.map(a=>`${a.nama}`).join('\n');
+  const pick = prompt('Pilih area (demo):\n'+opt);
+  const a = AREA.find(x=>x.nama===pick);
+  if (a){ pin = { x:RESTO.x+a.dx, y:RESTO.y+a.dy }; tempatPin(); hitung(); }
+}
+function tempatPin(){
+  const p = document.getElementById('mPin');
+  p.style.left = (pin.x*100)+'%'; p.style.top = (pin.y*100)+'%';
+}
+function initMap(){
+  const map = document.getElementById('map');
+  const pinEl = document.getElementById('mPin');
+  let drag=false;
+  const px = (e)=>{ const r=map.getBoundingClientRect(); return { x:(e.clientX-r.left)/r.width, y:(e.clientY-r.top)/r.height }; };
+  pinEl.addEventListener('pointerdown',(e)=>{ drag=true; pinEl.setPointerCapture(e.pointerId); });
+  pinEl.addEventListener('pointermove',(e)=>{ if(!drag)return; const p=px(e); pin={ x:Math.min(.94,Math.max(.06,p.x)), y:Math.min(.92,Math.max(.08,p.y)) }; tempatPin(); });
+  pinEl.addEventListener('pointerup',()=>{ drag=false; hitung(); });
+  tempatPin();
+}
+
+/* ================= bayar ================= */
+function pilihPay(p){
+  pay=p;
+  document.querySelectorAll('.payopt').forEach((el,i)=>el.classList.toggle('on', (i===0)=== (p==='q')));
+  renderQris(); updateBar();
+}
+function renderBayar(){
+  const ring = `<div class="sumrow"><span class="l">Subtotal menu</span><span class="v">${fmt(totalItem())}</span></div>
+    <div class="sumrow"><span class="l">Ongkos kirim (${jarak.toLocaleString('id-ID')} km)</span><span class="v">${fmt(ongkir)}</span></div>
+    <div class="sumrow total"><span class="l">Total</span><span class="v">${fmt(totalSemua())}</span></div>`;
+  document.getElementById('sumRingkas').innerHTML = ring;
+  renderQris();
+}
+function qrSvg(seed){
+  // QR dekoratif deterministik (bukan QR asli — mockup)
+  const N=25; let s=seed, out=[];
+  const rnd=()=>{ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; };
+  for(let y=0;y<N;y++){ for(let x=0;x<N;x++){
+    const inFinder=(x<7&&y<7)||(x>N-8&&y<7)||(x<7&&y>N-8);
+    let on=false;
+    if(inFinder){ const fx=x<7?x:x-(N-7), fy=y<7?y:y-(N-7);
+      on = !(fx===0||fx===6||fy===0||fy===6) || (fx>=2&&fx<=4&&fy>=2&&fy<=4); }
+    else if(x>N-9&&y>N-9){ on = (x+y)%2===0 && !(x>N-4&&y>N-4); }
+    else if(x===6||y===6){ on = (x+y)%2===0; }
+    else on = rnd()>.52;
+    if(on) out.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
+  }}
+  return `<svg viewBox="0 0 ${N} ${N}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">${out.join('')}</svg>`;
+}
+function renderQris(){
+  const el = document.getElementById('qrisArea');
+  if (pay!=='q'){ el.innerHTML=''; return; }
+  el.innerHTML = `
+    <div class="qrisbox">
+      <div class="qimg">${qrSvg(101+totalSemua())}</div>
+      <div class="amt">${fmt(totalSemua())}</div>
+      <div class="meta">Pesanan #101 · nominal terkunci · berlaku 10 menit</div>
+    </div>
+    <div class="upload${bukti?' done':''}" id="upBox" onclick="document.getElementById('upFile').click()">
+      <input type="file" id="upFile" accept="image/*" style="display:none" onchange="pilihBukti(this)"/>
+      <div class="uico">${bukti?'✅':'📷'}</div>
+      <div class="ut">${bukti?'Bukti terkirim':'Unggah bukti pembayaran'}</div>
+      <div class="us">${bukti?'Menunggu konfirmasi kasir':bukti?'':'Foto tangkapan layar QRIS / mutasi'}</div>
+    </div>
+    <div class="req">Wajib: bukti akan diverifikasi kasir sebelum pesanan diproses.</div>`;
+}
+function pilihBukti(inp){
+  const f = inp.files && inp.files[0];
+  bukti = f? f.name : bukti;
+  renderQris(); updateBar();
+  if (f) toast('Bukti "'+f.name+'" siap dikirim');
+}
+
+/* ================= kirim & status ================= */
+function kirimPesanan(){
+  if (pay==='q' && !bukti) return;
+  statusIdx = 0; verifKasir=false; csat=0;
+  document.getElementById('csatArea').innerHTML='';
+  renderStatus(); setStep(4); showScr('status');
+  toast(pay==='q'? 'Pesanan #101 terkirim — menunggu verifikasi kasir' : 'Pesanan #101 terkirim (COD)');
+  updateBar();
+}
+function renderStatus(){
+  const q = pay==='q';
+  const pill = q? (verifKasir? '<span class="pill lunas">✓ Lunas (diverifikasi kasir)</span>'
+                          : '<span class="pill wait">Menunggu verifikasi kasir</span>')
+                : '<span class="pill cod">COD — bayar saat kurir tiba</span>';
+  document.getElementById('statusPill').innerHTML = pill;
+  document.getElementById('statusDet').innerHTML =
+    `${totalItem()>0?Object.entries(cart).reduce((s,[id,q2])=>s+(q2>1?q2+'× ':''),'')+'item · ':''}${fmt(totalSemua())} ·
+     Bu Sari · 0812-3456-7890 · ${jarak.toLocaleString('id-ID')} km · ongkir ${fmt(ongkir)}`;
+  const langkah = ['Diterima','Dibuat','Siap','Diantar','Selesai'];
+  const tgl = ['12:01','12:06','12:14','12:31','12:47'];
+  document.getElementById('timeline').innerHTML = langkah.map((l,i)=>{
+    if (i>statusIdx && !(q && !verifKasir && i===0)) return '';
+    const cls = i<statusIdx?'done': i===statusIdx?'now':'';
+    const ket = i===0&&q&&!verifKasir? 'Menunggu kasir mencocokkan bukti pembayaran di aplikasi bank toko.'
+              : i===0&&q&&verifKasir? 'Bukti diterima — pesanan diproses.' : i===0?'Pesanan diterima, menunggu konfirmasi kasir.'
+              : i===3? 'Kurir dalam perjalanan · target ≤ 45 mnt' : '';
+    return `<div class="tl-item ${cls}"><div class="tt">${l}</div><div class="ts">${i<=statusIdx?tgl[i]:''} ${ket}</div></div>`;
+  }).join('');
+  const btn = document.getElementById('ctaBtn');
+  if (statusIdx<4){
+    btn.textContent = statusIdx===0&&pay==='q'&&!verifKasir? 'Cek lagi verifikasi' : 'Pantau status';
+    btn.disabled=false; btn.classList.add('ghost');
+  } else {
+    btn.textContent='Pesan lagi'; btn.classList.remove('ghost');
+  }
+  document.getElementById('barT1').textContent = 'Status pesanan';
+}
+function demoMajukan(st){
+  const mapS = { dibuat:1, siap:2, diantar:3, selesai:4 };
+  statusIdx = mapS[st];
+  if (st==='selesai') renderCsat();
+  renderStatus();
+  if (st==='selesai') toast('Pesanan selesai — terima kasih!');
+}
+function renderCsat(){
+  document.getElementById('csatArea').innerHTML = `
+    <div class="csat">
+      <div class="h">Bagaimana pesanan Anda? 🙏</div>
+      <div class="s">Nilai pengalaman dari 1–5 (CSAT) — tampil di laporan toko.</div>
+      <div class="stars" id="stars">${[1,2,3,4,5].map(i=>`<span data-v="${i}" onclick="pilihStar(${i})">★</span>`).join('')}</div>
+      <textarea id="csatTxt" placeholder="Komentar (opsional)"></textarea>
+      <button class="cta" style="width:100%;margin-top:8px" onclick="kirimCsat()">Kirim penilaian</button>
+    </div>`;
+}
+function pilihStar(v){ csat=v; document.querySelectorAll('#stars span').forEach(s=>s.classList.toggle('on',+s.dataset.v<=v)); }
+function kirimCsat(){
+  document.getElementById('csatArea').innerHTML =
+    `<div class="thanks"><div class="big">🎉</div><div class="tt">Terima kasih — nilai ${csat}/5 tersimpan</div>
+     <div class="ts">Pesanan #101 selesai. Sampai jumpa lagi! 🍗</div></div>`;
+  toast('Penilaian '+csat+'/5 terkirim');
+}
+
+/* ================= sisi kasir (pratinjau) ================= */
+function ksUpdate(){
+  const q = pay==='q';
+  const det = q? (verifKasir? 'QRIS — lunas' : 'QRIS — Rp '+fmt(totalSemua())+' menunggu verifikasi')
+               : 'COD — '+fmt(totalSemua())+' (bayar saat kurir tiba)';
+  document.getElementById('ksDet').innerHTML =
+    `Bu Sari · ${jarak.toLocaleString('id-ID')} km · ongkir ${fmt(ongkir)}<br>${det}`;
+  document.getElementById('ksCount').textContent = (q&&!verifKasir)? '1 menunggu verifikasi' : '0 menunggu verifikasi';
+  const pill = document.getElementById('ksPill');
+  pill.className = 'pill ' + (q? (verifKasir?'lunas':'wait') : 'cod');
+  pill.textContent = q? (verifKasir?'✓ lunas':'menunggu verifikasi') : 'COD';
+  document.getElementById('ksCard').style.opacity = verifKasir? '.55':'1';
+  const okB = document.querySelector('#ksCard .ok'), noB = document.querySelector('#ksCard .no');
+  if (q && !verifKasir){ okB.disabled=false; noB.disabled=false;
+    document.getElementById('ksImgTxt').textContent='Bukti transfer pelanggan — cocokkan nominal & waktu di aplikasi bank toko.';
+  } else if (q && verifKasir){
+    okB.disabled=true; noB.disabled=true;
+    document.getElementById('ksImgTxt').innerHTML='<span class="ksok">✓ Verifikasi selesai — pesanan masuk dapur</span>';
+  } else {
+    okB.disabled=true; noB.disabled=true;
+    document.getElementById('ksImgTxt').textContent='COD — tidak perlu verifikasi bukti.';
+  }
+}
+function ksVerifikasi(){ verifKasir=true; ksUpdate(); renderStatus(); toast('Kasir verifikasi bukti — pesanan LANJUT ke dapur ✓'); }
+function ksTolak(){ verifKasir=false; toast('Ditandai tolak — kasir menghubungi pelanggan untuk refund.'); }
+
+/* ===== notifikasi pesanan masuk (demo suara) ===== */
+function chime(){
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ac = new AC();
+    const t = ac.currentTime;
+    [[880,0],[1174.7,.16],[880,.34]].forEach(([f,d])=>{
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t+d);
+      g.gain.exponentialRampToValueAtTime(.4, t+d+.02);
+      g.gain.exponentialRampToValueAtTime(.0001, t+d+.5);
+      o.connect(g); g.connect(ac.destination);
+      o.start(t+d); o.stop(t+d+.55);
+    });
+  }catch(e){}
+}
+function simPesananMasuk(){
+  chime();
+  if (navigator.vibrate) navigator.vibrate([120,60,120]);
+  const app = document.querySelector('.state:nth-of-type(2) .app');
+  const old = document.getElementById('nb1');
+  if (old) old.remove();
+  const b = document.createElement('div');
+  b.id='nb1'; b.className='nbanner';
+  b.innerHTML='🔔 Pesanan #102 masuk · QRIS — menunggu verifikasi';
+  app.appendChild(b);
+  toast('🔔 Pesanan #102 masuk — suara & banner (demo)');
+  setTimeout(()=>{ b.classList.add('hide'); setTimeout(()=>b.remove(),400); }, 4200);
+}
+
+/* ================= util ================= */
+function toast(t){
+  const el=document.getElementById('toast'); el.textContent=t; el.classList.add('show');
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function tema(){ document.documentElement.toggleAttribute('data-theme') }
+
+/* ================= init ================= */
+renderChips(); renderMenu(); initMap(); hitung();
+setStep(1); showScr('menu'); updateBar();
+window._demo={ pay:()=>pay, jarak, csat, bukti, verifKasir };  // hook uji
+</script>
+</body>
+</html>

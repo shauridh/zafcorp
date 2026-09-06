@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kasir SABANA — mockup Produk &amp; Menu (v8)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  /* ===== token (terang) — sama dengan v7 + token pendukung ===== */
+  :root{ --acc:#dc2626; --acc2:#c01f1f; --ink:#191d23; --ink-soft:#414a55; --bg:#eef0f3; --card:#fff;
+         --line:#e6e9ee; --line-strong:#d3d8e0; --mut:#79828d; --mut2:#a6adb7; --soft:#f4f5f7; --hover:#f7f8fa;
+         --ok:#177245; --warn:#b45309; --danger:#b3261e; --deep:#991b1b;
+         --brand-soft:#fdecec; --ok-soft:#e8f5ee; --warn-soft:#fff8f1; --danger-soft:#fdecec; }
+  html[data-theme='gelap']{ --acc:#e03535; --acc2:#ef4b4b; --ink:#eceef2; --ink-soft:#c3cad4; --bg:#16181d;
+         --card:#20242b; --line:#2c313a; --line-strong:#3b424d; --mut:#9aa4b1; --mut2:#6f7885; --soft:#1c1f25;
+         --hover:#262b33; --ok:#4ade80; --warn:#fbbf24; --danger:#f87171; --deep:#fda4af;
+         --brand-soft:#3a1d1d; --ok-soft:#12291d; --warn-soft:#2a2113; --danger-soft:#3a1d1d; }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;padding:24px 18px 60px}
+  .wrap{max-width:1200px;margin:0 auto}
+  h1{font-size:20px}
+  .lead{color:#b7aea5;font-size:13.5px;max-width:900px;margin:9px 0 4px;line-height:1.6}
+  .hint{color:#8f847a;font-size:12px;margin:2px 0 6px;line-height:1.6}
+  .hint b{color:#cfc6bc}
+  .theme{display:inline-flex;align-items:center;gap:7px;margin-top:10px;background:#171412;color:#ece5dd;
+    border:1px solid #3d352e;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  .theme:hover{border-color:#8a7b6c}
+  .theme .sun,.theme .moon{display:inline-flex}
+  html[data-theme='gelap'] .theme .sun{display:none}
+  html:not([data-theme='gelap']) .theme .moon{display:none}
+
+  .state{margin-top:26px}
+  .st-tag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7aea5}
+  .st-name{font-size:16px;font-weight:800;margin:4px 0 2px}
+  .st-sub{font-size:12.5px;color:#b7aea5;line-height:1.55;max-width:880px}
+  .frame{margin:14px auto 0;background:#0c0b0a;border-radius:20px;padding:9px;
+    box-shadow:0 26px 60px -20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06)}
+  .app{width:100%;background:var(--bg);border-radius:14px;overflow:hidden;color:var(--ink);
+    font-size:13px;font-family:'Inter',system-ui,sans-serif;transition:background .2s,color .2s}
+  .app.m{max-width:372px;margin:0 auto}
+
+  /* ===== topbar & sidebar (sama dengan v6/v7) ===== */
+  .top{display:flex;align-items:center;gap:10px;background:var(--card);border-bottom:1px solid var(--line);
+    padding:9px 14px}
+  .burger{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);color:var(--ink-soft);
+    display:grid;place-items:center;flex:none;background:var(--card)}
+  .mark{width:34px;height:34px;border-radius:10px;background:var(--acc);color:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:17px;flex:none;margin-left:4px}
+  .brand{font-weight:800;font-size:15px}
+  .brand small{display:block;font-size:10px;color:var(--mut);font-weight:600;margin-top:1px}
+  .sp{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);
+    border-radius:10px;padding:7px 11px;font-size:11.5px;font-weight:700;color:var(--ink-soft)}
+  .pill .amt{color:var(--acc);font-variant-numeric:tabular-nums}
+  .live{width:8px;height:8px;border-radius:50%;background:#16a34a}
+  .top .icbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+    display:grid;place-items:center;color:var(--mut);cursor:pointer}
+
+  .body{display:flex;flex:1}
+  .sb{background:var(--card);border-right:1px solid var(--line);width:236px;flex:none}
+  .grp{font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2);
+    padding:16px 18px 5px}
+  .item{display:flex;align-items:center;gap:11px;padding:9px 14px;margin:2px 8px;border-radius:10px;
+    color:var(--ink-soft);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+  .item svg{flex:none}
+  .item:hover{background:var(--soft);color:var(--ink)}
+  .item.on{background:var(--acc);color:#fff}
+  .main{flex:1;min-width:0;padding:14px 16px 20px;position:relative}
+
+  /* ===== daftar produk — GRID kartu ===== */
+  .crumbs{font-size:11.5px;color:var(--mut);font-weight:600;margin-bottom:9px}
+  .crumbs b{color:var(--ink)}
+  .dhead{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .dhead h2{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .dhead .sub2{font-size:11.5px;color:var(--mut);margin-top:2px}
+  .sp2{flex:1}
+  .btn-primary{background:var(--acc);color:#fff;border:0;border-radius:11px;padding:10px 16px;font-weight:800;
+    font-size:13px;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+  .btn-primary:hover{background:var(--acc2)}
+  .btn-outline{background:var(--card);color:var(--ink);border:1px solid var(--line-strong);border-radius:11px;
+    padding:9px 14px;font-weight:800;font-size:12px;font-family:inherit;cursor:pointer;transition:.15s}
+  .btn-outline:hover{border-color:var(--acc);color:var(--acc)}
+  .btn-outline.sm{padding:7px 12px;font-size:11.5px}
+
+  .tool{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .search{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--card);
+    border-radius:11px;padding:9px 12px;color:var(--mut2);flex:1;min-width:200px;max-width:340px}
+  .search input{border:0;outline:0;font-family:inherit;font-size:13px;background:transparent;color:var(--ink);width:100%}
+  .chips{display:flex;gap:5px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:6px 12px;font-size:11.5px;
+    font-weight:700;color:var(--ink-soft);cursor:pointer;transition:.15s;font-family:inherit}
+  .chip:hover{border-color:var(--acc)}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .chip .cnt{color:var(--mut2);font-variant-numeric:tabular-nums}
+  .chip.on .cnt{color:rgba(255,255,255,.72)}
+
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:10px}
+  .ptile{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:11px 12px;
+    display:flex;flex-direction:column;gap:6px;transition:opacity .2s,background .2s}
+  .ptile.off,.ptile.habis{opacity:.58}
+  .pt-top{display:flex;align-items:center;gap:6px}
+  .pt-name{font-weight:800;font-size:13px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pt-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .badge{font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2.5px 7px;
+    border-radius:999px;background:var(--soft);color:var(--mut)}
+  .badge.prod{background:var(--brand-soft);color:var(--acc)}
+  .badge.lang{background:#e7f3fe;color:#1d4ed8}
+  .badge.off{background:var(--soft);color:var(--mut)}
+  .badge.habis{background:var(--danger-soft);color:var(--danger)}
+  .ckat{font-size:10px;font-weight:700;color:var(--mut)}
+  .pt-resep{font-size:10px;color:var(--mut2);font-weight:700}
+  .pt-price{font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+  .stat{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;
+    flex:none;white-space:nowrap}
+  .stat.on{background:var(--ok-soft);color:var(--ok)}
+  .stat.low{background:var(--warn-soft);color:var(--warn)}
+  .stat.hab{background:var(--danger-soft);color:var(--danger)}
+  .stat.na{background:var(--soft);color:var(--mut)}
+  .pt-meta{display:flex;gap:5px;flex-wrap:wrap}
+  .mchip{font-size:10px;font-weight:700;color:var(--mut);background:var(--soft);border:1px solid var(--line);
+    border-radius:7px;padding:2.5px 7px;display:inline-flex;gap:3px;align-items:center}
+  .mchip b{color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .mchip b.sk.low{color:var(--warn)}
+  .mchip b.sk.zero{color:var(--danger)}
+  .mchip b.hpp{color:var(--ink-soft)}
+  .mgn{font-weight:800;font-variant-numeric:tabular-nums}
+  .mgn.ok{color:var(--ok)} .mgn.warn{color:var(--warn)} .mgn.bad{color:var(--danger)}
+  .pt-acts{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:2px}
+  .pab{font-size:11px;font-weight:800;padding:6px 11px;border-radius:8px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);cursor:pointer;transition:.15s;font-family:inherit;display:inline-flex;
+    align-items:center;gap:5px}
+  .pab:hover{border-color:var(--acc);color:var(--acc)}
+  .pab.tiny{padding:5px 8px;font-size:10.5px}
+  .pab.on-ink{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pab.on-ink:hover{opacity:.85}
+  .pab.danger{color:var(--danger)}
+  .pab.danger:hover{border-color:var(--danger);color:var(--danger)}
+  .pab.icon{width:28px;height:28px;padding:0;display:grid;place-items:center;flex:none}
+  .dots{margin-left:auto;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);
+    color:var(--mut);display:grid;place-items:center;cursor:pointer;flex:none}
+
+  /* ===== form + stepper (ringkasan, input lewat pop-up) ===== */
+  .form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px}
+  .fhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .fhead h2{font-size:16px;font-weight:800}
+  .fhead .sub2{font-size:11px;color:var(--mut);margin-top:1px}
+  .stepper{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .stp{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:7px 13px;
+    font-weight:800;font-size:12px;color:var(--mut);cursor:pointer;background:var(--card);transition:.18s;
+    font-family:inherit}
+  .stp .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--soft);
+    color:var(--mut);flex:none}
+  .stp.done{color:var(--ok)}
+  .stp.done .n{background:var(--ok);color:#fff}
+  .stp.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .stp.on .n{background:rgba(255,255,255,.22);color:#fff}
+  .stp:hover{border-color:var(--acc)}
+  .tabpane{display:none}
+  .tabpane.on{display:block}
+
+  /* ringkasan tiap tab */
+  .sum{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .sum-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .sum-head .t{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .sum .row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+  .sum .row:last-child{border-bottom:0}
+  .sum .row .k{color:var(--mut);width:120px;flex:none;font-size:11.5px;font-weight:700}
+  .sum .row .v{flex:1;font-weight:700;color:var(--ink)}
+  .sum .row .v small{color:var(--mut);font-weight:600;font-size:11px}
+  .sum-edit{margin-left:auto;font-size:11px;font-weight:800;color:var(--acc);cursor:pointer;white-space:nowrap}
+
+  .stok-grid{display:grid;grid-template-columns:220px 1fr;gap:10px}
+  .stok-card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .stok-card .sc-l{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .stok-card .sc-v{font-size:24px;font-weight:800;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+  .stok-card .sc-v small{font-size:11px;color:var(--mut);font-weight:700}
+  .stok-card .go{font-size:11px;font-weight:800;color:var(--acc)}
+  .hint2{font-size:11.5px;color:var(--mut);line-height:1.6;margin:9px 0 10px;max-width:720px}
+  .hint2 b{color:var(--ink-soft)}
+
+  /* daftar resep — ringkas, edit lewat pop-up */
+  .hpp{display:flex;gap:10px;flex-wrap:wrap;background:var(--brand-soft);border:1px solid var(--line);
+    border-radius:12px;padding:10px 12px;margin:4px 0 12px}
+  .hpp .cell{flex:1;min-width:110px}
+  .hpp .cell span{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .hpp .cell b{display:block;font-size:15px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
+  .hpp .cell b.ok{color:var(--ok)} .hpp .cell b.warn{color:var(--warn)} .hpp .cell b.bad{color:var(--danger)}
+  .rlist{display:flex;flex-direction:column;gap:6px}
+  .rrow{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card);border-radius:10px;
+    padding:8px 11px;cursor:pointer;font-size:12px;transition:.15s}
+  .rrow:hover{border-color:var(--acc)}
+  .rrow .nm{font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rrow .dt{color:var(--mut);font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tahap2{font-size:9px;font-weight:800;padding:2px 7px;border-radius:999px;flex:none}
+  .tahap2.prod{background:var(--brand-soft);color:var(--acc)}
+  .tahap2.jual{background:#e7f3fe;color:#1d4ed8}
+  .rrow .bi{font-weight:800;font-size:11.5px;font-variant-numeric:tabular-nums;width:74px;text-align:right;flex:none}
+  .rrow .del{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:var(--card);
+    color:var(--danger);cursor:pointer;flex:none;display:grid;place-items:center;font-size:11px;font-family:inherit}
+  .rrow .del:hover{border-color:var(--danger)}
+
+  /* riwayat harga */
+  table.rh{width:100%;border-collapse:collapse;margin-bottom:8px}
+  .rh th{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);
+    text-align:left;padding:6px 10px;border-bottom:1px solid var(--line-strong)}
+  .rh td{font-size:12.5px;padding:9px 10px;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+  .rh td.cur{font-weight:800}
+  .rh td.src{color:var(--mut);font-size:11.5px}
+  .rh tr:hover td{background:var(--hover)}
+
+  .form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:12px;
+    border-top:1px solid var(--line)}
+
+  /* ===== overlay + pop-up ===== */
+  .ovl{position:absolute;inset:0;background:rgba(13,12,12,.55);display:none;place-items:center;z-index:6;
+    backdrop-filter:blur(1.5px)}
+  .ovl.show{display:grid}
+  .dlg{width:min(400px,92%);background:var(--card);border-radius:18px;padding:22px;box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+  .dlg .ic{width:46px;height:46px;border-radius:14px;background:var(--danger-soft);color:var(--danger);
+    display:grid;place-items:center;margin-bottom:13px}
+  .dlg h4{font-size:15.5px;font-weight:800}
+  .dlg .sub{font-size:11.5px;color:var(--mut);margin:3px 0 14px;line-height:1.5}
+  .dlg p{font-size:12.5px;color:var(--mut);line-height:1.6;margin:7px 0 16px}
+  .dlg p b{color:var(--ink-soft)}
+  .dlg .fld{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
+  .dlg .fld label{font-size:11px;font-weight:800;color:var(--ink-soft)}
+  .dlg .fld .hint{font-size:10.5px;color:var(--mut)}
+  .dlg .fld input,.dlg .fld select{border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;
+    font-family:inherit;background:var(--card);color:var(--ink);width:100%}
+  .dlg .fld select{cursor:pointer}
+  .dlg .fld .ro{background:var(--soft);color:var(--mut2);font-weight:700}
+  .dlg .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .dlg .tahap{display:inline-flex;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px}
+  .dlg .tahap .t{flex:1;text-align:center;font-size:11.5px;font-weight:800;padding:7px 10px;border-radius:7px;
+    color:var(--mut);cursor:pointer}
+  .dlg .tahap .t.on{background:var(--acc);color:#fff}
+  .dlg .btn{flex:1;border-radius:11px;padding:12px;text-align:center;font-weight:800;font-size:13.5px;
+    cursor:pointer;font-family:inherit;border:0;transition:.15s}
+  .dlg .btn.red{background:var(--acc);color:#fff}
+  .dlg .btn.red:hover{background:var(--acc2)}
+  .dlg .btn.sec{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+  .dlg .btnrow{display:flex;gap:8px;margin-top:14px}
+
+  /* ===== mobile ===== */
+  .bnav{display:flex;background:var(--card);border-top:1px solid var(--line);position:relative;z-index:2}
+  .bnav .b{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 9px;
+    font-size:9px;font-weight:800;color:var(--mut);cursor:pointer;letter-spacing:.02em}
+  .bnav .b.on{color:var(--acc)}
+  .bnav .add-c{width:40px;height:40px;border-radius:50%;background:var(--acc);display:grid;place-items:center;
+    margin-top:-16px;box-shadow:0 4px 12px rgba(220,38,38,.4);color:#fff}
+  .fab{position:absolute;right:14px;bottom:76px;width:46px;height:46px;border-radius:50%;background:var(--acc);
+    color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(220,38,38,.4);z-index:3;border:0;
+    cursor:pointer}
+  .msearch{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--card);
+    border-radius:11px;padding:9px 12px;color:var(--mut2);width:100%;margin-bottom:9px}
+  .msearch input{border:0;outline:0;font-family:inherit;font-size:13px;background:transparent;color:var(--ink);width:100%}
+  .mchips{display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px;scrollbar-width:none}
+  .mchips::-webkit-scrollbar{display:none}
+  .app.m .pgrid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
+  .app.m .ptile{padding:9px 10px;gap:5px}
+
+  .foot{margin-top:24px;font-size:12px;color:#9d948a;line-height:1.7;max-width:940px}
+  .foot b{color:#d9d0c6}
+  .foot li{margin:3px 0 3px 16px}
+  :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  @media (max-width:900px){
+    /* jendela sempit: sidebar disembunyikan (di HP ada bottom-nav, lihat Kondisi C) */
+    .sb{display:none}
+    .search{min-width:0;max-width:none;width:100%}
+    .stok-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kasir SABANA — mockup Produk &amp; Menu (v8)</h1>
+  <p class="lead">Penerapan rekomendasi §4.1 dengan dua penyesuaian dari review: daftar menu memakai
+  <b>grid kartu</b> (bukan baris) dan <b>semua inputan dibuka lewat pop-up</b> — halaman form hanya menampilkan
+  ringkasan (Info dasar / Stok / Resep / Riwayat harga), tombol <b>Ubah</b> atau baris yang diklik membuka dialog
+  berisi inputnya, sehingga layar tetap rapi. HPP langsung + estimasi margin tampil di tiap kartu, status
+  Aktif / Stok menipis / Habis / Nonaktif dengan kartu diredupkan.</p>
+  <p class="hint">Interaktif: <b>ketik di kotak cari</b> &amp; <b>klik chip kategori</b> untuk memfilter grid;
+  <b>klik langkah stepper</b> untuk pindah tab; di tab, <b>klik “Ubah info” / baris resep / “+ Tambah baris” /
+  “+ Catat perubahan”</b> untuk membuka pop-up input; <b>klik ikon daya</b> pada kartu untuk dialog nonaktifkan;
+  tombol <b>Mode gelap</b> menguji kedua tema.</p>
+  <button class="theme" id="themeBtn" type="button">
+    <span class="sun"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+    <span class="moon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></span>
+    <span id="themeLabel">Mode gelap</span>
+  </button>
+
+  <!-- ================= A · Daftar produk — GRID (desktop) ================= -->
+  <div class="state">
+    <div class="st-tag">Kondisi A · Desktop — daftar produk (grid kartu)</div>
+    <div class="st-name">Grid kartu per menu: harga, HPP &amp; margin, status; aksi tanpa masuk form</div>
+    <div class="st-sub">Kartu menyesuaikan lebar otomatis (3–4 kolom di desktop, 2 di tablet). Kartu aktif normal;
+    stok menipis (amber) &amp; habis (merah); nonaktif diredupkan + badge. Ikon daya = nonaktifkan/aktifkan
+    (ConfirmDialog); ⋮ = Hapus (ConfirmDialog) / Duplikat / Salin resep. Angka contoh: 25 menu, 15 aktif,
+    8 nonaktif, 2 habis.</div>
+    <div class="frame"><div class="app" id="frameA" style="position:relative">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill"><span class="live"></span>Kas <span class="amt">Rp 1.096.000</span></span>
+        <span class="icbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg></span>
+      </div>
+      <div class="body">
+        <div class="sb">
+          <div class="grp">Harian</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Dashboard</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg>Kasir</div>
+          <div class="grp">Operasi</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Beli Bahan</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/><path d="M9 3v18M15 3v18M6 9h3M6 15h3M15 9h3M15 15h3"/></svg>Produksi</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>Deep Fryer</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg>List Belanja</div>
+          <div class="grp">Master &amp; sistem</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Bahan &amp; Stok</div>
+          <div class="item on"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Produk &amp; Menu</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Pengeluaran</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg>Pengaturan</div>
+        </div>
+        <div class="main">
+          <div class="crumbs">Master &amp; sistem / <b>Produk &amp; Menu</b></div>
+          <div class="dhead">
+            <div>
+              <h2>Produk &amp; Menu</h2>
+              <div class="sub2">25 menu · 15 aktif · 2 habis · 8 nonaktif · nilai stok jadi ±Rp 412.000</div>
+            </div>
+            <div class="sp2"></div>
+            <button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Menu baru</button>
+          </div>
+          <div class="tool">
+            <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cari" type="search" placeholder="Cari nama menu…" autocomplete="off"/></div>
+            <div class="chips" id="chips">
+              <button class="chip on" data-kat="Semua">Semua <span class="cnt">25</span></button>
+              <button class="chip" data-kat="Ayam Goreng">Ayam Goreng <span class="cnt">4</span></button>
+              <button class="chip" data-kat="Aneka Goreng">Aneka Goreng <span class="cnt">6</span></button>
+              <button class="chip" data-kat="Paket">Paket <span class="cnt">8</span></button>
+              <button class="chip" data-kat="Nasi">Nasi <span class="cnt">1</span></button>
+              <button class="chip" data-kat="Sambal">Sambal <span class="cnt">6</span></button>
+              <button class="chip" data-kat="Minuman">Minuman <span class="cnt">1</span></button>
+            </div>
+          </div>
+
+          <div class="pgrid">
+            <div class="ptile" data-kat="Ayam Goreng" data-nama="Ayam Dada Goreng">
+              <div class="pt-top"><span class="pt-name">Ayam Dada Goreng</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Ayam Goreng</span><span class="pt-resep">resep 5</span></div>
+              <div class="pt-price">Rp 11.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">12</b></span>
+                <span class="mchip">HPP <b class="hpp">±7.100</b></span>
+                <span class="mchip">Margin <b class="mgn ok">35%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Ayam Dada Goreng" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya (Hapus / Duplikat / Salin resep)"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Ayam Goreng" data-nama="Ayam Paha Atas Goreng">
+              <div class="pt-top"><span class="pt-name">Ayam Paha Atas Goreng</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Ayam Goreng</span><span class="pt-resep">resep 5</span></div>
+              <div class="pt-price">Rp 11.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">6</b></span>
+                <span class="mchip">HPP <b class="hpp">±7.100</b></span>
+                <span class="mchip">Margin <b class="mgn ok">35%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Ayam Paha Atas Goreng" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Ayam Goreng" data-nama="Ayam Sayap Goreng">
+              <div class="pt-top"><span class="pt-name">Ayam Sayap Goreng</span><span class="stat low">● Menipis</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Ayam Goreng</span><span class="pt-resep">resep 5</span></div>
+              <div class="pt-price">Rp 8.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk low">2</b></span>
+                <span class="mchip">HPP <b class="hpp">±7.100</b></span>
+                <span class="mchip">Margin <b class="mgn bad">11%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Ayam Sayap Goreng" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Nasi" data-nama="Nasi">
+              <div class="pt-top"><span class="pt-name">Nasi</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Nasi</span><span class="pt-resep">resep 3</span></div>
+              <div class="pt-price">Rp 5.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">24</b></span>
+                <span class="mchip">HPP <b class="hpp">±2.900</b></span>
+                <span class="mchip">Margin <b class="mgn ok">42%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Nasi" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile habis" data-kat="Aneka Goreng" data-nama="Kentang Goreng">
+              <div class="pt-top"><span class="pt-name">Kentang Goreng</span><span class="stat hab">● Habis</span></div>
+              <div class="pt-badges"><span class="badge habis">habis</span><span class="ckat">Aneka Goreng</span><span class="pt-resep">resep 6</span></div>
+              <div class="pt-price">Rp 8.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk zero">0</b></span>
+                <span class="mchip">HPP <b class="hpp">±5.500</b></span>
+                <span class="mchip">Margin <b class="mgn warn">31%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Kentang Goreng" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Aneka Goreng" data-nama="Chicken Katsu">
+              <div class="pt-top"><span class="pt-name">Chicken Katsu</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Aneka Goreng</span><span class="pt-resep">resep 6</span></div>
+              <div class="pt-price">Rp 8.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">9</b></span>
+                <span class="mchip">HPP <b class="hpp">±5.800</b></span>
+                <span class="mchip">Margin <b class="mgn warn">27%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Chicken Katsu" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Sambal" data-nama="Sambal Geprek">
+              <div class="pt-top"><span class="pt-name">Sambal Geprek</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge prod">produksi</span><span class="ckat">Sambal</span><span class="pt-resep">resep 3</span></div>
+              <div class="pt-price">Rp 4.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">80</b></span>
+                <span class="mchip">HPP <b class="hpp">±2.500</b></span>
+                <span class="mchip">Margin <b class="mgn ok">38%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Sambal Geprek" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile" data-kat="Minuman" data-nama="Es Teh">
+              <div class="pt-top"><span class="pt-name">Es Teh</span><span class="stat on">● Aktif</span></div>
+              <div class="pt-badges"><span class="badge lang">langsung jual</span><span class="ckat">Minuman</span><span class="pt-resep">resep 2</span></div>
+              <div class="pt-price">Rp 3.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk">45</b></span>
+                <span class="mchip">HPP <b class="hpp">±800</b></span>
+                <span class="mchip">Margin <b class="mgn ok">73%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny danger icon js-off" data-nama="Es Teh" title="Nonaktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+
+            <div class="ptile off" data-kat="Paket" data-nama="Chicken Bun">
+              <div class="pt-top"><span class="pt-name">Chicken Bun</span><span class="stat na">● Nonaktif</span></div>
+              <div class="pt-badges"><span class="badge off">nonaktif</span><span class="ckat">Paket</span><span class="pt-resep">resep 10</span></div>
+              <div class="pt-price">Rp 10.000</div>
+              <div class="pt-meta">
+                <span class="mchip">Stok <b class="sk zero">0</b></span>
+                <span class="mchip">HPP <b class="hpp">±6.400</b></span>
+                <span class="mchip">Margin <b class="mgn ok">36%</b></span>
+              </div>
+              <div class="pt-acts">
+                <button class="pab tiny">Resep</button>
+                <button class="pab tiny">Harga</button>
+                <button class="pab tiny on-ink">Edit</button>
+                <button class="pab tiny icon js-on" title="Aktifkan"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2v9"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></svg></button>
+                <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- dialog nonaktifkan -->
+          <div class="ovl" id="offOvl">
+            <div class="dlg">
+              <div class="ic"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9.9 4.2a2 2 0 0 1 4.2 0A9 9 0 0 1 21 13v2h1v4H2v-4h1v-2a9 9 0 0 1 5.9-8.8Z"/><path d="M10 21h4"/></svg></div>
+              <h4>Nonaktifkan <span id="offName"></span> dari kasir?</h4>
+              <p>Menu ini <b>langsung hilang dari layar Kasir</b> dan tidak bisa dipesan. Resep, riwayat harga,
+              dan transaksi lama tetap tersimpan. Untuk menampilkan kembali, aktifkan dari halaman ini.</p>
+              <div class="btnrow">
+                <button class="btn sec batal" type="button">Batal</button>
+                <button class="btn red yakin" type="button">Nonaktifkan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ================= B · Form — ringkasan + input pop-up (desktop) ================= -->
+  <div class="state">
+    <div class="st-tag">Kondisi B · Desktop — form produk, input lewat pop-up</div>
+    <div class="st-name">Tab menampilkan ringkasan; setiap “Ubah” / baris membuka pop-up input</div>
+    <div class="st-sub">Stepper 4 langkah: Info dasar → Stok → Resep → Riwayat harga. Tiap tab berisi ringkasan
+    read-only; klik <b>Ubah info</b>, <b>Opname</b>, <b>baris resep</b>, <b>+ Tambah baris</b>, atau
+    <b>+ Catat perubahan</b> membuka dialog berisi inputnya. Tab Resep tetap menghitung HPP &amp; margin dari baris.</div>
+    <div class="frame"><div class="app" id="frameB" style="position:relative">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill"><span class="live"></span>Kas <span class="amt">Rp 1.096.000</span></span>
+      </div>
+      <div class="body">
+        <div class="sb">
+          <div class="grp">Master &amp; sistem</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>Bahan &amp; Stok</div>
+          <div class="item on"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Produk &amp; Menu</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Pengeluaran</div>
+          <div class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg>Pengaturan</div>
+        </div>
+        <div class="main">
+          <div class="crumbs">Master &amp; sistem / Produk &amp; Menu / <b>Ayam Dada Goreng</b></div>
+          <div class="form" id="formA">
+            <div class="fhead">
+              <h2>Edit produk: Ayam Dada Goreng</h2>
+              <span class="stat on">● Aktif</span>
+              <div class="sp2"></div>
+              <div class="sub2">Terakhir diubah 2 Sep 2026 · resep 5 baris</div>
+            </div>
+
+            <div class="stepper">
+              <button class="stp done" data-pane="info" type="button"><span class="n">✓</span>1 · Info dasar</button>
+              <button class="stp done" data-pane="stok" type="button"><span class="n">✓</span>2 · Stok</button>
+              <button class="stp on" data-pane="resep" type="button"><span class="n">3</span>3 · Resep</button>
+              <button class="stp" data-pane="riwayat" type="button"><span class="n">4</span>4 · Riwayat harga</button>
+            </div>
+
+            <!-- tab 1 · info dasar (ringkasan + pop-up) -->
+            <div class="tabpane" data-pane="info">
+              <div class="sum">
+                <div class="sum-head"><span class="t">Info dasar</span><div class="sp2"></div><span class="sum-edit" data-pop="popInfo">Ubah info →</span></div>
+                <div class="row"><span class="k">Nama menu</span><span class="v">Ayam Dada Goreng</span></div>
+                <div class="row"><span class="k">Kategori</span><span class="v">Ayam Goreng</span></div>
+                <div class="row"><span class="k">Harga jual</span><span class="v">Rp 11.000</span></div>
+                <div class="row"><span class="k">Tipe stok</span><span class="v">Produksi <small>(digoreng/dibuat dulu)</small></span></div>
+                <div class="row"><span class="k">Aktif di kasir</span><span class="v"><span class="stat on">● Aktif</span></span></div>
+              </div>
+            </div>
+
+            <!-- tab 2 · stok (ringkasan + pop-up) -->
+            <div class="tabpane" data-pane="stok">
+              <div class="stok-grid">
+                <div class="stok-card">
+                  <div class="sc-l">Stok jadi saat ini</div>
+                  <div class="sc-v">12 <small>potong</small></div>
+                  <span class="go">Riwayat mutasi →</span>
+                </div>
+                <div class="stok-card">
+                  <div class="sc-l" style="margin-bottom:6px">Opname terakhir</div>
+                  <div class="row" style="display:flex;gap:10px;padding:5px 0;font-size:12px">
+                    <span style="color:var(--mut);width:110px;font-weight:700">Stok fisik</span><span style="font-weight:800">10 potong</span>
+                  </div>
+                  <div class="row" style="display:flex;gap:10px;padding:5px 0;font-size:12px">
+                    <span style="color:var(--mut);width:110px;font-weight:700">Selisih</span><span style="font-weight:800;color:var(--danger)">−2</span>
+                  </div>
+                  <div class="row" style="display:flex;gap:10px;padding:5px 0;font-size:12px">
+                    <span style="color:var(--mut);width:110px;font-weight:700">Catatan</span><span style="font-weight:600;color:var(--ink-soft)">Opname sore — sisa etalase</span>
+                  </div>
+                  <div style="display:flex;gap:8px;margin-top:8px">
+                    <button class="btn-outline sm" data-pop="popStok" type="button">Opname / koreksi</button>
+                  </div>
+                </div>
+              </div>
+              <p class="hint2">Menyimpan opname mencatat mutasi jenis <b>opname</b> dan stok fisik menjadi stok baru.
+              Untuk opname banyak bahan sekaligus, gunakan halaman <b>Koreksi/Opname</b>.</p>
+            </div>
+
+            <!-- tab 3 · resep (ringkas, edit lewat pop-up) -->
+            <div class="tabpane on" data-pane="resep">
+              <div class="hpp">
+                <div class="cell"><span>Total biaya langsung (HPP)</span><b>Rp 7.100</b></div>
+                <div class="cell"><span>Laba / unit</span><b>Rp 3.900</b></div>
+                <div class="cell"><span>Margin</span><b class="ok">35%</b></div>
+                <div class="cell"><span>Baris</span><b>5 <small style="font-size:10px;color:var(--mut)">(3 produksi · 2 jual)</small></b></div>
+              </div>
+
+              <div class="rlist">
+                <div class="rrow" data-pop="popResep">
+                  <span class="nm">Ayam Potong 9</span><span class="dt">potong × 1</span>
+                  <span class="tahap2 prod">produksi</span><span class="bi">Rp 5.333</span>
+                  <button class="del" title="Hapus baris">✕</button>
+                </div>
+                <div class="rrow" data-pop="popResep">
+                  <span class="nm">Tepung Fried Chicken</span><span class="dt">pcs × 0,037</span>
+                  <span class="tahap2 prod">produksi</span><span class="bi">Rp 870</span>
+                  <button class="del" title="Hapus baris">✕</button>
+                </div>
+                <div class="rrow" data-pop="popResep">
+                  <span class="nm">SUNCO Minyak 2 L</span><span class="dt">liter × 0,022</span>
+                  <span class="tahap2 prod">produksi</span><span class="bi">Rp 482</span>
+                  <button class="del" title="Hapus baris">✕</button>
+                </div>
+                <div class="rrow" data-pop="popResep">
+                  <span class="nm">Kemasan Ayam</span><span class="dt">pcs × 1</span>
+                  <span class="tahap2 jual">jual</span><span class="bi">Rp 235</span>
+                  <button class="del" title="Hapus baris">✕</button>
+                </div>
+                <div class="rrow" data-pop="popResep">
+                  <span class="nm">Saus Sambal</span><span class="dt">pcs × 1</span>
+                  <span class="tahap2 jual">jual</span><span class="bi">Rp 180</span>
+                  <button class="del" title="Hapus baris">✕</button>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+                <button class="btn-outline sm" data-pop="popResep" type="button">+ Tambah baris</button>
+                <button class="btn-outline sm" type="button">Salin resep dari produk lain…</button>
+              </div>
+              <p class="hint2">Klik baris untuk mengedit lewat pop-up (pilih entitas bahan/produk jadi → satuan dasar
+              otomatis → qty → tahap). HPP = qty × harga beli terakhir per satuan dasar (<b>aturan rata-rata</b>);
+              ayam utuh dihitung per potong. Perubahan di tab ini langsung memperbarui HPP &amp; margin di daftar
+              dan laporan laba.</p>
+            </div>
+
+            <!-- tab 4 · riwayat harga (tabel + pop-up) -->
+            <div class="tabpane" data-pane="riwayat">
+              <table class="rh">
+                <tr><th>Berlaku sejak</th><th>Harga</th><th>Sumber perubahan</th></tr>
+                <tr><td>01 Sep 2026</td><td class="cur">Rp 11.000</td><td class="src">Edit manual · Ridho</td></tr>
+                <tr><td>15 Jul 2026</td><td>Rp 10.000</td><td class="src">Edit manual</td></tr>
+                <tr><td>01 Jan 2026</td><td>Rp 9.500</td><td class="src">Impor awal</td></tr>
+              </table>
+              <p class="hint2" style="margin-top:6px">Harga baru muncul sebagai baris teratas dan langsung berlaku di
+              kasir; transaksi yang sudah selesai <b>tetap memakai harga saat itu</b> (tidak berubah).</p>
+              <button class="btn-outline sm" data-pop="popHarga" type="button">+ Catat perubahan harga</button>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-primary" type="button">Simpan</button>
+              <button class="btn-outline" type="button">Batal</button>
+            </div>
+          </div>
+
+          <!-- pop-up: ubah info dasar -->
+          <div class="ovl" id="popInfo">
+            <div class="dlg">
+              <h4>Ubah info dasar</h4>
+              <div class="sub">Ayam Dada Goreng · perubahan dicatat otomatis</div>
+              <div class="fld"><label>Nama menu *</label><input value="Ayam Dada Goreng"/></div>
+              <div class="fld"><label>Kategori</label>
+                <select><option>Ayam Goreng</option><option>Aneka Goreng</option><option>Paket</option><option>Nasi</option><option>Sambal</option><option>Minuman</option><option>Lainnya</option></select></div>
+              <div class="row2">
+                <div class="fld"><label>Harga jual (Rp) *</label><input value="11000"/></div>
+                <div class="fld"><label>Tipe stok</label>
+                  <select><option>Produksi</option><option>Langsung jual</option></select></div>
+              </div>
+              <div class="fld"><label>Aktif di kasir</label>
+                <div style="display:flex;align-items:center;gap:8px"><span class="stat on">● Aktif</span><span class="hint">matikan untuk menyembunyikan dari kasir</span></div></div>
+              <div class="btnrow">
+                <button class="btn sec batal" type="button">Batal</button>
+                <button class="btn red simpan" type="button">Simpan</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- pop-up: opname / koreksi stok -->
+          <div class="ovl" id="popStok">
+            <div class="dlg">
+              <h4>Opname / koreksi stok</h4>
+              <div class="sub">Ayam Dada Goreng · stok catatan 12 potong</div>
+              <div class="fld"><label>Stok fisik (potong) *</label><input value="10" inputmode="numeric"/></div>
+              <div class="fld"><label>Selisih</label><input class="ro" value="−2 (kurang)" disabled=""/></div>
+              <div class="fld"><label>Catatan</label><input placeholder="mis. tumpah / opname sore"/></div>
+              <p>Menyimpan mencatat mutasi jenis <b>opname</b>; stok fisik menjadi stok baru yang dipakai kasir.</p>
+              <div class="btnrow">
+                <button class="btn sec batal" type="button">Batal</button>
+                <button class="btn red simpan" type="button">Simpan koreksi</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- pop-up: baris resep (roti isian) -->
+          <div class="ovl" id="popResep">
+            <div class="dlg">
+              <h4>Tambah / edit baris resep</h4>
+              <div class="sub">Pola “roti isian”: entitas → satuan dasar otomatis → qty → tahap</div>
+              <div class="fld"><label>Entitas</label>
+                <select><option>Bahan baku (gudang)</option><option>Komponen produk jadi</option></select></div>
+              <div class="fld"><label>Item</label>
+                <select><option>Ayam Potong 9</option><option>Ayam Potong 12</option><option>Tepung Fried Chicken</option><option>SUNCO Minyak 2 L</option><option>Kemasan Ayam</option><option>Saus Sambal</option></select></div>
+              <div class="row2">
+                <div class="fld"><label>Satuan dasar</label><input class="ro" value="potong" disabled=""/></div>
+                <div class="fld"><label>Qty *</label><input value="1" inputmode="decimal"/></div>
+              </div>
+              <div class="fld"><label>Tahap</label>
+                <span class="tahap"><span class="t on">produksi</span><span class="t">jual</span></span></div>
+              <div class="fld"><label>Biaya estimasi</label><input class="ro" value="Rp 5.333" disabled=""/></div>
+              <div class="btnrow">
+                <button class="btn sec batal" type="button">Batal</button>
+                <button class="btn red simpan" type="button">Tambah baris</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- pop-up: catat perubahan harga -->
+          <div class="ovl" id="popHarga">
+            <div class="dlg">
+              <h4>Catat perubahan harga</h4>
+              <div class="sub">Ayam Dada Goreng · harga saat ini Rp 11.000</div>
+              <div class="fld"><label>Harga baru (Rp) *</label><input value="11500" inputmode="numeric"/></div>
+              <div class="fld"><label>Catatan</label><input placeholder="mis. naik harga bahan"/></div>
+              <p>Berlaku segera di kasir. Transaksi yang sudah selesai <b>tetap memakai harga lama</b>.</p>
+              <div class="btnrow">
+                <button class="btn sec batal" type="button">Batal</button>
+                <button class="btn red simpan" type="button">Catat</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ================= C · Mobile portrait ================= -->
+  <div class="state">
+    <div class="st-tag">Kondisi C · HP/portrait — grid kartu &amp; navigasi bawah</div>
+    <div class="st-name">Grid 2 kolom di HP; toolbar menumpuk; “+” melayang; input tetap pop-up</div>
+    <div class="st-sub">Kartu memuat harga, status, HPP+margin; aksi edit &amp; lainnya lewat ikon agar hemat ruang;
+    FAB merah = menu baru (membuka pop-up input yang sama dengan desktop). Stepper &amp; ringkasan form di HP
+    menumpuk 1 kolom.</div>
+    <div class="frame"><div class="app m">
+      <div class="top">
+        <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+        <span class="mark">S</span>
+        <div class="brand">Kasir SABANA<small>Ridho · Offline</small></div>
+        <div class="sp"></div>
+        <span class="pill">Kas <span class="amt">Rp 1,09 jt</span></span>
+      </div>
+      <div class="main" style="padding:12px 12px 86px">
+        <div class="dhead" style="margin-bottom:8px">
+          <div>
+            <h2 style="font-size:17px">Produk &amp; Menu</h2>
+            <div class="sub2">25 menu · 15 aktif · 8 nonaktif</div>
+          </div>
+        </div>
+        <div class="msearch"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" placeholder="Cari nama menu…"/></div>
+        <div class="mchips">
+          <button class="chip on" style="flex:none">Semua</button>
+          <button class="chip" style="flex:none">Ayam Goreng</button>
+          <button class="chip" style="flex:none">Aneka Goreng</button>
+          <button class="chip" style="flex:none">Paket</button>
+          <button class="chip" style="flex:none">Sambal</button>
+          <button class="chip" style="flex:none">Minuman</button>
+        </div>
+
+        <div class="pgrid">
+          <div class="ptile">
+            <div class="pt-top"><span class="pt-name">Ayam Dada Goreng</span><span class="stat on">●</span></div>
+            <div class="pt-price">Rp 11.000</div>
+            <div class="pt-meta">
+              <span class="mchip">Stok <b class="sk">12</b></span>
+              <span class="mchip">HPP <b class="hpp">±7.100</b></span>
+            </div>
+            <div class="pt-acts">
+              <span style="font-size:10px;color:var(--mut2);font-weight:700;flex:1">Margin <b class="mgn ok" style="font-size:10.5px">35%</b></span>
+              <button class="pab tiny on-ink">Edit</button>
+              <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            </div>
+          </div>
+
+          <div class="ptile">
+            <div class="pt-top"><span class="pt-name">Ayam Sayap Goreng</span><span class="stat low">●</span></div>
+            <div class="pt-price">Rp 8.000</div>
+            <div class="pt-meta">
+              <span class="mchip">Stok <b class="sk low">2</b></span>
+              <span class="mchip">HPP <b class="hpp">±7.100</b></span>
+            </div>
+            <div class="pt-acts">
+              <span style="font-size:10px;color:var(--mut2);font-weight:700;flex:1">Margin <b class="mgn bad" style="font-size:10.5px">11%</b></span>
+              <button class="pab tiny on-ink">Edit</button>
+              <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            </div>
+          </div>
+
+          <div class="ptile">
+            <div class="pt-top"><span class="pt-name">Nasi</span><span class="stat on">●</span></div>
+            <div class="pt-price">Rp 5.000</div>
+            <div class="pt-meta">
+              <span class="mchip">Stok <b class="sk">24</b></span>
+              <span class="mchip">HPP <b class="hpp">±2.900</b></span>
+            </div>
+            <div class="pt-acts">
+              <span style="font-size:10px;color:var(--mut2);font-weight:700;flex:1">Margin <b class="mgn ok" style="font-size:10.5px">42%</b></span>
+              <button class="pab tiny on-ink">Edit</button>
+              <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            </div>
+          </div>
+
+          <div class="ptile habis">
+            <div class="pt-top"><span class="pt-name">Kentang Goreng</span><span class="stat hab">●</span></div>
+            <div class="pt-price">Rp 8.000</div>
+            <div class="pt-meta">
+              <span class="mchip">Stok <b class="sk zero">0</b></span>
+              <span class="mchip">HPP <b class="hpp">±5.500</b></span>
+            </div>
+            <div class="pt-acts">
+              <span style="font-size:10px;color:var(--mut2);font-weight:700;flex:1">Margin <b class="mgn warn" style="font-size:10.5px">31%</b></span>
+              <button class="pab tiny on-ink">Edit</button>
+              <button class="dots" title="Lainnya"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <button class="fab" title="Tambah menu baru"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <div class="bnav">
+        <div class="b"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Beranda</div>
+        <div class="b"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg>Kasir</div>
+        <div class="b add"><span class="add-c"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></div>
+        <div class="b on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>Produk</div>
+        <div class="b"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.5 1Z"/></svg>Lainnya</div>
+      </div>
+    </div></div>
+  </div>
+
+  <ul class="foot">
+    <li><b>Perubahan dari review:</b> daftar menu memakai <b>grid kartu</b> (auto-fill, 3–4 kolom desktop / 2 kolom
+    HP) bukan baris; <b>semua inputan pindah ke pop-up</b> — tab form hanya ringkasan, tombol “Ubah”/baris membuka
+    dialog input (Info dasar, Opname, baris resep “roti isian”, catat harga).</li>
+    <li><b>Interaksi yang direncanakan di aplikasi nyata:</b> tombol <b>Resep</b> &amp; <b>Harga</b> di kartu membuka
+    form langsung di tab ③/④; <b>ikon daya</b> = nonaktifkan (ConfirmDialog) lalu produk hilang dari kasir; ⋮ berisi
+    <b>Hapus</b> (ConfirmDialog, resep ikut terhapus), <b>Duplikat</b>, <b>Salin resep</b>. Pop-up ditutup dengan
+    Batal / klik luar / Esc.</li>
+    <li><b>Keputusan yang perlu disetujui (★ dari §6):</b> HPP memakai aturan rata-rata harga beli terakhir per
+    satuan dasar — tampil di sini &amp; di laporan laba; apakah margin <b>menipis (11% Sayap, 27% Katsu)</b> perlu
+    peringatan khusus di grid?</li>
+    <li><b>Angka contoh:</b> HPP dari resep × harga beli terakhir (bukan hardcode) — mis. Ayam Dada = 1 potong ayam
+    (Rp 5.333) + 0,037 pak tepung (Rp 870) + 0,022 L minyak (Rp 482) + kemasan &amp; saus saat jual (Rp 415) ≈
+    <b>Rp 7.100</b>, margin 35%. Warna margin: hijau ≥35%, amber 15–34%, merah &lt;15%.</li>
+    <li><b>Belum masuk mockup ini:</b> import massal menu (dari Excel/PDF), duplikasi menu, dan mode opname penuh —
+    direncanakan di halaman Koreksi/Opname (§4.4) dan alat impor Fase 0.</li>
+  </ul>
+</div>
+
+<script>
+  // ---- tema gelap/terang ----
+  const themeBtn = document.getElementById('themeBtn');
+  const themeLabel = document.getElementById('themeLabel');
+  themeBtn.addEventListener('click', () => {
+    const gelap = document.documentElement.dataset.theme === 'gelap';
+    document.documentElement.dataset.theme = gelap ? '' : 'gelap';
+    themeLabel.textContent = gelap ? 'Mode gelap' : 'Mode terang';
+  });
+
+  // ---- filter grid (frame A) ----
+  const cari = document.getElementById('cari');
+  const chips = document.querySelectorAll('#chips .chip');
+  const tiles = document.querySelectorAll('#frameA .ptile');
+  function applyFilter() {
+    const kat = document.querySelector('#chips .chip.on').dataset.kat;
+    const q = (cari.value || '').trim().toLowerCase();
+    tiles.forEach((t) => {
+      const okKat = kat === 'Semua' || t.dataset.kat === kat;
+      const okQ = !q || t.dataset.nama.toLowerCase().includes(q);
+      t.style.display = okKat && okQ ? '' : 'none';
+    });
+  }
+  chips.forEach((c) => c.addEventListener('click', () => {
+    chips.forEach((x) => x.classList.remove('on'));
+    c.classList.add('on');
+    applyFilter();
+  }));
+  cari.addEventListener('input', applyFilter);
+
+  // ---- stepper form (frame B) ----
+  document.querySelectorAll('#formA .stp').forEach((st) => st.addEventListener('click', () => {
+    document.querySelectorAll('#formA .stp').forEach((x) => x.classList.toggle('on', x === st));
+    document.querySelectorAll('#formA .tabpane').forEach((p) =>
+      p.classList.toggle('on', p.dataset.pane === st.dataset.pane));
+  }));
+
+  // ---- pop-up input (frame B): buka lewat [data-pop], tutup Batal / luar / Esc ----
+  function openPop(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('show');
+  }
+  document.querySelectorAll('#frameB [data-pop]').forEach((b) =>
+    b.addEventListener('click', () => openPop(b.dataset.pop)));
+  // tombol ✕ di baris resep jangan ikut membuka pop-up edit
+  document.querySelectorAll('#frameB .rrow .del').forEach((d) =>
+    d.addEventListener('click', (e) => e.stopPropagation()));
+  document.querySelectorAll('#frameB .ovl').forEach((o) => {
+    o.addEventListener('click', (e) => { if (e.target === o) o.classList.remove('show'); });
+    const batal = o.querySelector('.batal');
+    if (batal) batal.addEventListener('click', () => o.classList.remove('show'));
+    const simpan = o.querySelector('.simpan');
+    if (simpan) simpan.addEventListener('click', () => o.classList.remove('show'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.ovl.show').forEach((o) => o.classList.remove('show'));
+    }
+  });
+
+  // ---- dialog nonaktifkan (frame A) ----
+  const ovl = document.getElementById('offOvl');
+  const offName = document.getElementById('offName');
+  document.querySelectorAll('#frameA .js-off').forEach((b) => b.addEventListener('click', () => {
+    offName.textContent = b.dataset.nama;
+    ovl.classList.add('show');
+  }));
+  ovl.querySelector('.batal').addEventListener('click', () => ovl.classList.remove('show'));
+  ovl.querySelector('.yakin').addEventListener('click', () => {
+    ovl.classList.remove('show');
+    const tile = document.querySelector('#frameA .ptile[data-nama="' + offName.textContent + '"]');
+    if (tile) {
+      tile.classList.add('off');
+      const pill = tile.querySelector('.stat');
+      pill.textContent = '● Nonaktif';
+      pill.className = 'stat na';
+      const btn = tile.querySelector('.js-off');
+      btn.classList.remove('js-off', 'danger');
+      btn.classList.add('js-on');
+    }
+  });
+  // mengaktifkan kembali (Chicken Bun & yang baru dinonaktifkan)
+  document.querySelectorAll('#frameA .js-on').forEach((b) => b.addEventListener('click', () => {
+    const tile = b.closest('.ptile');
+    tile.classList.remove('off');
+    const pill = tile.querySelector('.stat');
+    pill.textContent = '● Aktif';
+    pill.className = 'stat on';
+    b.classList.remove('js-on');
+    b.classList.add('js-off', 'danger');
+  }));
+</script>
+</body>
+</html>

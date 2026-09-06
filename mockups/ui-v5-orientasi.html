@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kasir SABANA — orientasi tablet: portrait vs landscape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --acc:#e10600; --acc-ink:#c00e00; --acc-soft:#fde8e6; --acc-deep:#b30500;
+    --ink:#16191d; --mut:#7c848e; --mut2:#a2a9b2; --line:#e7e9ed; --bg:#eef0f3; --card:#fff;
+    --ok:#16a34a;
+  }
+  :root[data-p="sabana"]{
+    --acc:#dc2626; --acc-ink:#b91c1c; --acc-soft:#fdecec; --acc-deep:#b91c1c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;padding:24px 18px 70px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:20px}
+  .lead{color:#b7aea5;font-size:13.5px;max-width:820px;margin:9px 0 12px;line-height:1.6}
+  .pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .pick .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#b7aea5}
+  .pick button{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:10px 16px;font-weight:700;
+    font-size:13px;cursor:pointer;border:1px solid #4a413b;background:#2c2622;color:#e9e1d8}
+  .pick button .sw{width:16px;height:16px;border-radius:5px}
+  .pick button.on{border-color:#fff}
+  .twocol{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;margin-top:8px}
+  .boxcol{flex:1 1 520px;min-width:0}
+  .boxtag{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b7aea5}
+  .boxname{font-size:16px;font-weight:800;margin:5px 0 2px}
+  .boxsub{font-size:12.5px;color:#b7aea5;line-height:1.55;max-width:520px}
+  .frame{margin:14px auto 0;background:#0b0a09;border-radius:30px;padding:10px;
+    box-shadow:0 30px 80px -24px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.06)}
+  .screen{width:100%;background:var(--bg);color:var(--ink);border-radius:22px;overflow:hidden;
+    font-family:'Inter',system-ui,sans-serif}
+  .portrait .frame{max-width:430px}
+  .landscape .frame{max-width:760px}
+  .landscape .screen2{display:flex}
+  .note{font-size:10.5px;color:#857a70;text-align:center;margin-top:6px}
+
+  /* ---------- shared atoms ---------- */
+  .hd{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+  .mark{width:38px;height:38px;border-radius:11px;background:var(--acc);color:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:19px;flex:none;box-shadow:0 4px 10px -4px var(--acc)}
+  .brand{font-weight:800;font-size:15.5px;line-height:1.1;white-space:nowrap}
+  .brand small{display:block;font-size:10px;color:var(--mut);font-weight:600;margin-top:2px}
+  .sp{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#f7f8fa;
+    border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;color:#3c434d;white-space:nowrap}
+  .pill .amt{color:var(--acc-ink);font-variant-numeric:tabular-nums}
+  .live{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+  .search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:11px;padding:10px 13px;color:var(--mut2);font-size:13px;margin-top:12px}
+  .chips{display:flex;gap:6px;margin:10px 0 12px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 13px;font-size:12.5px;
+    font-weight:700;color:#454c56;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+  .chip b{background:var(--bg);color:var(--mut);font-size:10.5px;border-radius:999px;padding:2px 7px;font-weight:800}
+  .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .chip.on b{background:rgba(255,255,255,.22);color:#fff}
+  .grid{display:grid;gap:9px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 10px 9px;text-align:left;
+    position:relative;display:flex;flex-direction:column}
+  .tile .nm{font-weight:700;font-size:13px;line-height:1.2;color:#20242a}
+  .tile .pr{font-size:13.5px;font-weight:800;margin-top:auto;padding-top:6px;font-variant-numeric:tabular-nums}
+  .tile .st{font-size:10px;font-weight:600;color:#8b939d;margin-top:1px}
+  .tile .st.low{color:#b45309}
+  .tile.out{background:#f5f6f8}
+  .tile.out .nm,.tile.out .pr{color:#b6bcc5}
+  .tile .n{position:absolute;top:-6px;right:-6px;background:var(--acc);color:#fff;font-size:11px;font-weight:800;
+    min-width:21px;height:21px;border-radius:999px;display:grid;place-items:center;padding:0 5px;border:2px solid var(--bg)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
+  .pt{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:flex;
+    justify-content:space-between;align-items:center;margin-bottom:6px}
+  .ci{display:flex;align-items:center;gap:8px;padding:6px 0}
+  .ci+.ci{border-top:1px dashed var(--bg)}
+  .ci .n2{flex:1;min-width:0}
+  .ci .nm2{font-weight:700;font-size:12.5px}
+  .ci .s2{font-size:11px;color:#8b939d;margin-top:1px}
+  .qty{display:inline-flex;align-items:center}
+  .qb{width:27px;height:27px;border-radius:8px;border:1px solid #dfe3e8;background:#fff;color:#3c434d;display:grid;
+    place-items:center;font-weight:800;font-size:14px}
+  .qty b{min-width:20px;text-align:center;font-size:12.5px;font-variant-numeric:tabular-nums}
+  .ci .am{font-weight:800;font-size:12px;width:66px;text-align:right;font-variant-numeric:tabular-nums}
+  .total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);
+    margin-top:7px;padding-top:8px}
+  .total .l{font-size:11px;font-weight:700;color:var(--mut)}
+  .total .v{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+  .mini{display:flex;justify-content:space-between;font-size:10.5px;color:var(--mut);margin-top:6px}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+  .sg{border:1px solid var(--line);border-radius:9px;padding:8px 0;font-weight:800;font-size:12px;color:#4b525c;
+    background:#fff;text-align:center}
+  .sg.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .cashbox{margin-top:9px}
+  .crow{display:flex;justify-content:space-between;align-items:baseline}
+  .crow .l2{font-size:10.5px;color:#8b939d;font-weight:600}
+  .crow .in{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+  .qk{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px}
+  .qc{border:1px solid var(--line);background:#f7f8fa;border-radius:8px;padding:7px 0;text-align:center;
+    font-size:10.5px;font-weight:700;color:#3c434d}
+  .qc.hi{background:var(--acc-soft);border-color:var(--acc-soft);color:var(--acc-ink)}
+  .ret{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:7px;
+    border-top:1px dashed var(--bg)}
+  .ret .l3{font-size:11px;font-weight:800;color:var(--mut)}
+  .ret .v3{font-size:17px;font-weight:800;color:var(--ok);font-variant-numeric:tabular-nums}
+  .pay{margin-top:10px;background:var(--acc);color:#fff;border-radius:13px;padding:13px 16px;display:flex;
+    align-items:center;justify-content:space-between;font-weight:800;font-size:15px;
+    box-shadow:0 10px 20px -12px var(--acc)}
+  .pay small{display:block;font-size:9.5px;opacity:.85;font-weight:700}
+  .pay .v{font-size:19px;font-variant-numeric:tabular-nums}
+  .pad{padding:0 16px}
+
+  /* ---------- portrait specifics ---------- */
+  .portrait .hd{padding:11px 16px}
+  .portrait .search{margin-top:11px}
+  .portrait .grid{grid-template-columns:repeat(4,1fr);margin-bottom:12px}
+  .portrait .bottom{margin-top:auto}
+
+  /* ---------- landscape specifics ---------- */
+  .landscape .menu{flex:1.75;min-width:0;padding:0 4px 0 16px}
+  .landscape .side{flex:1;min-width:0;max-width:360px;padding:0 16px}
+  .landscape .search{margin-top:0}
+  .landscape .chips{margin-bottom:12px}
+  .landscape .grid{grid-template-columns:repeat(4,1fr)}
+  .landscape .body{display:flex;gap:14px;padding:14px 0}
+  .landscape .side .panel+.panel{margin-top:10px}
+
+  .foot{margin-top:20px;font-size:12px;color:#9d948a;line-height:1.65;max-width:900px}
+  .foot b{color:#d9d0c6}
+  @media (max-width:560px){
+    .portrait .grid{grid-template-columns:repeat(3,1fr)}
+    .landscape .body{flex-direction:column}
+    .landscape .side{max-width:none}
+  }
+</style>
+</head>
+<body data-p="ferrari">
+<div class="wrap">
+  <h1>Kasir SABANA — orientasi tablet: portrait vs landscape</h1>
+  <p class="lead">Isi sama persis (menu, pesanan, bayar) — bedanya hanya <b>cara tablet diletakkan</b>.
+  Aplikasi nyata nantinya otomatis mengikuti arah tablet; yang ingin Anda tentukan adalah orientasi mana
+  yang paling nyaman di meja kasir, supaya saya prioritaskan kerapiannya.</p>
+  <div class="pick">
+    <span class="lbl">Nada merah:</span>
+    <button data-v="ferrari"><span class="sw" style="background:#e10600"></span>Rosso (Ferrari)</button>
+    <button data-v="sabana"><span class="sw" style="background:#dc2626"></span>Merah SABANA</button>
+  </div>
+
+  <div class="twocol">
+    <!-- PORTRAIT -->
+    <div class="boxcol portrait">
+      <div class="boxtag">Orientasi A · Portrait (tegak)</div>
+      <div class="boxname">Tablet berdiri di samping kasir</div>
+      <div class="boxsub">Menu lebar di atas, panel pesanan &amp; bayar menempel di bawah. Cocok bila tablet
+      berdiri tegak — jangkauan tangan pendek, semua dalam satu layar.</div>
+      <div class="frame">
+        <div class="screen" id="scr-portrait"></div>
+      </div>
+      <div class="note">Mockup portrait · dibuka lebar untuk proporsi asli</div>
+    </div>
+
+    <!-- LANDSCAPE -->
+    <div class="boxcol landscape">
+      <div class="boxtag">Orientasi B · Landscape (mendatar)</div>
+      <div class="boxname">Tablet membaring di meja kasir</div>
+      <div class="boxsub">Menu kiri besar, pesanan &amp; pembayaran selalu tampak di kanan. Cocok bila tablet
+      dibaringkan — kasir melihat menu &amp; tagihan bersamaan tanpa mengalihkan pandangan.</div>
+      <div class="frame">
+        <div class="screen" id="scr-landscape"></div>
+      </div>
+      <div class="note">Mockup landscape · dibuka lebar untuk proporsi asli</div>
+    </div>
+  </div>
+
+  <p class="foot"><b>Setelah memilih orientasi</b> (atau bilang “dua-duanya”), saya terapkan ke aplikasi nyata:
+  token palet merah baru, layout kasir sesuai orientasi itu, layar lain ikut bahasa visual yang sama, lalu
+  diverifikasi dengan screenshot &amp; tes E2E hijau. Bagian yang mau diubah (jumlah kolom menu, tinggi kartu,
+  isi panel kanan) tinggal disebut.</p>
+</div>
+
+<script>
+  const MK = { p:{}, l:{} };
+  const DATA = {
+    cats: [['Semua','9',1],['Ayam','4',0],['Nasi','2',0],['Cemilan','2',0],['Minuman','2',0]],
+    items: [
+      ['Ayam Dada','11.000','',12],['Ayam Sayap','8.000','low',2],['Paha Atas','11.000','',9],
+      ['Paha Bawah','10.000','',9],['Nasi Uduk','6.000','',4],['Kentang','12.000','',6],
+      ['Nasi Goreng','8.000','out',0],['Chicken Roll','7.000','',10],['Es Teh','4.000','',15],
+      ['Air Mineral','5.000','',20],['Baso Goreng','9.000','',8],['Kulit','10.000','',5],
+    ],
+    cart: [['Ayam Dada','11.000','2'],['Ayam Sayap','8.000','1']]
+  };
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const rp = n => 'Rp ' + n;
+
+  function header(){
+    return `<div class="hd">
+      <div class="mark">S</div>
+      <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+      <div class="sp"></div>
+      <span class="pill"><span class="live"></span>Kas&nbsp;<span class="amt">Rp 361.000</span></span>
+      <span class="pill" style="padding:8px 10px">12:04</span>
+    </div>`;
+  }
+  function chips(){
+    return `<div class="chips">` + DATA.cats.map(([n,c,on]) =>
+      `<span class="chip${on?' on':''}">${n} <b>${c}</b></span>`).join('') + `</div>`;
+  }
+  function grid(){
+    return `<div class="grid">` + DATA.items.map(([n,pr,st,stock]) => {
+      const s = st==='out' ? '<div class="st">Habis</div>'
+              : st==='low' ? '<div class="st low">Sisa '+stock+'</div>'
+              : '<div class="st">Stok '+stock+'</div>';
+      const nBadge = n==='Ayam Dada' ? '<span class="n">2</span>' : '';
+      return `<div class="tile${st==='out'?' out':''}">${nBadge}<div class="nm">${n}</div><div class="pr">${rp(pr)}</div>${s}</div>`;
+    }).join('') + `</div>`;
+  }
+  function cart(){
+    return `<div class="pt"><span>Pesanan · 3 item</span><span class="x" style="color:var(--mut2)">#12</span></div>`
+      + DATA.cart.map(([n,pr,q]) => `
+        <div class="ci">
+          <div class="n2"><div class="nm2">${n}</div><div class="s2">${rp(pr)} × ${q}</div></div>
+          <span class="qty"><span class="qb">−</span><b>${q}</b><span class="qb">+</span></span>
+          <span class="am">${rp(String(Number(pr.replace('.',''))*q).replace(/\B(?=(\d{3})+(?!\d))/g,'.'))}</span>
+        </div>`).join('')
+      + `<div class="total"><span class="l">Total</span><span class="v">Rp 30.000</span></div>
+      <div class="mini"><span>Offline · Tunai</span><span>Kasir: Ridho</span></div>`;
+  }
+  function paypanel(){
+    return `<div class="pt" style="margin-top:2px">Sumber</div>
+      <div style="display:flex;gap:5px">
+        <span class="qc hi" style="flex:1">Offline</span><span class="qc" style="flex:1">GoFood</span>
+        <span class="qc" style="flex:1">Grab</span><span class="qc" style="flex:1">Shopee</span>
+      </div>
+      <div class="pt" style="margin-top:10px">Metode bayar</div>
+      <div class="seg"><span class="sg on">Tunai</span><span class="sg">QRIS</span><span class="sg">Transfer</span></div>
+      <div class="cashbox">
+        <div class="crow"><span class="l2">Uang diterima</span><span class="in">Rp 50.000</span></div>
+        <div class="qk"><span class="qc hi">Pas</span><span class="qc">50rb</span><span class="qc">100rb</span><span class="qc">200rb</span></div>
+        <div class="ret"><span class="l3">Kembalian</span><span class="v3">Rp 20.000</span></div>
+      </div>
+      <div class="pay"><span>Bayar<small>3 item · Tunai · Offline</small></span><span class="v">Rp 30.000</span></div>`;
+  }
+
+  MK.p = header()
+    + `<div class="pad">
+        <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cari menu…</div>
+        ${chips()}
+        <div class="pt"><span>Menu</span><span style="font-weight:600;letter-spacing:0;text-transform:none"><span class="live" style="display:inline-block;margin-right:5px"></span>pesanan offline</span></div>
+        ${grid()}
+      </div>`
+    + `<div class="pad" style="padding-bottom:14px"><div class="panel bottom">${cart()}${paypanel()}</div></div>`;
+
+  MK.l = header()
+    + `<div class="body pad">
+        <div class="menu">
+          <div class="search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Cari menu…</div>
+          ${chips()}
+          ${grid()}
+        </div>
+        <div class="side">
+          <div class="panel">${cart()}</div>
+          <div class="panel">${paypanel()}</div>
+        </div>
+      </div>`;
+
+  document.getElementById('scr-portrait').innerHTML = MK.p;
+  document.getElementById('scr-landscape').innerHTML = MK.l;
+
+  const btns = document.querySelectorAll('.pick button');
+  const setP = v => { document.documentElement.dataset.p = v;
+    btns.forEach(b => b.classList.toggle('on', b.dataset.v === v)); };
+  btns.forEach(b => b.addEventListener('click', () => setP(b.dataset.v)));
+  setP('ferrari');
+</script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Konsep UI Kasir SABANA — A vs B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --ink:#171a1f; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter','Karla',system-ui,sans-serif; background:#26221f; color:#efe9e3;
+         padding:28px 18px 60px; }
+  .wrap { max-width:1240px; margin:0 auto; }
+  h1 { font-size:20px; letter-spacing:.01em; }
+  .lead { color:#b9b0a7; font-size:13.5px; max-width:760px; margin:8px 0 0; line-height:1.55; }
+  .cols { display:flex; gap:26px; margin-top:26px; align-items:flex-start; flex-wrap:wrap; }
+  .col { flex:1 1 560px; min-width:0; }
+  .tag { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
+         letter-spacing:.06em; text-transform:uppercase; color:#cfc6bd; }
+  .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+  h2 { font-size:18px; margin:6px 0 2px; }
+  .sub { font-size:13px; color:#b9b0a7; line-height:1.5; max-width:560px; }
+  .why { margin-top:14px; font-size:12.5px; color:#cfc6bd; line-height:1.6; }
+  .why b { color:#e8e1d9; }
+
+  /* ---------- phone frame ---------- */
+  .frame { width:384px; border-radius:40px; background:#0d0b0a; padding:10px;
+           box-shadow:0 24px 70px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.07);
+           margin:18px auto 0; }
+  .screen { position:relative; width:364px; height:800px; border-radius:30px; overflow:hidden;
+            font-family:'Inter',system-ui,sans-serif; }
+
+  /* ============ KONSEP A — POS BERSIH ============ */
+  .a .screen { background:#f2f3f6; color:#171a1f; }
+  .a .top { display:flex; align-items:center; gap:10px; padding:16px 14px 10px; }
+  .a .mark { width:34px; height:34px; border-radius:10px; background:#171a1f; color:#fff;
+             display:grid; place-items:center; font-weight:800; font-size:17px;
+             font-family:'Fraunces',serif; }
+  .a .brand { font-weight:800; font-size:15px; letter-spacing:.02em; }
+  .a .brand small { display:block; font-size:10px; font-weight:500; color:#7a828c; margin-top:1px; }
+  .a .sp { flex:1; }
+  .a .pill { display:inline-flex; align-items:center; gap:5px; background:#fff; border:1px solid #e2e5ea;
+             border-radius:999px; font-size:11.5px; font-weight:600; color:#3d4450; padding:6px 10px; }
+  .a .pill b { color:#b71c1c; font-weight:700; }
+  .a .ic { width:32px; height:32px; border-radius:9px; border:1px solid #e2e5ea; background:#fff;
+           display:grid; place-items:center; color:#3d4450; }
+  .a .search { margin:6px 14px 10px; background:#fff; border:1px solid #e2e5ea; border-radius:12px;
+               display:flex; align-items:center; gap:8px; padding:10px 12px; color:#a4abb5; font-size:13px; }
+  .a .cats { display:flex; gap:6px; padding:0 14px 12px; overflow:hidden; }
+  .a .cat { border:1px solid #e2e5ea; background:#fff; color:#3d4450; font-size:12px; font-weight:600;
+            padding:7px 12px; border-radius:999px; white-space:nowrap; }
+  .a .cat.on { background:#171a1f; border-color:#171a1f; color:#fff; }
+  .a .cat small { opacity:.55; font-weight:500; }
+  .a .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; padding:0 14px; }
+  .a .tile { background:#fff; border:1px solid #e6e8ec; border-radius:14px; padding:10px 8px 8px;
+             text-align:left; position:relative; }
+  .a .tile .nm { font-size:12.5px; font-weight:700; line-height:1.2; color:#23262c; min-height:30px; }
+  .a .tile .pr { font-size:13.5px; font-weight:800; margin-top:4px; font-variant-numeric:tabular-nums; }
+  .a .tile .st { font-size:10px; color:#8b939d; font-weight:600; margin-top:3px; }
+  .a .tile .st.low { color:#b45309; }
+  .a .tile .st.out { color:#a4abb5; }
+  .a .tile.out { background:#f7f8fa; border-color:#e6e8ec; }
+  .a .tile.out .nm, .a .tile.out .pr { color:#b3bac3; }
+  .a .n { position:absolute; top:-6px; right:-6px; background:#b71c1c; color:#fff; font-size:11px;
+          font-weight:800; min-width:20px; height:20px; border-radius:999px; display:grid;
+          place-items:center; padding:0 5px; border:2px solid #f2f3f6; }
+  .a .lbl { font-size:10.5px; font-weight:700; color:#8b939d; letter-spacing:.08em; text-transform:uppercase;
+            padding:14px 16px 6px; }
+  .a .cartline { background:#fff; margin:0 14px; border:1px solid #e6e8ec; border-radius:14px; padding:10px 12px;
+                 display:flex; flex-direction:column; gap:8px; }
+  .a .ci { display:flex; align-items:center; gap:8px; }
+  .a .ci .nm2 { flex:1; font-size:12.5px; font-weight:700; }
+  .a .ci .sub2 { color:#8b939d; font-size:11px; font-weight:500; }
+  .a .qty { display:inline-flex; align-items:center; gap:8px; }
+  .a .qb { width:24px; height:24px; border-radius:7px; border:1px solid #d7dbe1; display:grid;
+           place-items:center; font-weight:700; color:#3d4450; font-size:14px; background:#fff; }
+  .a .qty b { min-width:16px; text-align:center; font-size:12.5px; }
+  .a .ci .am { font-weight:700; font-size:12.5px; width:66px; text-align:right; font-variant-numeric:tabular-nums; }
+  .a .sum { display:flex; justify-content:space-between; padding:9px 12px; border-top:1px dashed #e6e8ec;
+            font-size:14px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .a .met { background:#fff; margin:0 14px; border:1px solid #e6e8ec; border-radius:14px; padding:8px; }
+  .a .seg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+  .a .seg button { border:1px solid #e2e5ea; background:#fff; color:#4a525c; font-weight:700; font-size:12px;
+                   padding:9px 0; border-radius:10px; }
+  .a .seg button.on { background:#b71c1c; border-color:#b71c1c; color:#fff; }
+  .a .cash { background:#fff; margin:10px 14px 0; border:1px solid #e6e8ec; border-radius:14px; padding:10px 12px; }
+  .a .cash .row2 { display:flex; gap:6px; margin-top:8px; }
+  .a .cash .qc { flex:1; text-align:center; border:1px solid #e2e5ea; border-radius:9px; padding:7px 0;
+                 font-size:11.5px; font-weight:700; color:#3d4450; background:#fff; }
+  .a .cash .ret { display:flex; justify-content:space-between; margin-top:9px; font-size:11.5px; color:#5c6670; }
+  .a .cash .ret b { font-size:15px; color:#177245; font-variant-numeric:tabular-nums; }
+  .a .pay { position:absolute; left:14px; right:14px; bottom:12px; background:#171a1f; color:#fff;
+            border-radius:14px; padding:14px; display:flex; align-items:center; justify-content:space-between;
+            font-weight:800; font-size:15px; box-shadow:0 10px 24px -10px rgba(0,0,0,.4); }
+  .a .pay small { display:block; font-size:10.5px; color:#aeb6c0; font-weight:600; }
+  .a .bnav { position:absolute; left:0; right:0; bottom:0; height:0; }
+  .a .foot { position:absolute; left:14px; right:14px; bottom:86px; display:flex; justify-content:space-between; }
+
+  /* ============ KONSEP B — PREMIUM HANGAT ============ */
+  .b .screen { background:#f7f0e6; color:#241a15; font-family:'Karla',system-ui,sans-serif; }
+  .b .top { display:flex; align-items:center; gap:10px; padding:18px 16px 12px; }
+  .b .mark { width:36px; height:36px; border-radius:12px; background:#7a1e16; color:#f3d9a4;
+             display:grid; place-items:center; font-family:'Fraunces',serif; font-weight:700; font-size:19px;
+             box-shadow:inset 0 0 0 1px rgba(243,217,164,.35); }
+  .b .brand { font-family:'Fraunces',serif; font-weight:600; font-size:18px; letter-spacing:.01em; color:#241a15; }
+  .b .brand small { display:block; font-family:'Karla',sans-serif; font-size:9.5px; font-weight:600;
+                    letter-spacing:.22em; text-transform:uppercase; color:#96703a; margin-top:1px; }
+  .b .sp { flex:1; }
+  .b .pill { display:inline-flex; align-items:center; gap:5px; background:#fffaf0; border:1px solid #e4d3b8;
+             border-radius:999px; font-size:11px; font-weight:700; color:#6a4a1f; padding:6px 10px;
+             letter-spacing:.02em; }
+  .b .ic { width:32px; height:32px; border-radius:10px; border:1px solid #e4d3b8; background:#fffaf0;
+           display:grid; place-items:center; color:#6a4a1f; }
+  .b .search { margin:4px 16px 10px; background:#fffaf0; border:1px solid #e9dcc4; border-radius:14px;
+               display:flex; align-items:center; gap:8px; padding:11px 13px; color:#a08a63; font-size:13px; }
+  .b .cats { display:flex; gap:7px; padding:0 16px 13px; overflow:hidden; }
+  .b .cat { border:1px solid #e4d3b8; background:#fffaf0; color:#6a4a1f; font-size:12px; font-weight:700;
+            padding:7px 13px; border-radius:999px; white-space:nowrap; }
+  .b .cat.on { background:#241a15; border-color:#241a15; color:#f3d9a4; }
+  .b .cat small { opacity:.6; font-weight:600; }
+  .b .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; padding:0 16px; }
+  .b .tile { background:#fffaf0; border:1px solid #ecdfc8; border-radius:16px; padding:11px 8px 9px;
+             text-align:left; position:relative; }
+  .b .tile .nm { font-family:'Fraunces',serif; font-weight:600; font-size:13px; line-height:1.15;
+                 color:#33251d; min-height:30px; }
+  .b .tile .pr { font-size:13px; font-weight:800; margin-top:5px; color:#7a1e16;
+                 font-variant-numeric:tabular-nums; }
+  .b .tile .st { font-size:9.5px; color:#9c8660; font-weight:700; letter-spacing:.04em; margin-top:3px; }
+  .b .tile .st.low { color:#b45309; }
+  .b .tile.out { background:#f6ecdd; border-color:#eadbbf; }
+  .b .tile.out .nm { color:#b3a48d; }
+  .b .tile.out .pr { color:#c9b99e; }
+  .b .n { position:absolute; top:-6px; right:-6px; background:#7a1e16; color:#f6dfae; font-size:11px;
+          font-weight:800; min-width:20px; height:20px; border-radius:999px; display:grid;
+          place-items:center; padding:0 5px; border:2px solid #f7f0e6; }
+  .b .lbl { font-size:9.5px; font-weight:800; color:#96703a; letter-spacing:.16em; text-transform:uppercase;
+            padding:15px 18px 7px; }
+  .b .cartline { background:#fffaf0; margin:0 16px; border:1px solid #ecdfc8; border-radius:16px; padding:11px 13px;
+                 display:flex; flex-direction:column; gap:9px; }
+  .b .ci { display:flex; align-items:center; gap:8px; }
+  .b .ci .nm2 { flex:1; font-size:12.5px; font-weight:700; }
+  .b .ci .sub2 { color:#9c8660; font-size:11px; }
+  .b .qty { display:inline-flex; align-items:center; gap:8px; }
+  .b .qb { width:25px; height:25px; border-radius:8px; border:1px solid #e0cba4; display:grid;
+           place-items:center; font-weight:700; color:#6a4a1f; font-size:14px; background:#fff8e8; }
+  .b .qty b { min-width:16px; text-align:center; font-size:12.5px; }
+  .b .ci .am { font-weight:800; font-size:12.5px; width:66px; text-align:right; color:#33251d;
+               font-variant-numeric:tabular-nums; }
+  .b .sum { display:flex; justify-content:space-between; padding:10px 4px 2px; border-top:1px dashed #e4d3b8;
+            font-size:15px; font-weight:800; margin-top:2px; font-variant-numeric:tabular-nums; }
+  .b .sum span:last-child { color:#7a1e16; }
+  .b .met { background:#fffaf0; margin:0 16px; border:1px solid #ecdfc8; border-radius:16px; padding:9px; }
+  .b .seg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; }
+  .b .seg button { border:1px solid #e4d3b8; background:transparent; color:#7a6a52; font-weight:700;
+                   font-size:12px; padding:9px 0; border-radius:11px; font-family:'Karla',sans-serif; }
+  .b .seg button.on { background:#7a1e16; border-color:#7a1e16; color:#f6dfae; }
+  .b .cash { background:#fffaf0; margin:10px 16px 0; border:1px solid #ecdfc8; border-radius:16px; padding:11px 13px; }
+  .b .cash .row2 { display:flex; gap:6px; margin-top:9px; }
+  .b .cash .qc { flex:1; text-align:center; border:1px solid #e4d3b8; border-radius:10px; padding:7px 0;
+                 font-size:11px; font-weight:700; color:#6a4a1f; background:#fff8e8; }
+  .b .cash .ret { display:flex; justify-content:space-between; margin-top:9px; font-size:11px; color:#9c8660; }
+  .b .cash .ret b { font-size:16px; color:#177245; font-family:'Fraunces',serif; font-variant-numeric:tabular-nums; }
+  .b .pay { position:absolute; left:16px; right:16px; bottom:12px; background:#241a15; color:#f6e7c8;
+            border-radius:16px; padding:14px 16px; display:flex; align-items:center; justify-content:space-between;
+            font-family:'Fraunces',serif; font-weight:700; font-size:16px;
+            box-shadow:0 14px 30px -12px rgba(36,26,21,.5), inset 0 1px 0 rgba(255,255,255,.06); }
+  .b .pay small { display:block; font-size:10px; color:#b49c6e; font-family:'Karla',sans-serif; font-weight:700;
+                  letter-spacing:.08em; }
+  .b .ruler { height:1px; margin:14px 20px 0; background:linear-gradient(90deg,transparent,#c9a35f 20%,#c9a35f 80%,transparent); }
+
+  /* wide tablet variant strip */
+  .wide { margin:22px 0 8px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.1); }
+  .wide .bar { padding:10px 14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+               font-weight:800; color:#b9b0a7; }
+  .wa { background:#eef0f3; color:#171a1f; font-family:'Inter',system-ui,sans-serif; }
+  .wa .bar { background:#171a1f; }
+  .wb { background:#f2e9da; color:#241a15; font-family:'Karla',system-ui,sans-serif; }
+  .wb .bar { background:#241a15; color:#d9c08a; }
+  .wa .inner, .wb .inner { display:flex; gap:16px; padding:16px; }
+  .wa .menu2 { flex:1.7; min-width:0; }
+  .wa .cart2 { flex:1; min-width:0; background:#fff; border-radius:14px; border:1px solid #e3e6ea; padding:12px; }
+  .wb .cart2 { background:#fffaf0; border:1px solid #e8d9bc; border-radius:18px; padding:13px; }
+  .wa .cats2 { display:flex; gap:6px; margin-bottom:12px; }
+  .wb .cats2 { display:flex; gap:7px; margin-bottom:12px; }
+  .wa .g2 { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .wb .g2 { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; }
+  .smallnote { text-align:center; font-size:11px; color:#857a70; margin-top:6px; }
+
+  .footnote { margin-top:26px; font-size:12px; color:#9d948a; line-height:1.6; max-width:900px; }
+  .footnote b { color:#d6cdc3; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kasir SABANA — konsep UI v3</h1>
+  <p class="lead">Dua arah tampilan yang berbeda untuk layar Kasir (layar yang dipakai setiap hari) beserta
+  varian tablet. Angka &amp; nama menu hanyalah ilustrasi. Tidak ada satu baris kode aplikasi yang diubah —
+  pilih dulu arahnya, baru saya terapkan.</p>
+
+  <div class="cols">
+
+    <!-- ============ KONSEP A ============ -->
+    <div class="col">
+      <span class="tag"><span class="dot" style="background:#c8102e"></span> Konsep A</span>
+      <h2>POS modern bersih</h2>
+      <p class="sub">Netral, tenang, profesional. Permukaan putih di atas abu sangat terang, aksen merah dipakai
+      hanya di titik penting (aksi &amp; status). Alur mirip aplikasi POS yang sudah dikenal kasir: menu kiri,
+      pesanan kanan, tombol bayar selalu terlihat.</p>
+      <div class="why">
+        <b>Perbaikan yang diusung:</b> satu bahasa kartu/batas halus dan konsisten; angka pakai tabular;
+        stok jadi teks netral (bukan warna-warni); tombol &amp; area sentuh ≥44px; keranjang ringkas dengan
+        stepper; strip pembayaran tetap di bawah; tanpa dekorasi yang “berteriak”.
+      </div>
+
+      <div class="frame"><div class="screen a">
+        <div class="top">
+          <div class="mark">S</div>
+          <div class="brand">Kasir SABANA<small>Shift #12 · Ridho</small></div>
+          <div class="sp"></div>
+          <span class="pill">Kas <b>Rp 361.000</b></span>
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+        </div>
+        <div class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Cari menu…
+        </div>
+        <div class="cats">
+          <span class="cat on">Semua <small>9</small></span>
+          <span class="cat">Ayam <small>4</small></span>
+          <span class="cat">Nasi <small>2</small></span>
+          <span class="cat">Cemilan <small>2</small></span>
+        </div>
+        <div class="grid">
+          <div class="tile"><span class="n">2</span><div class="nm">Ayam Dada</div><div class="pr">Rp 11.000</div><div class="st">Stok 12</div></div>
+          <div class="tile"><div class="nm">Ayam Sayap</div><div class="pr">Rp 8.000</div><div class="st low">Sisa 2</div></div>
+          <div class="tile"><div class="nm">Paha Atas</div><div class="pr">Rp 11.000</div><div class="st">Stok 9</div></div>
+          <div class="tile"><div class="nm">Paha Bawah</div><div class="pr">Rp 10.000</div><div class="st">Stok 9</div></div>
+          <div class="tile out"><div class="nm">Nasi Uduk</div><div class="pr">Rp 6.000</div><div class="st out">Habis</div></div>
+          <div class="tile"><div class="nm">Kentang</div><div class="pr">Rp 12.000</div><div class="st">Stok 6</div></div>
+        </div>
+        <div class="lbl">Pesanan · 3 item</div>
+        <div class="cartline">
+          <div class="ci">
+            <div class="nm2">Ayam Dada<div class="sub2">Rp 11.000 × 1</div></div>
+            <span class="qty"><span class="qb">−</span><b>1</b><span class="qb">+</span></span>
+            <span class="am">Rp 11.000</span>
+          </div>
+          <div class="ci">
+            <div class="nm2">Ayam Sayap<div class="sub2">Rp 8.000 × 2</div></div>
+            <span class="qty"><span class="qb">−</span><b>2</b><span class="qb">+</span></span>
+            <span class="am">Rp 16.000</span>
+          </div>
+          <div class="sum"><span>Total</span><span>Rp 27.000</span></div>
+        </div>
+        <div class="met" style="margin-top:10px">
+          <div class="seg">
+            <button class="on">Tunai</button><button>QRIS</button><button>Transfer</button>
+          </div>
+        </div>
+        <div class="cash">
+          <div style="display:flex;justify-content:space-between;font-size:11.5px;color:#5c6670">
+            <span>Uang diterima</span><span style="font-weight:800;color:#23262c;font-size:13px">Rp 50.000</span>
+          </div>
+          <div class="row2"><span class="qc">Pas</span><span class="qc">50.000</span><span class="qc">100.000</span><span class="qc">200.000</span></div>
+          <div class="ret"><span>Kembalian</span><b>Rp 23.000</b></div>
+        </div>
+        <div class="pay">
+          <span>Bayar<small>3 item · Tunai</small></span>
+          <span>Rp 27.000</span>
+        </div>
+      </div></div>
+      <p class="smallnote">Konsep A · layar HP (384px)</p>
+
+      <div class="wide wa">
+        <div class="bar">Konsep A · varian tablet/layar lebar — menu &amp; pesanan berdampingan</div>
+        <div class="inner">
+          <div class="menu2">
+            <div class="cats2">
+              <span class="cat on" style="border-color:#171a1f;background:#171a1f;color:#fff">Semua</span>
+              <span class="cat">Ayam</span><span class="cat">Nasi</span><span class="cat">Cemilan</span>
+            </div>
+            <div class="g2">
+              <div class="tile"><div class="nm">Ayam Dada</div><div class="pr">Rp 11.000</div><div class="st">Stok 12</div></div>
+              <div class="tile"><div class="nm">Ayam Sayap</div><div class="pr">Rp 8.000</div><div class="st low">Sisa 2</div></div>
+              <div class="tile"><div class="nm">Paha Atas</div><div class="pr">Rp 11.000</div><div class="st">Stok 9</div></div>
+              <div class="tile"><div class="nm">Paha Bawah</div><div class="pr">Rp 10.000</div><div class="st">Stok 9</div></div>
+              <div class="tile"><div class="nm">Nasi Uduk</div><div class="pr">Rp 6.000</div><div class="st">Stok 4</div></div>
+              <div class="tile out"><div class="nm">Kentang</div><div class="pr">Rp 12.000</div><div class="st out">Habis</div></div>
+              <div class="tile"><div class="nm">Chicken Roll</div><div class="pr">Rp 7.000</div><div class="st">Stok 10</div></div>
+              <div class="tile"><div class="nm">Es Teh</div><div class="pr">Rp 4.000</div><div class="st">Stok 15</div></div>
+              <div class="tile"><div class="nm">Air Mineral</div><div class="pr">Rp 5.000</div><div class="st">Stok 20</div></div>
+              <div class="tile"><div class="nm">Baso Goreng</div><div class="pr">Rp 9.000</div><div class="st">Stok 8</div></div>
+            </div>
+          </div>
+          <div class="cart2">
+            <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7a828c">Pesanan · 3</div>
+            <div class="ci" style="margin-top:10px"><div class="nm2">Ayam Dada<div class="sub2">Rp 11.000 × 1</div></div><span class="qty"><span class="qb">−</span><b>1</b><span class="qb">+</span></span><span class="am" style="width:74px">Rp 11.000</span></div>
+            <div class="ci" style="margin-top:8px"><div class="nm2">Ayam Sayap<div class="sub2">Rp 8.000 × 2</div></div><span class="qty"><span class="qb">−</span><b>2</b><span class="qb">+</span></span><span class="am" style="width:74px">Rp 16.000</span></div>
+            <div class="sum" style="border-top:1px dashed #e3e6ea"><span>Total</span><span>Rp 27.000</span></div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:#5c6670"><span>Offline · Tunai</span><span>Kasir: Ridho</span></div>
+            <div class="seg" style="margin-top:12px"><button class="on">Tunai</button><button>QRIS</button><button>Transfer</button></div>
+            <div style="margin-top:12px;background:#171a1f;color:#fff;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-weight:800"><span>Bayar</span><span>Rp 27.000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ KONSEP B ============ -->
+    <div class="col">
+      <span class="tag"><span class="dot" style="background:#7a1e16"></span> Konsep B</span>
+      <h2>Premium hangat (brand FnB)</h2>
+      <p class="sub">Nuansa brand yang kuat namun dewasa: kertas krem hangat, merah anggur (oxblood),
+      emas antik dipakai hemat, tipografi serif untuk nama &amp; harga. Terasa seperti merek ayam goreng
+      yang mapan — tetap ergonomis untuk transaksi cepat.</p>
+      <div class="why">
+        <b>Perbaikan yang diusung:</b> palet lebih tenang &amp; selaras (merah anggur menggantikan merah
+        menyala + emas yang ramai); nama menu &amp; total dalam serif berkarakter; label huruf kecil berjarak
+        (uppercase letter-spacing) untuk kerapian; ruang antar kartu lebih lega; tombol utama espresso tua.
+      </div>
+
+      <div class="frame"><div class="screen b">
+        <div class="top">
+          <div class="mark">S</div>
+          <div class="brand">SABANA<small>Fried Chicken · Kasir</small></div>
+          <div class="sp"></div>
+          <span class="pill">Kas Rp 361.000</span>
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+        </div>
+        <div class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          Cari menu…
+        </div>
+        <div class="cats">
+          <span class="cat on">Semua</span>
+          <span class="cat">Ayam</span>
+          <span class="cat">Nasi</span>
+          <span class="cat">Cemilan</span>
+        </div>
+        <div class="grid">
+          <div class="tile"><span class="n">2</span><div class="nm">Ayam Dada</div><div class="pr">Rp 11.000</div><div class="st">Stok 12</div></div>
+          <div class="tile"><div class="nm">Ayam Sayap</div><div class="pr">Rp 8.000</div><div class="st low">Sisa 2</div></div>
+          <div class="tile"><div class="nm">Paha Atas</div><div class="pr">Rp 11.000</div><div class="st">Stok 9</div></div>
+          <div class="tile"><div class="nm">Paha Bawah</div><div class="pr">Rp 10.000</div><div class="st">Stok 9</div></div>
+          <div class="tile out"><div class="nm">Nasi Uduk</div><div class="pr">Rp 6.000</div><div class="st">Habis</div></div>
+          <div class="tile"><div class="nm">Kentang</div><div class="pr">Rp 12.000</div><div class="st">Stok 6</div></div>
+        </div>
+        <div class="lbl">Pesanan · 3 item</div>
+        <div class="cartline">
+          <div class="ci">
+            <div class="nm2">Ayam Dada<div class="sub2">Rp 11.000 × 1</div></div>
+            <span class="qty"><span class="qb">−</span><b>1</b><span class="qb">+</span></span>
+            <span class="am">Rp 11.000</span>
+          </div>
+          <div class="ci">
+            <div class="nm2">Ayam Sayap<div class="sub2">Rp 8.000 × 2</div></div>
+            <span class="qty"><span class="qb">−</span><b>2</b><span class="qb">+</span></span>
+            <span class="am">Rp 16.000</span>
+          </div>
+          <div class="sum"><span>Total</span><span>Rp 27.000</span></div>
+        </div>
+        <div class="met" style="margin-top:11px">
+          <div class="seg">
+            <button class="on">Tunai</button><button>QRIS</button><button>Transfer</button>
+          </div>
+        </div>
+        <div class="cash">
+          <div style="display:flex;justify-content:space-between;font-size:11.5px;color:#9c8660">
+            <span>Uang diterima</span><span style="font-weight:800;color:#33251d;font-size:13px">Rp 50.000</span>
+          </div>
+          <div class="row2"><span class="qc">Pas</span><span class="qc">50.000</span><span class="qc">100.000</span><span class="qc">200.000</span></div>
+          <div class="ret"><span>Kembalian</span><b>Rp 23.000</b></div>
+        </div>
+        <div class="ruler"></div>
+        <div class="pay">
+          <span>Bayar<small>3 item · Tunai</small></span>
+          <span>Rp 27.000</span>
+        </div>
+      </div></div>
+      <p class="smallnote">Konsep B · layar HP (384px)</p>
+
+      <div class="wide wb">
+        <div class="bar">Konsep B · varian tablet/layar lebar</div>
+        <div class="inner">
+          <div class="menu2">
+            <div class="cats2">
+              <span class="cat on">Semua</span><span class="cat">Ayam</span><span class="cat">Nasi</span><span class="cat">Cemilan</span>
+            </div>
+            <div class="g2">
+              <div class="tile"><div class="nm">Ayam Dada</div><div class="pr">Rp 11.000</div><div class="st">Stok 12</div></div>
+              <div class="tile"><div class="nm">Ayam Sayap</div><div class="pr">Rp 8.000</div><div class="st low">Sisa 2</div></div>
+              <div class="tile"><div class="nm">Paha Atas</div><div class="pr">Rp 11.000</div><div class="st">Stok 9</div></div>
+              <div class="tile"><div class="nm">Paha Bawah</div><div class="pr">Rp 10.000</div><div class="st">Stok 9</div></div>
+              <div class="tile"><div class="nm">Nasi Uduk</div><div class="pr">Rp 6.000</div><div class="st">Stok 4</div></div>
+              <div class="tile out"><div class="nm">Kentang</div><div class="pr">Rp 12.000</div><div class="st">Habis</div></div>
+              <div class="tile"><div class="nm">Chicken Roll</div><div class="pr">Rp 7.000</div><div class="st">Stok 10</div></div>
+              <div class="tile"><div class="nm">Es Teh</div><div class="pr">Rp 4.000</div><div class="st">Stok 15</div></div>
+              <div class="tile"><div class="nm">Air Mineral</div><div class="pr">Rp 5.000</div><div class="st">Stok 20</div></div>
+              <div class="tile"><div class="nm">Baso Goreng</div><div class="pr">Rp 9.000</div><div class="st">Stok 8</div></div>
+            </div>
+          </div>
+          <div class="cart2">
+            <div style="font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#96703a">Pesanan · 3</div>
+            <div class="ci" style="margin-top:10px"><div class="nm2">Ayam Dada<div class="sub2">Rp 11.000 × 1</div></div><span class="qty"><span class="qb">−</span><b>1</b><span class="qb">+</span></span><span class="am" style="width:74px">Rp 11.000</span></div>
+            <div class="ci" style="margin-top:8px"><div class="nm2">Ayam Sayap<div class="sub2">Rp 8.000 × 2</div></div><span class="qty"><span class="qb">−</span><b>2</b><span class="qb">+</span></span><span class="am" style="width:74px">Rp 16.000</span></div>
+            <div class="sum" style="border-top:1px dashed #e4d3b8"><span>Total</span><span>Rp 27.000</span></div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10.5px;color:#9c8660"><span>Offline · Tunai</span><span>Kasir: Ridho</span></div>
+            <div class="seg" style="margin-top:12px"><button class="on">Tunai</button><button>QRIS</button><button>Transfer</button></div>
+            <div style="margin-top:13px;background:#241a15;color:#f6e7c8;border-radius:13px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-family:'Fraunces',serif;font-weight:700"><span>Bayar</span><span>Rp 27.000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    <b>Cara memilih:</b> bayangkan HP/tablet ini di meja kasir selama 8 jam — konsep mana yang mata &amp;
+    tangan Anda nyaman? A memberi kesan “alat kerja yang netral dan tepercaya”, B memberi kesan “brand
+    yang kuat tapi tetap rapi”. Keduanya bisa juga dipadukan (misal palet B dengan kerapian A).<br/>
+    Setelah Anda pilih (atau minta penyesuaian warna/kerapatan), saya terapkan ke seluruh aplikasi —
+    token warna &amp; tipografi, semua layar, mode gelap ikut menyesuaikan, dan tes E2E tetap hijau.
+  </p>
+</div>
+</body>
+</html>

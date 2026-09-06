@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kasir SABANA — mockup Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{ --acc:#dc2626; --acc2:#c01f1f; --ink:#191d23; --bg:#eef0f3; --card:#fff; --line:#e6e9ee;
+         --mut:#79828d; --mut2:#a6adb7; --soft:#f4f5f7; --ok:#177245; --warn:#b45309; --deep:#991b1b;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;padding:24px 18px 60px}
+  .wrap{max-width:1200px;margin:0 auto}
+  h1{font-size:20px}
+  .lead{color:#b7aea5;font-size:13.5px;max-width:880px;margin:9px 0 4px;line-height:1.6}
+  .hint{color:#8f847a;font-size:12px;margin:2px 0 6px}
+  .hint b{color:#cfc6bc}
+  .frame{margin:16px auto 0;background:#0c0b0a;border-radius:20px;padding:9px;
+    box-shadow:0 26px 60px -20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06)}
+  .app{width:100%;background:var(--bg);border-radius:14px;overflow:hidden;color:var(--ink);
+    font-size:13px;font-family:'Inter',system-ui,sans-serif}
+
+  /* header */
+  .top{display:flex;align-items:center;gap:10px;background:var(--card);border-bottom:1px solid var(--line);
+    padding:9px 14px}
+  .burger{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);color:var(--ink-soft,#414a55);
+    display:grid;place-items:center;flex:none;background:var(--card)}
+  .mark{width:34px;height:34px;border-radius:10px;background:var(--acc);color:#fff;display:grid;place-items:center;
+    font-weight:800;font-size:17px;flex:none;margin-left:4px}
+  .brand{font-weight:800;font-size:15px}
+  .brand small{display:block;font-size:10px;color:var(--mut);font-weight:600;margin-top:1px}
+  .sp{flex:1}
+  .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);
+    border-radius:10px;padding:7px 11px;font-size:11.5px;font-weight:700;color:var(--ink-soft,#414a55)}
+  .pill .amt{color:var(--acc);font-variant-numeric:tabular-nums}
+  .live{width:8px;height:8px;border-radius:50%;background:#16a34a}
+  .top .icbtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+    display:grid;place-items:center;color:var(--mut)}
+
+  .body{display:flex;flex:1}
+  .sb{background:var(--card);border-right:1px solid var(--line);width:64px;flex:none}
+  .sb .it{display:flex;justify-content:center;padding:10px 0;margin:2px 6px;border-radius:10px;color:var(--mut)}
+  .sb .it.on{background:var(--acc);color:#fff}
+  .main{flex:1;min-width:0;padding:14px 16px 20px}
+
+  /* dashboard head */
+  .dhead{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .dhead h2{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .dhead .sub2{font-size:11.5px;color:var(--mut);margin-top:2px}
+  .sp2{flex:1}
+  .range{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:3px}
+  .r{font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:8px;color:var(--mut);cursor:pointer}
+  .r.on{background:var(--ink);color:#fff}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+  .kpi .l{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);
+    display:flex;justify-content:space-between}
+  .kpi .v{font-size:20px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+  .kpi .d{font-size:10.5px;font-weight:700;margin-top:2px}
+  .kpi .d.up{color:var(--ok)} .kpi .d.dn{color:var(--warn)}
+  .kpi.hero{background:linear-gradient(135deg,var(--deep),var(--acc2) 60%,var(--acc));color:#fff;border:0}
+  .kpi.hero .l{color:rgba(255,255,255,.8)}
+  .kpi.hero .d{color:#ffe3c9}
+
+  .row{display:grid;gap:10px;margin-bottom:10px}
+  .r23{grid-template-columns:1.6fr 1fr}
+  .r3{grid-template-columns:1fr 1fr 1fr}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 13px;min-width:0}
+  .ct{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .ct .go{font-size:10.5px;color:var(--acc);font-weight:800;text-transform:none;letter-spacing:0}
+
+  /* bar chart 7 hari */
+  .bars{display:flex;align-items:flex-end;gap:8px;height:120px;padding-top:6px}
+  .bcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%;cursor:pointer}
+  .bcol .amt2{font-size:9px;color:var(--mut2);font-weight:700;text-align:center;height:12px;font-variant-numeric:tabular-nums}
+  .bcol .bar{background:#e7e9ee;border-radius:6px 6px 3px 3px;min-height:3px;position:relative}
+  .bcol.today .bar{background:linear-gradient(180deg,var(--acc),var(--acc2))}
+  .bcol:hover .bar{outline:2px solid var(--acc);outline-offset:1px}
+  .bcol .lab{font-size:9.5px;color:var(--mut);text-align:center;font-weight:600}
+  .bcol.today .lab{color:var(--acc);font-weight:800}
+
+  /* donut */
+  .donutwrap{display:flex;align-items:center;gap:14px}
+  .donut{width:104px;height:104px;border-radius:50%;flex:none;position:relative}
+  .donut::after{content:"";position:absolute;inset:16px;background:var(--card);border-radius:50%}
+  .donut .mid{position:absolute;inset:0;display:grid;place-items:center;z-index:1;text-align:center}
+  .donut .mid b{font-size:16px;font-weight:800;display:block;font-variant-numeric:tabular-nums}
+  .donut .mid span{font-size:9px;color:var(--mut);font-weight:700}
+  .legend{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .li{display:flex;align-items:center;gap:7px;font-size:11.5px}
+  .li .sw{width:9px;height:9px;border-radius:3px;flex:none}
+  .li .nm{flex:1;color:var(--ink-soft,#414a55);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .li .va{font-weight:800;font-variant-numeric:tabular-nums}
+  .li .pc{color:var(--mut2);font-weight:700;width:34px;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* top produk bars */
+  .tp{display:flex;flex-direction:column;gap:8px}
+  .tp .row2{display:flex;align-items:center;gap:8px}
+  .tp .rank{width:18px;font-size:11px;font-weight:800;color:var(--mut2);flex:none;text-align:right}
+  .tp .info{width:92px;flex:none}
+  .tp .info b{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tp .info span{font-size:9.5px;color:var(--mut);font-variant-numeric:tabular-nums}
+  .tp .bar2{flex:1;height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+  .tp .bar2 i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--acc),#f08a8a)}
+  .tp .va2{font-size:11px;font-weight:800;width:70px;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* kas card */
+  .kas{display:flex;gap:12px;align-items:center}
+  .kas .g1{width:46px;height:46px;border-radius:13px;background:#fdecec;color:var(--acc);display:grid;place-items:center;flex:none}
+  .kas .g2{flex:1;min-width:0}
+  .kas .stat{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px}
+  .kas .stat.on{background:#e8f5ee;color:var(--ok)}
+  .kas .stat.off{background:#f5f5f6;color:var(--mut)}
+  .kas .g2 b{font-size:16px;display:block;margin:3px 0 1px;font-variant-numeric:tabular-nums}
+  .kas .g2 .row3{font-size:10.5px;color:var(--mut);display:flex;gap:10px}
+  .kas .btn{background:var(--ink);color:#fff;border-radius:10px;padding:9px 13px;font-weight:800;font-size:12px;flex:none}
+  .kas .btn.ghost{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+  .kasmini{display:flex;gap:8px;margin-top:9px}
+  .kasmini .m{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:7px 9px}
+  .kasmini .m span{font-size:9px;color:var(--mut);font-weight:700;display:block}
+  .kasmini .m b{font-size:12.5px;font-variant-numeric:tabular-nums}
+
+  /* alerts */
+  .alerts{display:flex;flex-direction:column;gap:6px}
+  .al{display:flex;align-items:center;gap:8px;background:#fff8f1;border:1px solid #f2e3c8;border-radius:10px;padding:7px 10px;
+    font-size:11.5px;color:#7c4a03}
+  .al b{font-weight:800}
+  .al.ga{background:#fdecec;border-color:#f6cdca;color:var(--deep)}
+  .al .go{margin-left:auto;font-weight:800;white-space:nowrap}
+
+  /* actions */
+  .acts{display:flex;gap:8px;flex-wrap:wrap}
+  .act{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+    display:flex;align-items:center;gap:9px;font-weight:800;font-size:12.5px;color:var(--ink)}
+  .act .ai{width:30px;height:30px;border-radius:9px;background:var(--soft);color:var(--acc);display:grid;place-items:center;flex:none}
+  .act.on{background:var(--acc);border-color:var(--acc);color:#fff}
+  .act.on .ai{background:rgba(255,255,255,.2);color:#fff}
+
+  /* recent */
+  .tr{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px dashed var(--line)}
+  .tr .w{font-size:10px;color:var(--mut);width:40px;flex:none;font-weight:700;font-variant-numeric:tabular-nums}
+  .tr .no{font-weight:800;font-size:12px;width:58px;flex:none}
+  .tr .it2{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;color:var(--ink-soft,#414a55)}
+  .tr .tag{font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:999px;flex:none}
+  .tr .tag.t{background:#fdecec;color:var(--acc)}
+  .tr .tag.q{background:#ede9fe;color:#6d28d9}
+  .tr .tag.f{background:#e7f3fe;color:#1d4ed8}
+  .tr .src{font-size:9.5px;font-weight:700;color:var(--mut);width:58px;flex:none;text-align:right}
+  .tr .tot{font-size:12px;font-weight:800;width:74px;text-align:right;font-variant-numeric:tabular-nums;flex:none}
+  .tr .rp{color:var(--acc);width:20px;flex:none;text-align:center}
+
+  .note2{margin-top:16px;font-size:12px;color:#9d948a;line-height:1.65;max-width:960px}
+  .note2 b{color:#d9d0c6}
+  @media (max-width: 900px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .r23,.r3{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kasir SABANA — mockup Dashboard</h1>
+  <p class="lead">Gabungan Beranda + Penjualan + Laporan jadi satu layar interaktif: KPI hari ini, grafik
+  omzet 7 hari (klik bar = hari itu), donat metode &amp; platform, produk terlaris, status Kas (buka/kelola
+  via pop-up — bukan halaman), peringatan operasional, aksi cepat, dan transaksi terbaru yang bisa dicetak
+  ulang. Angka adalah contoh.</p>
+  <p class="hint">Klik bar hari → daftar transaksi harian; tombol Kas → pop-up yang sama seperti di Kasir;
+  range <b>Hari ini · 7 hari · Bulan ini</b> menggeser seluruh angka &amp; grafik (di aplikasi nyata).</p>
+
+  <div class="frame"><div class="app">
+    <div class="top">
+      <span class="burger"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+      <span class="mark">S</span>
+      <div class="brand">Kasir SABANA<small>Shift #12 · Ridho · Offline</small></div>
+      <div class="sp"></div>
+      <span class="pill"><span class="live"></span>Kas <span class="amt">Rp 1.096.000</span></span>
+      <span class="icbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+    </div>
+    <div class="body">
+      <div class="sb">
+        <div class="it on"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></div>
+        <div class="it"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg></div>
+      </div>
+      <div class="main">
+        <!-- head -->
+        <div class="dhead">
+          <div>
+            <h2>Dashboard</h2>
+            <div class="sub2">Kamis, 3 Sep 2026 · shift #12 buka 06.00</div>
+          </div>
+          <div class="sp2"></div>
+          <div class="range"><span class="r on">Hari ini</span><span class="r">7 hari</span><span class="r">Bulan ini</span></div>
+        </div>
+
+        <!-- KPI -->
+        <div class="kpis">
+          <div class="kpi hero">
+            <div class="l"><span>Omzet hari ini</span></div>
+            <div class="v">Rp 1.284.000</div>
+            <div class="d up">▲ 12% vs kemarin</div>
+          </div>
+          <div class="kpi"><div class="l"><span>Transaksi</span></div><div class="v">23</div>
+            <div class="d up">78 item terjual</div></div>
+          <div class="kpi"><div class="l"><span>Rata-rata / nota</span></div><div class="v">Rp 55.800</div>
+            <div class="d">+9% vs kemarin</div></div>
+          <div class="kpi"><div class="l"><span>Laba bersih hari ini</span></div><div class="v">Rp 367.000</div>
+            <div class="d">omzet − HPP − pengeluaran</div></div>
+        </div>
+
+        <!-- charts -->
+        <div class="row r23">
+          <div class="card">
+            <div class="ct"><span>Omzet 7 hari terakhir</span><span class="go">Hari ini Rp 1.284.000</span></div>
+            <div class="bars">
+              <div class="bcol"><div class="amt2">640</div><div class="bar" style="height:50%"></div><div class="lab">Kam</div></div>
+              <div class="bcol"><div class="amt2">880</div><div class="bar" style="height:69%"></div><div class="lab">Jum</div></div>
+              <div class="bcol"><div class="amt2">760</div><div class="bar" style="height:59%"></div><div class="lab">Sab</div></div>
+              <div class="bcol"><div class="amt2">1.050</div><div class="bar" style="height:82%"></div><div class="lab">Min</div></div>
+              <div class="bcol"><div class="amt2">1.180</div><div class="bar" style="height:92%"></div><div class="lab">Sen</div></div>
+              <div class="bcol"><div class="amt2">990</div><div class="bar" style="height:77%"></div><div class="lab">Sel</div></div>
+              <div class="bcol today"><div class="amt2">1.284</div><div class="bar" style="height:100%"></div><div class="lab">Hari ini</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct"><span>Metode bayar</span><span class="go">Tunai 77%</span></div>
+            <div class="donutwrap">
+              <div class="donut" style="background:conic-gradient(#dc2626 0 77%,#7c3aed 77% 95%,#2563eb 95% 100%)">
+                <div class="mid"><div><b>Rp 1,28 jt</b><span>hari ini</span></div></div>
+              </div>
+              <div class="legend">
+                <div class="li"><span class="sw" style="background:#dc2626"></span><span class="nm">Tunai</span><span class="va">Rp 986.000</span><span class="pc">77%</span></div>
+                <div class="li"><span class="sw" style="background:#7c3aed"></span><span class="nm">QRIS</span><span class="va">Rp 231.000</span><span class="pc">18%</span></div>
+                <div class="li"><span class="sw" style="background:#2563eb"></span><span class="nm">Transfer</span><span class="va">Rp 67.000</span><span class="pc">5%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row r3">
+          <div class="card">
+            <div class="ct"><span>Sumber pesanan</span></div>
+            <div class="legend">
+              <div class="li"><span class="sw" style="background:#3f4854"></span><span class="nm">Offline (kasir)</span><span class="va">Rp 1.046.000</span><span class="pc">81%</span></div>
+              <div class="li"><span class="sw" style="background:#16a34a"></span><span class="nm">GoFood</span><span class="va">Rp 128.000</span><span class="pc">10%</span></div>
+              <div class="li"><span class="sw" style="background:#0e9f8f"></span><span class="nm">GrabFood</span><span class="va">Rp 74.000</span><span class="pc">6%</span></div>
+              <div class="li"><span class="sw" style="background:#ee4d2d"></span><span class="nm">ShopeeFood</span><span class="va">Rp 36.000</span><span class="pc">3%</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct"><span>Produk terlaris</span><span class="go">Selengkapnya</span></div>
+            <div class="tp">
+              <div class="row2"><span class="rank">1</span><div class="info"><b>Ayam Dada</b><span>62 potong · sisa 12</span></div><div class="bar2"><i style="width:100%"></i></div><span class="va2">Rp 682 rb</span></div>
+              <div class="row2"><span class="rank">2</span><div class="info"><b>Ayam Sayap</b><span>41 potong · sisa 2</span></div><div class="bar2"><i style="width:56%"></i></div><span class="va2">Rp 328 rb</span></div>
+              <div class="row2"><span class="rank">3</span><div class="info"><b>Paha Atas</b><span>23 potong</span></div><div class="bar2"><i style="width:38%"></i></div><span class="va2">Rp 253 rb</span></div>
+              <div class="row2"><span class="rank">4</span><div class="info"><b>Kentang</b><span>18 porsi</span></div><div class="bar2"><i style="width:31%"></i></div><span class="va2">Rp 216 rb</span></div>
+              <div class="row2"><span class="rank">5</span><div class="info"><b>Es Teh</b><span>34 gelas</span></div><div class="bar2"><i style="width:20%"></i></div><span class="va2">Rp 136 rb</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct"><span>Kas tunai — shift aktif</span></div>
+            <div class="kas">
+              <div class="g1"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 12h.01M18 12h.01"/></svg></div>
+              <div class="g2">
+                <span class="stat on">● Buka · 06.00</span>
+                <b>Uang di laci Rp 1.096.000</b>
+                <div class="row3"><span>float 350.000</span><span>omzet tunai 986.000</span><span>kas kecil −240.000</span></div>
+              </div>
+              <button class="btn">Kelola / Tutup</button>
+            </div>
+            <div class="kasmini">
+              <div class="m"><span>Omzet tunai</span><b>Rp 986.000</b></div>
+              <div class="m"><span>Kas keluar (petty)</span><b>− Rp 240.000</b></div>
+              <div class="m"><span>Seharusnya di laci</span><b>Rp 1.096.000</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row r23" style="grid-template-columns:1.25fr 1fr">
+          <div class="card">
+            <div class="ct"><span>Aksi cepat</span></div>
+            <div class="acts">
+              <div class="act on"><span class="ai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h2.2l2.4 12.4a1.8 1.8 0 0 0 1.8 1.4h9.6a1.8 1.8 0 0 0 1.8-1.4L21.5 8H6"/></svg></span>Buka Kasir</div>
+              <div class="act"><span class="ai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span>Beli Bahan</div>
+              <div class="act"><span class="ai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18H6z"/></svg></span>Produksi</div>
+              <div class="act"><span class="ai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg></span>List Belanja</div>
+            </div>
+            <div class="ct" style="margin-top:12px"><span>Perlu perhatian</span></div>
+            <div class="alerts">
+              <div class="al ga"><b>Fryer 1</b> — top-up minyak: sudah 10 ekor <span class="go">Atasi →</span></div>
+              <div class="al"><b>Stok Sayap</b> sisa 2 potong <span class="go">Lihat stok →</span></div>
+              <div class="al"><b>Belanja:</b> Tepung habis ±1 hari · Ayam ±3 hari <span class="go">Buat list →</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct"><span>Transaksi terbaru · hari ini</span><span class="go">Semua 23 →</span></div>
+            <div class="tr"><span class="w">12:41</span><span class="no">#142</span><span class="it2">2× Ayam Dada, 1× Nasi</span><span class="tag t">Tunai</span><span class="src">Offline</span><span class="tot">Rp 55.000</span><span class="rp">⤓</span></div>
+            <div class="tr"><span class="w">12:33</span><span class="no">#141</span><span class="it2">1× Ayam Dada, 1× Es Teh</span><span class="tag q">QRIS</span><span class="src">GoFood</span><span class="tot">Rp 47.000</span><span class="rp">⤓</span></div>
+            <div class="tr"><span class="w">12:20</span><span class="no">#140</span><span class="it2">3× Sayap, 2× Kentang</span><span class="tag q">QRIS</span><span class="src">Grab</span><span class="tot">Rp 74.000</span><span class="rp">⤓</span></div>
+            <div class="tr"><span class="w">12:02</span><span class="no">#139</span><span class="it2">1× Paha Bawah, 1× Es Teh</span><span class="tag f">Transfer</span><span class="src">Offline</span><span class="tot">Rp 40.000</span><span class="rp">⤓</span></div>
+            <div class="tr"><span class="w">11:48</span><span class="no">#138</span><span class="it2">1× Ayam Dada (paket)</span><span class="tag t">Tunai</span><span class="src">Shopee</span><span class="tot">Rp 36.000</span><span class="rp">⤓</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:0">
+          <div class="ct"><span>Laba hari ini (Rp)</span><span class="go">Detail laporan →</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div class="m" style="background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px">
+              <span style="font-size:9.5px;color:var(--mut);font-weight:700">Omzet</span>
+              <div style="font-weight:800;font-size:14px;font-variant-numeric:tabular-nums">Rp 1.284.000</div></div>
+            <div class="m" style="background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px">
+              <span style="font-size:9.5px;color:var(--mut);font-weight:700">HPP produk</span>
+              <div style="font-weight:800;font-size:14px;font-variant-numeric:tabular-nums">− Rp 545.000</div></div>
+            <div class="m" style="background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px">
+              <span style="font-size:9.5px;color:var(--mut);font-weight:700">Pengeluaran</span>
+              <div style="font-weight:800;font-size:14px;font-variant-numeric:tabular-nums">− Rp 150.000</div></div>
+            <div class="m" style="background:#e8f5ee;border:1px solid #c4e2d0;border-radius:10px;padding:8px 10px">
+              <span style="font-size:9.5px;color:var(--ok);font-weight:700">Laba bersih</span>
+              <div style="font-weight:800;font-size:15px;color:var(--ok);font-variant-numeric:tabular-nums">Rp 589.000</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <p class="note2"><b>Interaksi yang direncanakan di aplikasi nyata:</b> pilih <b>Hari ini / 7 hari / Bulan ini</b>
+  mengubah KPI, grafik, dan daftar; klik bar hari → tampilkan transaksi hari itu; kartu Kas membuka pop-up
+  kas yang sama dengan di Kasir (buka/tarik/kas keluar/tutup — tanpa halaman terpisah); ikon ⤓ di baris
+  transaksi = reprint struk (PNG/PDF/WhatsApp). Item &amp; struktur di atas bisa dipangkas/ditambah sebelum
+  saya implementasikan — sebut yang tidak perlu.</p>
+</div>
+</body>
+</html>

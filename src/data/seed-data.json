@@ -1,0 +1,1565 @@
+{
+ "version": 3,
+ "dibuat": "tools/make_seed.py",
+ "sumber": {
+  "hpp": "HPP Reguler.xlsx",
+  "priceList": "Price List Sabana Sharing Mitra.pdf"
+ },
+ "bahan": [
+  {
+   "kodePusat": "100001",
+   "nama": "AYAM POTONG 9",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "9 Potong",
+   "satuanDasar": "potong",
+   "hargaBeliDefault": 48000,
+   "jumlahDasarPerBeli": 9.0,
+   "isAyam": true,
+   "komposisiAyam": {
+    "dada": 3,
+    "pahaAtas": 2,
+    "pahaBawah": 2,
+    "sayap": 2
+   }
+  },
+  {
+   "kodePusat": "100002",
+   "nama": "AYAM POTONG 12",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "12 Potong",
+   "satuanDasar": "potong",
+   "hargaBeliDefault": 48000,
+   "jumlahDasarPerBeli": 12.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100003",
+   "nama": "AYAM BONELESS",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "30 Pcs/ 60 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 65000,
+   "jumlahDasarPerBeli": 30.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100004",
+   "nama": "KULIT AYAM",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 20000,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100006",
+   "nama": "BERAS MENTIK WANGI 10 KG",
+   "kategori": "Nasi & Beras",
+   "satuanBeli": "1 Karung",
+   "isiLabel": "10 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 165000,
+   "jumlahDasarPerBeli": 10.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100007",
+   "nama": "BERAS MENTIK WANGI 25 KG",
+   "kategori": "Nasi & Beras",
+   "satuanBeli": "1 Karung",
+   "isiLabel": "25 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 412500,
+   "jumlahDasarPerBeli": 25.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100008",
+   "nama": "KULIT AYAM",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 20000,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100009",
+   "nama": "AYAM BONELESS",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "30 Pcs/ 60 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 70000,
+   "jumlahDasarPerBeli": 30.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "100010",
+   "nama": "AYAM POTONG 9",
+   "kategori": "Ayam",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "9 Potong",
+   "satuanDasar": "potong",
+   "hargaBeliDefault": 45000,
+   "jumlahDasarPerBeli": 9.0,
+   "isAyam": true,
+   "komposisiAyam": {
+    "dada": 3,
+    "pahaAtas": 2,
+    "pahaBawah": 2,
+    "sayap": 2
+   }
+  },
+  {
+   "kodePusat": "200001",
+   "nama": "TEPUNG FRIED CHICKEN",
+   "kategori": "Tepung & Bumbu",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "1 Pack",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 23500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200002",
+   "nama": "SUNCO MINYAK GORENG 2 LITER",
+   "kategori": "Minyak",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "2 Liter",
+   "satuanDasar": "liter",
+   "hargaBeliDefault": 43400,
+   "jumlahDasarPerBeli": 2.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200003",
+   "nama": "CHICKEN PATTY",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 4500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200004",
+   "nama": "ROTI BURGER",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 2600,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200005",
+   "nama": "BAKSO",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "50 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 24000,
+   "jumlahDasarPerBeli": 50.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200006",
+   "nama": "CHICKEN ROLL",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "10 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 24400,
+   "jumlahDasarPerBeli": 10.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200007",
+   "nama": "SAUS SAMBAL SABANA",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "125 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 22500,
+   "jumlahDasarPerBeli": 125.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200008",
+   "nama": "SAUS TOMAT DELMONTE",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "20 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 5300,
+   "jumlahDasarPerBeli": 20.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200009",
+   "nama": "SAUS SAMBAL REFILL 1 KG DELMONTE",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "1 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 20700,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200010",
+   "nama": "SAUS TOMAT REFILL 1 KG DELMONTE",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "1 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 15100,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200011",
+   "nama": "KEMASAN AYAM",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 23500,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200012",
+   "nama": "KEMASAN KULIT CRISPY",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 15000,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200013",
+   "nama": "KERTAS NASI",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 13000,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200014",
+   "nama": "BOX STANDARD",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 125000,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200015",
+   "nama": "LUNCH BOX",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 115000,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200016",
+   "nama": "BOX SERBAGUNA",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 85000,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200017",
+   "nama": "BOX SIAP SAJI",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 60500,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200018",
+   "nama": "BOX KENTANG",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "200 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 119800,
+   "jumlahDasarPerBeli": 200.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200019",
+   "nama": "SAMBAL GEPREK",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 64000,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200020",
+   "nama": "SAMBAL IJO",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 53000,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200021",
+   "nama": "SAMBAL HITAM",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 51500,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200022",
+   "nama": "CUP SAUCE 35 ML",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "50 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 15000,
+   "jumlahDasarPerBeli": 50.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200023",
+   "nama": "PLASTIK KECIL",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "± 25 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 7000,
+   "jumlahDasarPerBeli": 25.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200024",
+   "nama": "PLASTIK SEDANG",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "± 25 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 7000,
+   "jumlahDasarPerBeli": 25.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200025",
+   "nama": "PLASTIK HITAM",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "30 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 15600,
+   "jumlahDasarPerBeli": 30.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200026",
+   "nama": "PLASTIK MERAH",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "30 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 28000,
+   "jumlahDasarPerBeli": 30.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200027",
+   "nama": "SARUNG TANGAN",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "75 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 11000,
+   "jumlahDasarPerBeli": 75.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200028",
+   "nama": "SAUD BULDAK",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 36800,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200029",
+   "nama": "SAUS TOMAT PRIMA",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "20 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 9300,
+   "jumlahDasarPerBeli": 20.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200030",
+   "nama": "SAUS KEJU MENTAI",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 27000,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200031",
+   "nama": "SAUS BLACK PAPPER",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "10 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 16500,
+   "jumlahDasarPerBeli": 10.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200032",
+   "nama": "SAUS BBQ",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "10 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 8000,
+   "jumlahDasarPerBeli": 10.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200033",
+   "nama": "SAUS EXTRA PEDAS (SADAS)",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "500 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 24500,
+   "jumlahDasarPerBeli": 500.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200034",
+   "nama": "MAYONAISE PRIMA 900 GR",
+   "kategori": "Saus & Sambal",
+   "satuanBeli": "1 Pouch",
+   "isiLabel": "900 Gram",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 36700,
+   "jumlahDasarPerBeli": 900.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200035",
+   "nama": "FRUIT TEA APPLE 250 ML",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 2500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200036",
+   "nama": "FRUIT TEA BLACKCURRANT 250 ML",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 2500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200037",
+   "nama": "FRUIT TEA LEMON 250 ML",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 2500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200038",
+   "nama": "THE BOTOL SOSRO 250 ML",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 2500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200039",
+   "nama": "CONCENTRATE FRUIT TEA RASA BLACKCURRANT",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Botol",
+   "isiLabel": "1 Botol",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 16700,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200040",
+   "nama": "CONCENTRATE FRUIT TEA RASA LEMON TEA",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Botol",
+   "isiLabel": "1 Botol",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 16700,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200041",
+   "nama": "AIR BOTOL 330 ML",
+   "kategori": "Minuman",
+   "satuanBeli": "1 Dus",
+   "isiLabel": "24 Botol",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 59400,
+   "jumlahDasarPerBeli": 24.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200042",
+   "nama": "AIR KESEHATAN CUP 220 ML",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Dus",
+   "isiLabel": "48 Gelas",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 28000,
+   "jumlahDasarPerBeli": 48.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200043",
+   "nama": "KENTANG SIMPLOT 2.72 KG",
+   "kategori": "Kentang & Gorengan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "2.72 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 115000,
+   "jumlahDasarPerBeli": 2.72,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200044",
+   "nama": "KENTANG MC CAIN 2.5 KG",
+   "kategori": "Kentang & Gorengan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "2.5 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 110500,
+   "jumlahDasarPerBeli": 2.5,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200045",
+   "nama": "KARDUS UKURAN 30",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 9500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200046",
+   "nama": "KARDUS UKURAN 50",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 11000,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200047",
+   "nama": "ROTI CHICKEN BUN",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "4 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 8000,
+   "jumlahDasarPerBeli": 4.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200048",
+   "nama": "PAPER BOWL 500 ML",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "25 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 38750,
+   "jumlahDasarPerBeli": 25.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200049",
+   "nama": "PAPER BOWL 650 ML",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "25 Pcs",
+   "satuanDasar": "ml",
+   "hargaBeliDefault": 41250,
+   "jumlahDasarPerBeli": 25.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200050",
+   "nama": "OREGANO 25 GR",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "gram",
+   "hargaBeliDefault": 8000,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200051",
+   "nama": "SENDOK GARPU PLASTIK",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "50 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 10000,
+   "jumlahDasarPerBeli": 50.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200052",
+   "nama": "RICE BOX",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "100 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 153200,
+   "jumlahDasarPerBeli": 100.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200058",
+   "nama": "KENTANG SIMPLOT 2 KG",
+   "kategori": "Kentang & Gorengan",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "2 Kg",
+   "satuanDasar": "kg",
+   "hargaBeliDefault": 83000,
+   "jumlahDasarPerBeli": 2.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200059",
+   "nama": "CHICKEN KATSU",
+   "kategori": "Aneka Bahan",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 4500,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200060",
+   "nama": "KARDUS UKURAN 40",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pcs",
+   "isiLabel": "1 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 10000,
+   "jumlahDasarPerBeli": 1.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  },
+  {
+   "kodePusat": "200085",
+   "nama": "CUP SAUCE MIKA",
+   "kategori": "Kemasan & Lainnya",
+   "satuanBeli": "1 Pack",
+   "isiLabel": "50 Pcs",
+   "satuanDasar": "pcs",
+   "hargaBeliDefault": 10000,
+   "jumlahDasarPerBeli": 50.0,
+   "isAyam": false,
+   "komposisiAyam": null
+  }
+ ],
+ "produk": [
+  {
+   "nama": "Ayam Dada Goreng",
+   "kategori": "Ayam Goreng",
+   "hargaJual": 11000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "PENDAPATAN",
+   "resepDraft": []
+  },
+  {
+   "nama": "Ayam Paha Atas Goreng",
+   "kategori": "Ayam Goreng",
+   "hargaJual": 11000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "PENDAPATAN",
+   "resepDraft": []
+  },
+  {
+   "nama": "Ayam Paha Bawah Goreng",
+   "kategori": "Ayam Goreng",
+   "hargaJual": 9000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "PENDAPATAN",
+   "resepDraft": []
+  },
+  {
+   "nama": "Ayam Sayap Goreng",
+   "kategori": "Ayam Goreng",
+   "hargaJual": 8000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "PENDAPATAN",
+   "resepDraft": []
+  },
+  {
+   "nama": "Nasi",
+   "kategori": "Nasi",
+   "hargaJual": 5000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "NASI",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Beras Mentik Wangi",
+     "biaya": null,
+     "total": 12000,
+     "keterangan": "1333.333333"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Kertas Nasi",
+     "biaya": null,
+     "total": 13000,
+     "keterangan": "130"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Box",
+     "biaya": null,
+     "total": 125000,
+     "keterangan": "1250"
+    }
+   ]
+  },
+  {
+   "nama": "Chicken Roll",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "CR",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Chicken Roll",
+     "biaya": null,
+     "total": 24400,
+     "keterangan": "2440"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Tepung Bumbu",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "0"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "628.3333333"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Kemasan",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "78.33333333"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "180"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "46.66666667"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Bakso",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "BKS",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Bakso",
+     "biaya": null,
+     "total": 24000,
+     "keterangan": "2400"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Tepung Bumbu",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "0"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "628.3333333"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Kemasan",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "82.45614035"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "180"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Chicken Strip",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "CS",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Chiken Strip",
+     "biaya": null,
+     "total": 59800,
+     "keterangan": "1993.333333"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Tepung Bumbu",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "335.7142857"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "628.3333333"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Kemasan",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "78.33333333"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "180"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "70"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Chicken Bun",
+   "kategori": "Paket",
+   "hargaJual": 10000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "CHICKEN BUN",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Roti Bun",
+     "biaya": null,
+     "total": 2000,
+     "keterangan": "2000"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Ayam Goreng - Sayap",
+     "biaya": null,
+     "total": 8000,
+     "keterangan": "2666.666667"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Mentega",
+     "biaya": null,
+     "total": 10000,
+     "keterangan": "150"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Sauce BBQ",
+     "biaya": null,
+     "total": 800,
+     "keterangan": "266.6666667"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "60"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Mayonaise",
+     "biaya": null,
+     "total": 35000,
+     "keterangan": "311.1111111"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Oregano",
+     "biaya": null,
+     "total": 8000,
+     "keterangan": "120"
+    },
+    {
+     "bahan": "8.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "9.0",
+     "satuan": "Box Serbaguna",
+     "biaya": null,
+     "total": 85000,
+     "keterangan": "850"
+    },
+    {
+     "bahan": "10.0",
+     "satuan": "Gas 3 Kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Kulit Crispy",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 5000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "KULIT",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Kulit",
+     "biaya": null,
+     "total": 20000,
+     "keterangan": "2000"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Tepung Bumbu",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "419.6428571"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "628.3333333"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Kemasan Kulit",
+     "biaya": null,
+     "total": 15000,
+     "keterangan": "150"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "180"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Burger",
+   "kategori": "Paket",
+   "hargaJual": 12000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "BURGER",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Roti",
+     "biaya": null,
+     "total": 2600,
+     "keterangan": "2600"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Chicken Patty",
+     "biaya": null,
+     "total": 4500,
+     "keterangan": "4500"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Mayonaise",
+     "biaya": null,
+     "total": 35000,
+     "keterangan": "777.7777778"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Sayuran (Tomat, Salada, Timun)",
+     "biaya": 1100,
+     "total": 1000,
+     "keterangan": "Tomat 1 Slices, Salada 1 Lembar, Timun 2 Slices"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Mentega",
+     "biaya": 7000,
+     "total": 140,
+     "keterangan": ""
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Saus",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "188"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Box Burger",
+     "biaya": null,
+     "total": 70000,
+     "keterangan": "700"
+    },
+    {
+     "bahan": "7.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "8.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Kentang Goreng",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 8000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "KENTANG",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Kentang Simplot",
+     "biaya": null,
+     "total": 113000,
+     "keterangan": "4985.294118"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "471.25"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Box Kentang",
+     "biaya": null,
+     "total": 119800,
+     "keterangan": "599"
+    },
+    {
+     "bahan": "4.0",
+     "satuan": "Saus Sambal Delmonte",
+     "biaya": null,
+     "total": 22500,
+     "keterangan": "360"
+    },
+    {
+     "bahan": "5.0",
+     "satuan": "Kantong Plastik",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Gas 3 kg",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "153.3333333"
+    }
+   ]
+  },
+  {
+   "nama": "Sambal Geprek",
+   "kategori": "Sambal",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "GEPREK",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Sambal Geprek",
+     "biaya": null,
+     "total": 50000,
+     "keterangan": "2000"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "230.347"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Saus Buldak",
+   "kategori": "Sambal",
+   "hargaJual": 3000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "BULDAK",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Saos Buldak",
+     "biaya": null,
+     "total": 36800,
+     "keterangan": "1472"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Saus Mentai",
+   "kategori": "Sambal",
+   "hargaJual": 2000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "MENTAI",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Saus Keju Mentai",
+     "biaya": null,
+     "total": 25600,
+     "keterangan": "1024"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Saus Sadas",
+   "kategori": "Sambal",
+   "hargaJual": 3000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "SADAS",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Saus Sadas",
+     "biaya": null,
+     "total": 24500,
+     "keterangan": "980"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Sambal Hitam",
+   "kategori": "Sambal",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "SAMBAL HITAM",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Sambal Sambal Hitam",
+     "biaya": null,
+     "total": 50500,
+     "keterangan": "2020"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Sambal Ijo",
+   "kategori": "Sambal",
+   "hargaJual": 4000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "SAMBAL IJO",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Sambal Ijo",
+     "biaya": null,
+     "total": 50000,
+     "keterangan": "2000"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37000,
+     "keterangan": "226.07"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Sauce Cup",
+     "biaya": null,
+     "total": 12600,
+     "keterangan": "252"
+    }
+   ]
+  },
+  {
+   "nama": "Chicken Katsu",
+   "kategori": "Aneka Goreng",
+   "hargaJual": 8000,
+   "tipeStok": "produksi",
+   "aktif": true,
+   "sheet": "KATSU",
+   "resepDraft": [
+    {
+     "bahan": "1.0",
+     "satuan": "Chicken Katsu",
+     "biaya": null,
+     "total": 4500,
+     "keterangan": "4500"
+    },
+    {
+     "bahan": "2.0",
+     "satuan": "Minyak Goreng",
+     "biaya": null,
+     "total": 37700,
+     "keterangan": "414.7"
+    },
+    {
+     "bahan": "3.0",
+     "satuan": "Gas",
+     "biaya": null,
+     "total": 23000,
+     "keterangan": "150.3267974"
+    },
+    {
+     "bahan": "6.0",
+     "satuan": "Saus Sambal Sabana",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "376"
+    },
+    {
+     "bahan": "10.0",
+     "satuan": "Plastik Kecil",
+     "biaya": null,
+     "total": 7000,
+     "keterangan": "140"
+    },
+    {
+     "bahan": "11.0",
+     "satuan": "Kemasan Ayam",
+     "biaya": null,
+     "total": 23500,
+     "keterangan": "235"
+    }
+   ]
+  },
+  {
+   "nama": "Rice Bowl 650ml Sambal Geprek",
+   "kategori": "Paket",
+   "hargaJual": 15000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "RICE BOWL 650ML",
+   "resepDraft": []
+  },
+  {
+   "nama": "Rice Bowl 650ml BBQ",
+   "kategori": "Paket",
+   "hargaJual": 15000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "RICE BOWL 650ML",
+   "resepDraft": []
+  },
+  {
+   "nama": "Rice Bowl 650ml Katsu",
+   "kategori": "Paket",
+   "hargaJual": 15000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "RICE BOWL 650ML",
+   "resepDraft": []
+  },
+  {
+   "nama": "Rice Bowl 500ml Sambal Geprek",
+   "kategori": "Paket",
+   "hargaJual": 12000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "RICE BOWL 500ML",
+   "resepDraft": []
+  },
+  {
+   "nama": "Rice Bowl 500ml BBQ",
+   "kategori": "Paket",
+   "hargaJual": 12000,
+   "tipeStok": "produksi",
+   "aktif": false,
+   "sheet": "RICE BOWL 500ML",
+   "resepDraft": []
+  }
+ ]
+}

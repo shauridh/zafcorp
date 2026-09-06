@@ -1,0 +1,17 @@
+{
+  "name": "Ayam SABANA — Portal Customer",
+  "short_name": "SABANA Antar",
+  "description": "Pesan antar sendiri dari Ayam SABANA: menu tersinkron kasir, bayar QRIS/transfer, pantau status, riwayat pesanan.",
+  "lang": "id",
+  "start_url": "/web-order.html",
+  "scope": "/web-order.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#dc2626",
+  "background_color": "#fff8f6",
+  "icons": [
+    { "src": "/pwa-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/pwa-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/pwa-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Ayam SABANA — Preview berdampingan: Portal Customer ↔ Kasir</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#211d1b;color:#ece5dd;font-family:'Inter',system-ui,sans-serif;height:100vh;display:flex;flex-direction:column}
+  .hd{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #3d352e;flex:none}
+  .hd h1{font-size:15px}
+  .hd .note{font-size:11.5px;color:#b7aea5}
+  .hd .sp{flex:1}
+  .hd .pill{font-size:11px;font-weight:800;background:#241f1c;border:1px solid #3d352e;color:#cfc6bc;
+    border-radius:999px;padding:5px 12px;white-space:nowrap}
+  .hd .pill b{color:#4ade80}
+  .panes{flex:1;display:flex;min-height:0}
+  .pane{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid #3d352e}
+  .pane:last-child{border-right:0}
+  .pane-head{display:flex;align-items:center;gap:8px;padding:7px 12px;background:#171412;border-bottom:1px solid #3d352e;flex:none}
+  .pane-head .tt{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .pane-head .sub{font-size:10px;color:#8f847a}
+  .pane-head .sp{flex:1}
+  .pane-head a{color:#b7aea5;font-size:10.5px;text-decoration:none;border:1px solid #3d352e;border-radius:8px;padding:3px 9px}
+  .pane-head a:hover{color:#fff;border-color:#8a7b6c}
+  iframe{flex:1;border:0;width:100%;background:#fff}
+  @media (max-width:600px){ .panes{flex-direction:column} .pane{min-height:50%} .pane:last-child{border-top:1px solid #3d352e} }
+</style>
+</head>
+<body>
+  <div class="hd">
+    <h1>🍗 Ayam SABANA — Preview berdampingan</h1>
+    <div class="note">Portal customer di kiri, papan kasir di kanan — pesan di kiri, kelola di kanan, pantau di kiri.</div>
+    <div class="sp"></div>
+    <span class="pill">server order: <b>npm run server:order</b> wajib jalan (port 5198)</span>
+  </div>
+  <div class="panes">
+    <div class="pane">
+      <div class="pane-head">
+        <span class="tt">📱 Portal Customer</span>
+        <span class="sp"></span>
+        <a href="/web-order.html" target="_blank">buka penuh ↗</a>
+      </div>
+      <iframe src="/web-order.html" id="f-cust"></iframe>
+    </div>
+    <div class="pane">
+      <div class="pane-head">
+        <span class="tt">🖥️ Kasir — Papan Pesanan Antar</span>
+        <span class="sp"></span>
+        <a href="/#/papan-antar" target="_blank">buka penuh ↗</a>
+      </div>
+      <iframe src="/#/papan-antar" id="f-kasir"></iframe>
+    </div>
+  </div>
+</body>
+</html>

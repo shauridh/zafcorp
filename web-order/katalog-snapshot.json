@@ -1,0 +1,18 @@
+{
+  "dibuat": "2026-09-06T12:05:00+07:00",
+  "resto": { "nama": "Ayam SABANA", "alamat": "Jl. Sudirman No. 12, Jakarta", "lat": -6.20012, "lng": 106.81667 },
+  "tarif": { "biayaDasar": 5000, "perKm": 2000, "jarakMaxKm": 7, "gratisMin": 50000 },
+  "terimaCOD": false,
+  "produk": [
+    { "id": 1, "nama": "Ayam Dada Goreng", "kategori": "Ayam", "harga": 11000, "hargaAsli": 13000, "emoji": "🍗", "tersedia": true, "promo": "Diskon" },
+    { "id": 2, "nama": "Sayap Goreng (2)", "kategori": "Ayam", "harga": 9000, "hargaAsli": 11000, "emoji": "🍗", "tersedia": true, "promo": "Diskon" },
+    { "id": 3, "nama": "Paha Bawah Goreng", "kategori": "Ayam", "harga": 9500, "emoji": "🍗", "tersedia": true, "menipis": true },
+    { "id": 4, "nama": "Paket Nasi + Ayam", "kategori": "Paket", "harga": 15000, "hargaAsli": 17000, "emoji": "🍱", "tersedia": true, "promo": "Paket" },
+    { "id": 5, "nama": "Paket Nasi + 2 Ayam", "kategori": "Paket", "harga": 21000, "emoji": "🍱", "tersedia": true },
+    { "id": 6, "nama": "Kentang Goreng", "kategori": "Lain", "harga": 8000, "hargaAsli": 10000, "emoji": "🍟", "tersedia": true, "promo": "Diskon" },
+    { "id": 7, "nama": "Es Teh Manis", "kategori": "Minum", "harga": 5000, "emoji": "🧋", "tersedia": true },
+    { "id": 8, "nama": "Sambal Extra (3)", "kategori": "Lain", "harga": 3000, "emoji": "🌶️", "tersedia": true },
+    { "id": 9, "nama": "Es Jeruk", "kategori": "Minum", "harga": 6000, "emoji": "🍊", "tersedia": false },
+    { "id": 10, "nama": "Gorengan Pisang (5)", "kategori": "Lain", "harga": 7000, "emoji": "🍌", "tersedia": false }
+  ]
+}
