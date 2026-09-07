@@ -70,6 +70,7 @@ create table if not exists pesanan (
   sumber_verifikasi  text,                      -- qris-bridge | gateway
   alasan_batal       text,
   rentang_bayar      text,                      -- ISO UTC (jendela pencocokan)
+  bridge_event_id    text,                      -- event_id qrishook yang mencocokkan (dedup)
   items              jsonb not null default '[]'::jsonb,
   pesan              jsonb not null default '[]'::jsonb,   -- thread chat
   riwayat            jsonb not null default '[]'::jsonb,

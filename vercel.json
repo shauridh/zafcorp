@@ -4,7 +4,10 @@
   "outputDirectory": "dist",
   "framework": null,
   "functions": {
-    "api/[[...path]].mjs": { "maxDuration": 30 }
+    "api/[[...path]].mjs": {
+      "maxDuration": 30,
+      "includeFiles": "web-order/katalog-snapshot.json"
+    }
   },
   "headers": [
     {

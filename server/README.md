@@ -10,7 +10,26 @@ PORT=5174 node server/server.mjs  # ganti port
 
 Store disimpan di `server/data/store.json` (bisa diganti lewat env `STORE_FILE`).
 Ganti store menjadi PostgreSQL/Supabase saat siap produksi — kontrak endpoint
-sama; lihat `docs/arsitektur/sinkronisasi-multi-perangkat.md`.
+sama; lihat `docs/BACKEND-SUPABASE-VERCEL.md`.
+
+## Struktur kode (Fase 2: handler bersama + store di-inject)
+
+Logika kedua server dipisah dari node:http supaya kode yang sama dipakai di
+jalur dev (JSON) dan produksi (Supabase + Vercel):
+
+| File | Isi |
+| --- | --- |
+| `handler-order.mjs` | logika portal delivery → `penanganOrder(req, res)`; ekspor `pasangStore`, `aturSseAktif`, `cekGatewayPembayaran` |
+| `handler-sync.mjs` | logika sinkronisasi → `penanganSync(req, res)`; ekspor `pasangStore` |
+| `store-json.mjs` | store JSON (`buatStoreJsonOrder` / `buatStoreJsonSync`) — jalur dev |
+| `store-supabase.mjs` | store Supabase (baca semua baris → bentuk sama → tulis delta) — jalur produksi |
+| `order.mjs` / `server.mjs` | thin dev adapter (node:http + SSE + polling gateway 20 dtk utk order) |
+| `api/[[...path]].mjs` (root) | Vercel Function catch-all — store Supabase, SSE mati |
+
+SSE `/api/events` dan polling gateway 20 dtk **hanya berjalan di dev** —
+serverless tidak punya koneksi panjang / `setInterval`; produksi memakai
+webhook QRIS Bridge + polling per-pesanan klien (dan nanti Supabase Realtime,
+P3).
 
 ## Endpoint
 

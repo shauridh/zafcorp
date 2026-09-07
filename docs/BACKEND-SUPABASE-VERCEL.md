@@ -49,13 +49,31 @@ Database & realtime → **Supabase (Postgres)** · Hosting & fungsi API → **Ve
 - `supabase/schema.sql` — skema lengkap + RLS deny-by-default + urutan.
 - Dokumen ini.
 
-### P2 — Migrasi kode handler (belum)
-- Ekstrak logika handler dari `server/order.mjs` & `server/server.mjs` ke modul
-  bersama dengan store di-inject (`muatStore/simpanStore` menjadi antarmuka).
-- Implementasi store **Supabase** (baca semua baris → bentuk store yang sama →
-  mutasi di memori → upsert kembali; volume UMKM kecil, aman).
-- Entry Vercel: `api/[[...path]].mjs` → panggil handler dgn store Supabase.
-- Buang SSE & `setInterval` dari jalur produksi (dev tetap bisa).
+### P2 — Migrasi kode handler (✅ selesai)
+- Logika handler diekstrak ke modul bersama dengan **store di-inject**
+  (`muatStore/simpanStore` sebagai antarmuka):
+  - `server/handler-order.mjs` — seluruh logika portal delivery (auth PIN,
+    pesanan, chat, QRIS Bridge, refund, SSE) → `penanganOrder(req, res)`.
+  - `server/handler-sync.mjs` — sinkronisasi multi-perangkat →
+    `penanganSync(req, res)`.
+  - `server/store-json.mjs` — store JSON (jalur dev, tetap jalan & teruji).
+  - `server/store-supabase.mjs` — store Supabase: muat SEMUA baris → bentuk
+    in-memory identik dgn JSON → mutasi di memori → `simpanStore` menulis
+    delta (upsert baris berubah/baru, hapus yg hilang) per request.
+  - `server/order.mjs` & `server/server.mjs` — thin dev adapter (node:http):
+    pasang store JSON, jalankan SSE & polling gateway 20 dtk (dev only).
+- Entry Vercel: `api/[[...path]].mjs` (satu catch-all, web-handler `fetch`)
+  → memilih handler order/sync per pathname, memakai store Supabase.
+- **SSE & polling gateway TIDAK jalan di serverless**: entry Vercel mematikan
+  SSE (`aturSseAktif(false)` → `/api/events` = 501; notifikasi instan papan
+  kasir = Supabase Realtime broadcast di P3) dan tidak ada `setInterval`
+  (webhook QRIS Bridge + polling per-pesanan klien sebagai gantinya).
+- Katalog kasir dibaca dari file `web-order/katalog-snapshot.json` —
+  disertakan ke fungsi via `includeFiles` di `vercel.json`.
+- Catatan kecil: body `/api/sync` bisa besar (≤50 MB); Vercel Hobby membatasi
+  ukuran request fungsi (~4,5 MB) → bila DB kasir tumbuh, chunk push per tabel
+  di klien (todo). Kolom `bridge_event_id` ditambahkan ke `schema.sql`
+  (dipakai webhook QRIS Bridge).
 
 ### P3 — Realtime di klien (belum)
 - Papan Pesanan Antar & panel kasir portal: ganti `EventSource(/api/events)`
@@ -99,8 +117,12 @@ Database & realtime → **Supabase (Postgres)** · Hosting & fungsi API → **Ve
   `schema.sql`).
 - **Fungsi serverless** dingin-dingin (cold start ~300–800 ms) — untuk volume
   UMKM tidak masalah.
-- **Data lama** di `server/data/*.json` tidak otomatis pindah — saat P2 selesai,
-  jalankan skrip impor sekali (json → tabel) sebelum cutover.
+- **Data lama** di `server/data/*.json` tidak otomatis pindah — sebelum
+  cutover, jalankan skrip impor sekali (json → tabel; skrip belum dibuat).
+- **Mutasi bersifat LWW per baris.** Setiap request membaca seluruh store lalu
+  menulis delta baris yg berubah; bila dua permintaan menyentuh baris SAMA
+  bersamaan (mis. dua perangkat sync detik yg sama), penulis terakhir menang —
+  utk volume UMKM & pemakaian 1–2 perangkat diterima.
 - Jangan pernah menaruh `service_role` key di kode klien — hanya env server.
 
 ## Perintah cepat (saat P4)
