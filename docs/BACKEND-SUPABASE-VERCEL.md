@@ -83,21 +83,29 @@ Database & realtime → **Supabase (Postgres)** · Hosting & fungsi API → **Ve
 - Config klien: `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` (hanya utk
   realtime — tabel tetap tertutup).
 
-### P4 — Provisioning & deploy (butuh akun Anda)
-1. Buat project di [supabase.com](https://supabase.com) (region terdekat).
-2. SQL Editor → jalankan `supabase/schema.sql`.
-3. Settings → API: salin `Project URL`, `anon public key`,
-   `service_role key` (rahasiakan service role!).
-4. Deploy repo ke Vercel (dari GitHub `zafcorp`) → Vercel akan deteksi
+### P4 — Provisioning & deploy (status: ✅ DB selesai, ⏳ deploy)
+
+**Sudah dikerjakan (Sep 2026, project `pjrvopkzgfxstemydsmf`):**
+1. ✅ Project Supabase dibuat (region Singapore).
+2. ✅ `supabase/schema.sql` dijalankan → 9 tabel ada
+   (`baris_sync, pelanggan, pengaturan, perangkat, pesanan, push_sub, sesi,
+   vapid, webhook_event`).
+3. ✅ Data lama diimpor via `tools/impor-supabase.mjs` (idempoten, boleh
+   dijalankan ulang): 4 pesanan, 5 pelanggan, 7 sesi, 2 perangkat, VAPID.
+4. ⏳ Deploy repo ke Vercel (dari GitHub `zafcorp`) — Vercel akan deteksi
    `vercel.json` + `api/`.
-5. Env di Vercel:
+5. ⏳ Env di Vercel:
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `KASIR_SECRET` (mis. `openssl rand -hex 16`)
    - `CORS_ORIGIN` (origin portal, mis. `https://pesan.anda.vercel.app`)
    - opsional `VAPID_PUBLIC`/`VAPID_PRIVATE`
-6. Deploy → uji: portal order → kasir board → lunas QRIS Bridge.
+6. ⏳ Deploy → uji: portal order → kasir board → lunas QRIS Bridge.
+
+Catatan: `.env.local` (gitignored) sudah berisi `SUPABASE_URL` +
+`SUPABASE_SERVICE_ROLE_KEY` untuk jalur dev/uji lokal. `VITE_SUPABASE_ANON_KEY`
+masih kosong — salin dari dashboard Settings → API bila Realtime (P3) aktif.
 
 ## Biaya (perkiraan, 1 outlet)
 
@@ -118,7 +126,9 @@ Database & realtime → **Supabase (Postgres)** · Hosting & fungsi API → **Ve
 - **Fungsi serverless** dingin-dingin (cold start ~300–800 ms) — untuk volume
   UMKM tidak masalah.
 - **Data lama** di `server/data/*.json` tidak otomatis pindah — sebelum
-  cutover, jalankan skrip impor sekali (json → tabel; skrip belum dibuat).
+  cutover, jalankan skrip impor sekali:
+  `node --env-file=.env.local tools/impor-supabase.mjs` (idempoten; tabel
+  harus sudah dibuat oleh `schema.sql`).
 - **Mutasi bersifat LWW per baris.** Setiap request membaca seluruh store lalu
   menulis delta baris yg berubah; bila dua permintaan menyentuh baris SAMA
   bersamaan (mis. dua perangkat sync detik yg sama), penulis terakhir menang —
