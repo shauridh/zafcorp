@@ -6,7 +6,17 @@
 const LS_URL = 'papan-order-url'
 const LS_SECRET = 'papan-kasir-secret'
 
-export const ORDER_URL_DEFAULT = 'http://127.0.0.1:5198'
+/* Default server order: env VITE_ORDER_API_URL menang; di dev lokal (localhost)
+ * pakai server prototipe 5198; di produksi (Vercel) kosong → same-origin /api
+ * yang ditangani Vercel Function. */
+function bakuDefault(): string {
+  const dariEnv = (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_ORDER_API_URL
+  if (dariEnv) return dariEnv
+  const h = typeof location !== 'undefined' ? location.hostname : ''
+  return h === '127.0.0.1' || h === 'localhost' ? 'http://127.0.0.1:5198' : ''
+}
+
+export const ORDER_URL_DEFAULT = bakuDefault()
 
 export function orderUrl(): string {
   return localStorage.getItem(LS_URL) || ORDER_URL_DEFAULT

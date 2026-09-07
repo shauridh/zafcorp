@@ -23,8 +23,9 @@ interface Pesanan {
 interface Pelanggan { hp: string; nama?: string; alamatTerakhir?: string; jumlahPesanan: number; total: number; ratingRata: number | null; terakhirPesan?: string }
 interface Tarif { biayaDasar: number; perKm: number; jarakMaxKm: number; gratisMin: number | null }
 
+import { ORDER_URL_DEFAULT } from '../data/orderKonfig'
+
 const LS_URL = 'papan-order-url'
-const DEFAULT_URL = 'http://127.0.0.1:5198'
 const LS_SECRET = 'papan-kasir-secret'
 
 const LABEL_STATUS: Record<string, string> = {
@@ -112,7 +113,7 @@ function tglJamWIB(iso: string): string {
 }
 
 export default function PapanPesananPage() {
-  const [url, setUrl] = useState(() => localStorage.getItem(LS_URL) || DEFAULT_URL)
+  const [url, setUrl] = useState(() => localStorage.getItem(LS_URL) || ORDER_URL_DEFAULT)
   const [secret, setSecret] = useState(() => localStorage.getItem(LS_SECRET) || '')
   const [daftar, setDaftar] = useState<Pesanan[]>([])
   const [banner, setBanner] = useState('')

@@ -3,6 +3,11 @@
 Checklist wajib sebelum aplikasi dipakai dengan pelanggan/uang sungguhan.
 Kerangka: hasil security review (lihat ringkasan di bawah) + kebutuhan deploy.
 
+> **Keputusan backend:** Supabase (Postgres) + Vercel (hosting). Lihat
+> `docs/BACKEND-SUPABASE-VERCEL.md` — skema ada di `supabase/schema.sql`;
+> checklist di bawah ini berlaku utk jalur lokal (server Node prototipe) DAN
+> jalur Supabase/Vercel (P2–P4 dokumen tsb).
+
 ## 🔴 Wajib — keamanan (blokir go-live bila belum)
 
 - [ ] **Order server (port 5198) dijalankan dengan `KASIR_SECRET`**

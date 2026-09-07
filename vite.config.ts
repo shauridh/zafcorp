@@ -1,9 +1,20 @@
 import react from '@vitejs/plugin-react'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      // multi-page: aplikasi kasir + portal customer (+ hub preview berdampingan)
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        portal: resolve(__dirname, 'web-order.html'),
+        hub: resolve(__dirname, 'web-order-hub.html'),
+      },
+    },
+  },
   plugins: [
     react(),
     VitePWA({

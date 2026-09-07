@@ -32,7 +32,11 @@ type Pesanan = {
   riwayat: { status: string; waktu: string }[]
 }
 
-const API = new URLSearchParams(location.search).get('api') || 'http://127.0.0.1:5198'
+/* Server order: query ?api= menang; lalu env VITE_API_URL (build produksi);
+ * di dev lokal default 5198; di produksi (Vercel) kosong → same-origin /api. */
+const API = new URLSearchParams(location.search).get('api')
+  || (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_API_URL
+  || (location.hostname === '127.0.0.1' || location.hostname === 'localhost' ? 'http://127.0.0.1:5198' : '')
 const fmt = (n: number) => 'Rp ' + Math.round(n).toLocaleString('id-ID')
 const rupiah = (n: number) => Math.round(n / 100) * 100
 
